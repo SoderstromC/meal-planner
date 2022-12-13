@@ -1,17 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const recipes = createSlice({
-    name: 'recipe',
+    name: 'recipes',
     initialState: {
-        dish: [],
-        value: ''
+        results: {
+            name: '',
+            instructions: [],
+            description: ''
+        }
     },
     reducers: {
-        setDish: (store, action) => {
-            store.dish = action.payload;
+        setMealName: (store, action) => {
+            store.results.name = action.payload;
         },
-        setValue: (store, action) => {
-            store.value = action.payload;
+        setMealInstructions: (store, action) => {
+            store.results.instructions = action.payload;
+        },
+        setMealDescription: (store, action) => {
+            store.results.description = action.payload;
         }
     }
 
@@ -20,7 +26,7 @@ const recipes = createSlice({
 export default recipes;
 
 export const generateRecipe = () => {
-    return (dispatch, getState) => {
+    return (dispatch) => {
     const generate = {
         method: 'GET',
         headers: {
@@ -32,15 +38,15 @@ export const generateRecipe = () => {
     
     fetch('https://tasty.p.rapidapi.com/recipes/list?from=0&size=20&tags=under_30_minutes', generate)
         .then(response => response.json())
-        .then(response => console.log('response', response))
-        .then((data) => {
-            dispatch(recipes.actions.setDish(data))
-          })
+        // .then(response => console.log('response', response))
+        .then((data) => { 
+            dispatch(recipes.actions.setMealName(data))
+            dispatch(recipes.actions.setMealInstructions(data))
+            dispatch(recipes.actions.setMealDescription(data))}) 
+            .then((data) => console.log('datad', data))
         .catch(err => console.error(err));
 }   
 }
-
-
 
 /*
 dispatch(game.actions.setLoading(true))

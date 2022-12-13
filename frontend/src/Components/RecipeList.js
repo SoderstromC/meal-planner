@@ -3,14 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { generateRecipe } from "reducers/recipes";
 
 const RecipeList = () => {
-  const dish = useSelector((store) => store.recipes.dish)
+  const name = useSelector((store) => store.recipes.results.name)
+  console.log('nameSelected', name)
+  const description = useSelector((store) => store.recipes.results[].description)
+  console.log('description', description)
+  
   const dispatch = useDispatch()
-  console.log('dish1', dish)
   dispatch(generateRecipe());
 
-
 return(
-    <p>${dish}</p>
+  <>
+    <p>{name}</p>
+    <p>{description}</p>
+  </>
 )
 } 
 
