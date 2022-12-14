@@ -29,7 +29,7 @@ export const generateRecipe = () => {
     const generate = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'fb2180e11emsh383fe87dd2f9172p1a2dbejsnc4b7896e9fbd',
+            'X-RapidAPI-Key': '3ecb94565cmshdcb2aa095eb280cp106d0djsn59e08e6ce037',
             'X-RapidAPI-Host': 'tasty.p.rapidapi.com'
         },
         // body: JSON.stringify({ dish: getState().recipes.dish })
