@@ -42,7 +42,6 @@ export const generateRecipe = () => {
           console.log('dataAllreducer', data)
             dispatch(recipes.actions.setRecipe(data.results))
         })
-        .then((data) => console.log('datad', data))
         .catch(err => console.error(err));
 }
 }
