@@ -22,6 +22,9 @@ return(
       <RecipeCard
        key= {recipe.id}
        name={recipe.name}
+       time={recipe.total_time_minutes}
+       description={recipe.description}
+       img={recipe.thumbnail_url}
        />
      )
     })}

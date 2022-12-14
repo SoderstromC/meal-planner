@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const recipes = createSlice({
     name: 'recipes',
     initialState: {
-        results: []
+        results: [],
+        error: null
     },
     reducers: {
         setRecipe: (store, action) => {
