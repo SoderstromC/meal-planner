@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Main from 'Components/Main';
-import Login from 'Components/Login';
-import NotFound from 'Components/NotFound';
-import RecipeList from 'Components/RecipeList'
+import Main from 'components/Main';
+import Login from 'components/Login';
+import NotFound from 'components/NotFound';
+import RecipeList from 'components/RecipeList'
 import { Provider } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import thoughts from 'reducers/thoughts';
