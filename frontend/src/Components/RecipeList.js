@@ -1,20 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { generateRecipe } from "reducers/recipes";
 
 const RecipeList = () => {
-  const name = useSelector((store) => store.recipes.results.name)
-  console.log('nameSelected', name)
-  const description = useSelector((store) => store.recipes.results[].description)
-  console.log('description', description)
-  
+  const arrayOfRecipes = useSelector((store) => store.recipes.results)
+  console.log('arrayOfRecipes', arrayOfRecipes)
+  // const description = useSelector((store) => store.recipes.results[].description)
+  // console.log('description', description)
   const dispatch = useDispatch()
-  dispatch(generateRecipe());
+  useEffect(() => {
+    dispatch(generateRecipe());
+  }, [])
 
 return(
   <>
-    <p>{name}</p>
-    <p>{description}</p>
+    <h1>List of recipes</h1>
+    {arrayOfRecipes.map((recipe) => {
+    <p>{recipe.name}</p>
+    })}
   </>
 )
 } 
