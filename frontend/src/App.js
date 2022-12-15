@@ -3,7 +3,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from 'components/Main';
 import Login from 'components/Login';
 import NotFound from 'components/NotFound';
-import RecipeList from 'components/RecipeList'
+import RecipeList from 'components/RecipeList';
+import MyRecipes from 'components/MyRecipes';
+import ShoppingList from 'components/ShoppingList';
+import SingleRecipe from 'components/SingleRecipe';
 import { Provider } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import thoughts from 'reducers/thoughts';
@@ -22,9 +25,12 @@ export const App = () => {
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path='/recipe' element={<RecipeList/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
           <Route path='/' element={<Main/>}></Route>
+          <Route path='/recipes' element={<RecipeList/>}></Route>
+          <Route path='/saved' element={<MyRecipes/>}></Route>
+          <Route path='/shoppinglist' element={<ShoppingList/>}></Route>
+          <Route path='/single' element={<SingleRecipe/>}></Route>
           <Route path='*' element={<NotFound/>}></Route>
         </Routes>
       </BrowserRouter>

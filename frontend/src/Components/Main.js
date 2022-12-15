@@ -4,6 +4,7 @@ import thoughts from "reducers/thoughts";
 import { API_URL } from "utils/utils";
 import { useNavigate, Link } from "react-router-dom";
 import user from "reducers/user";
+import styled from "styled-components";
 
 const Main = () => {
     const thoughtItems = useSelector((store) => store.thoughts.items);
@@ -44,16 +45,32 @@ const Main = () => {
     };
 
     return (
-        <>
+        <MainContainer>
             <Link to="/login">GO TO LOGIN</Link>
             
-            <h2>This is the main component</h2>
-            {thoughtItems.map((item) => {
+            <h2>This is the landing page</h2>
+            <Link to="/recipes">Go to: Recipes list!</Link>
+            <Link to="/saved">Go to: My saved recipes!</Link>
+            <Link to="/shoppinglist">Go to: My shopping list!</Link>
+
+            {/* {thoughtItems.map((item) => {
                 return <p key={item._id}>{item.message}</p>
-            })}
-            <button type="button" onClick={logOutOnClick}>LOG OUT</button>
-        </>
+            })} */}
+            <LogOutButton type="button" onClick={logOutOnClick}>LOG OUT</LogOutButton>
+        </MainContainer>
     )
 }
 
 export default Main;
+
+const MainContainer = styled.div`
+width: 100%;
+height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+`
+const LogOutButton = styled.button`
+margin-top: 40px;
+`
