@@ -2,6 +2,20 @@ import React from "react";
 import styled from "styled-components";
 
 const SingleRecipe = () => {
+
+  // 1. create a useSelector to mapp out path to single recipe data
+
+  // 2. build a function in reducer to fetch single recipe api (based on recipe-id)
+
+  // 3. call the function in the reducer through a dispatch and put it in a useEffect to prevent fetch loop
+
+  // 4. map out the recipe in return() to access specific data and display in our frontend
+
+  // 5. create path from recipes in our RecipeList component to the single recipe (see Movie project)
+
+  // 6. create a go back button to return back to the list from the single recipe (see Movie project)
+
+
     return (
       <SingleRecipeContainer>
         <div>
