@@ -44,6 +44,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const accessToken = useSelector((store) => store.user.accessToken);
+  const error = useSelector(store => store.user.error)
+
   useEffect(() => {
     if (accessToken) {
       navigate("/");
@@ -118,7 +120,13 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            {password && password.length < 8
+                ? 'Password must be over 8 characters'
+                : ''}
             <button type='submit'>Submit</button>
+            {error !== null && (
+              <p>{error}</p>
+            )}
           </form>
           </InputWrapper>
         </InnerWrapper>
