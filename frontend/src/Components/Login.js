@@ -5,38 +5,6 @@ import { API_URL } from "utils/utils";
 import user from "reducers/user";
 import styled from "styled-components";
 
-const OuterWrapper = styled.div`
-padding: 20px 0 0 0;
-`;
-
-const InnerWrapper = styled.div`
-  // max-width: 940px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Radiobuttons = styled.div`
-display: flex;
-flex-direction: row;
-margin: 15px;
-`
-
-const InputWrapper = styled.div`
-display: flex;
-flex-direction: column;
-margin: 15px;
-`
-
-const InputForm = styled.input`
-padding: 10px;
-display: flex;
-flex-direction: column;
-`;
-
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -86,24 +54,9 @@ const Login = () => {
     <>
       <OuterWrapper>
         <InnerWrapper>
-            <Radiobuttons>
-          <label htmlFor='register'>Register</label>
-          <input
-            type='radio'
-            id='register'
-            checked={mode === "register"}
-            onChange={() => setMode("register")}
-          />
-          <label htmlFor='login'>Login</label>
-          <input
-            type='radio'
-            id='login'
-            checked={mode === "login"}
-            onChange={() => setMode("login")}
-          />
-          </Radiobuttons>
           <InputWrapper>
           <form onSubmit={onFormSubmit}>
+            <h1> { mode === "register" && "Register" || "Log in" } </h1>
             <label htmlFor='username'>Username</label>
             <InputForm
               type='text'
@@ -123,12 +76,30 @@ const Login = () => {
             {password && password.length < 8
                 ? 'Password must be over 8 characters'
                 : ''}
-            <button type='submit'>Submit</button>
+            <button type='submit'>{ mode === "register" && "Register" || "Log in" }</button>
             {error !== null && (
               <p>{error}</p>
             )}
           </form>
           </InputWrapper>
+          <Radiobuttons>
+          <label htmlFor='register'>{mode === "register" ? "" : "Click here to register" }
+          <RadioInput
+            type='radio'
+            id='register'
+            checked={mode === "register"}
+            onChange={() => setMode("register")}
+          />
+          </label>
+          <label htmlFor='login'>{mode === "login" ? "" : "Click here to log in" }
+          <RadioInput
+            type='radio'
+            id='login'
+            checked={mode === "login"}
+            onChange={() => setMode("login")}
+          />
+          </label>
+          </Radiobuttons>
         </InnerWrapper>
       </OuterWrapper>
     </>
@@ -140,3 +111,47 @@ export default Login;
 // {password && password.length < 8
 //     ? alert(`password must be over 8 characters`)
 //     : ''}
+
+const OuterWrapper = styled.div`
+padding: 20px 0 0 0;
+`;
+
+const InnerWrapper = styled.div`
+  // max-width: 940px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Radiobuttons = styled.div`
+display: flex;
+flex-direction: row;
+margin: 15px;
+`
+
+const InputWrapper = styled.div`
+display: flex;
+flex-direction: column;
+margin: 15px;
+`
+
+const InputForm = styled.input`
+padding: 10px;
+display: flex;
+flex-direction: column;
+`;
+
+const RadioInput = styled.input`
+-webkit-appearance: none;
+font-size: 60px;
+width: 0;
+height: 0;
+text-align: center;
+
+&:checked {
+  visibility:hidden;
+}
+`;
