@@ -6,7 +6,7 @@ import NotFound from 'components/NotFound';
 import RecipeList from 'components/RecipeList';
 import MyRecipes from 'components/MyRecipes';
 import ShoppingList from 'components/ShoppingList';
-import SingleRecipe from 'components/SingleRecipe';
+import { Ingredients } from 'components/reusable/Ingredients';
 import { Provider } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import thoughts from 'reducers/thoughts';
@@ -30,7 +30,7 @@ export const App = () => {
           <Route path='/recipes' element={<RecipeList/>}></Route>
           <Route path='/saved' element={<MyRecipes/>}></Route>
           <Route path='/shoppinglist' element={<ShoppingList/>}></Route>
-          <Route path='/single' element={<SingleRecipe/>}></Route>
+          <Route path='/single' element={<Ingredients/>}></Route>
           <Route path='*' element={<NotFound/>}></Route>
         </Routes>
       </BrowserRouter>
