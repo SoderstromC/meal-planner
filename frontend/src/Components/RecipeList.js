@@ -45,7 +45,7 @@ const RecipeList = () => {
 
 return(
   <>
-    <button type="button">GO BACK TO MAIN</button>
+    <button type="button" onClick={() => navigate(-1)}>GO BACK TO MAIN</button>
     <button type="button" onClick={logOutOnClick}>LOG OUT</button>
     <h1>List of recipes</h1>
     {arrayOfRecipes.map((recipe) => {
