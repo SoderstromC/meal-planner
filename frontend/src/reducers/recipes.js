@@ -64,7 +64,7 @@ export const generateSingle = () => {
         .then(response => response.json())
         .then((data) => {
           console.log('dataSingle', data)
-            dispatch(recipes.actions.setMealComponents(data.sections[0].components[0].ingredient))
+            dispatch(recipes.actions.setMealComponents(data.sections[0].components))
         })
         .catch(err => console.error(err));
 }
