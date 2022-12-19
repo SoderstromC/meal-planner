@@ -5,34 +5,47 @@ import styled from "styled-components";
 
 export const Ingredients = () => {
   const components = useSelector((store) => store.recipes.components);
+  console.log('singlerecipe', components)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   useEffect(() => {
     dispatch(generateSingle());
-  }, []);
+  }, [])
 
-  return (
-    <>
-      <h2>Ingredients here</h2>
-      {components[0].map((component) => {
-        return (
-          <RecipeWrapper key={component.id}>
+return(
+  <>
+    <h2>Ingredients here</h2>
+    {components[0].map((component) => {
+        return(
+            <RecipeWrapper key={component.id}>
             <p>{component.ingredient.name}</p>
-          </RecipeWrapper>
-        );
-      })}
-    </>
-  );
-};
+            </RecipeWrapper>
+        )
+    }
+    )
+    }
+
+</>
+)
+
+}
+
 
 const RecipeWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
+  `
+
+
+
 
 // 1. map out API to get single ingredient
 // 2. display all single ingredients in an ingredients list in the frontend
 // 3. export to SingleRecipe component
+
+
+
+
 
 /*
 {components.map((component) => {

@@ -7,6 +7,7 @@ const recipes = createSlice({
         error: null,
         sections: [],
         components:[],
+        instructions:[],
     },
     reducers: {
         setRecipe: (store, action) => {
@@ -44,7 +45,7 @@ export const generateRecipe = () => { //change name to generateRecipeList when w
         .then(response => response.json())
         .then((data) => {
           console.log('dataAllreducer', data)
-            dispatch(recipes.actions.setRecipe(data.results))
+            dispatch(recipes.actions.setRecipe(data?.results))
         })
         .catch(err => console.error(err));
 }
@@ -60,11 +61,12 @@ export const generateSingle = () => {
         },
     };
     //const id = id; /{$id} at the end of the url
-    fetch('https://tasty.p.rapidapi.com/recipes/get-more-info/?id=8138', details)
+    fetch('https://tasty.p.rapidapi.com/recipes/get-more-info/?id=8575', details)
         .then(response => response.json())
         .then((data) => {
           console.log('dataSingle', data)
-            dispatch(recipes.actions.setMealComponents(data.sections[0].components))
+            dispatch(recipes.actions.setMealComponents(data?.sections[0]?.components))
+            dispatch(recipes.actions.setMealInstructions(data?.instructions))
         })
         .catch(err => console.error(err));
 }
