@@ -61,7 +61,7 @@ export const generateSingle = () => {
         },
     };
     //const id = id; /{$id} at the end of the url
-    fetch('https://tasty.p.rapidapi.com/recipes/get-more-info/?id=8575', details)
+    fetch('https://tasty.p.rapidapi.com/recipes/get-more-info?id=8575', details)
         .then(response => response.json())
         .then((data) => {
           console.log('dataSingle', data)
