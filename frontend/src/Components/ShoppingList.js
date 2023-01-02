@@ -21,23 +21,23 @@ const ShoppingList = () => {
   return (
     <Wrapper>
       <ListWrapper>
-        <ComponentTitle>This is my shopping list:</ComponentTitle>
+        <ComponentTitle>This is my shopping list</ComponentTitle>
           {shoppingList.map((shoppingItem, index) => {
             return (
               <ArticleWrapper key={shoppingItem.id}>
-                <TodoWrapper>
                   <h2>{shoppingItem.name}</h2>
+                <TodoWrapper>
                   <label>
                     <CheckBox
                       type="checkbox"
                       checked={shoppingItem.isCompleted}
                       onChange={() => onIsCompletedToggle(shoppingItem.id)} />
                   </label>
+                  <DeleteButton
+                    onClick={() => onDeleteButtonClick(index)}
+                    type="button">&#128465;&#65039;
+                  </DeleteButton>
                 </TodoWrapper>
-                <DeleteButton
-                  onClick={() => onDeleteButtonClick(index)}
-                  type="button">&#128465;&#65039;
-                </DeleteButton>
               </ArticleWrapper>
             )
           })}
@@ -55,21 +55,27 @@ const Wrapper = styled.section`
 
 const ListWrapper = styled.div`
   width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 const ComponentTitle = styled.h2`
   text-align: center;
+  margin-bottom: 40px;
+  font-size: 30px;
 `
 
 const ArticleWrapper = styled.article`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  width: 50%;
   // padding: 10px;
 `
 const TodoWrapper = styled.div`
   display: flex;
-  width: 70%;
-  padding-left: 25px;
+  width: 100px;
   justify-content: space-between;
   h2{
   font-size: 20px;
@@ -159,7 +165,7 @@ const LabelWrapper = styled.label`
   justify-content: center;
   text-align: center;
   align-items: center;
-  margin: 30px 0px;
+  margin: 40px 0px;
   padding: 5px;
   border: none;
   p{
