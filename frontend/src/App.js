@@ -12,14 +12,19 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import thoughts from 'reducers/thoughts';
 import user from 'reducers/user';
 import recipes from 'reducers/recipes';
+import shopping from 'reducers/shopping';
 
 const reducer = combineReducers({
   user: user.reducer,
   thoughts: thoughts.reducer,
-  recipes: recipes.reducer
+  recipes: recipes.reducer,
+  shopping: shopping.reducer
 });
 
 const store = configureStore({reducer});
+
+store.subscribe(() => localStorage.setItem('shopping', JSON.stringify(store.getState().shopping.items)));
+
 export const App = () => {
   return (
     <Provider store={store}>
