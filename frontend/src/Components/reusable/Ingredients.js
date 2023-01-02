@@ -5,62 +5,29 @@ import styled from "styled-components";
 
 export const Ingredients = () => {
   const components = useSelector((store) => store.recipes.components);
-  { console.log('COM in ingredients', components) } 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(generateSingle());
-  }, [])
+  }, []);
 
-return(
-  <>
-    <h2>Ingredients here</h2> 
-    { console.log('components in ingredients', components) } 
-    
-    
-    { /* We get errors when components are  undefined (or component.ingredient.name is undefined)... How do we write this in a way where it waits for components to get fetched from the store? */ }
-    {components.map((component) => {
-        return(
-            <RecipeWrapper key={component.id}>
+  return (
+    <>
+      <h2>Ingredients</h2>
+      {components.map((component) => {
+        return (
+          <RecipeWrapper key={component.id}>
             <p>{component.ingredient.name}</p>
-            </RecipeWrapper>
-        )
-    }
-    )
-    }
-
-</>
-)
-
-}
-
+          </RecipeWrapper>
+        );
+      })}
+    </>
+  );
+};
 
 const RecipeWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  `
-
-// 1. map out API to get single ingredient
-// 2. display all single ingredients in an ingredients list in the frontend
-// 3. export to SingleRecipe component
-
-
-/*
-{components.map((component) => {
-  return (
-    <RecipeWrapper key={component.id}>
-    <h2>{component.raw_text}</h2>
-    {/* <p>{component.description}</p>
-    <p>{component.instructions}</p>
-    <p>{component.ingredient}</p>}
-    </RecipeWrapper>
-    )
-    })}
-  
-  const RecipeWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  `
-*/
+`;
 
 // const Ingredients = styled.div`
 //   display: flex;

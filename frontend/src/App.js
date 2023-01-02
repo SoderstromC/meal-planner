@@ -7,7 +7,6 @@ import RecipeList from 'components/RecipeList';
 import MyRecipes from 'components/MyRecipes';
 import ShoppingList from 'components/ShoppingList';
 import SingleRecipe from 'components/SingleRecipe';
-// import { Instructions } from 'components/reusable/Instructions';
 import { Provider } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import thoughts from 'reducers/thoughts';

@@ -1,26 +1,15 @@
 import React, { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { generateSingle } from "reducers/recipes";
 // import styled from "styled-components";
 import  { Ingredients } from "./reusable/Ingredients";
-//import  { Instructions } from "./reusable/Instructions";
+import  { Instructions } from "./reusable/Instructions";
 
 const SingleRecipe = () => {
-  // const components = useSelector((store) => store.recipes.components);
-  // console.log('singlerecipe', components)
-
-  // const dispatch = useDispatch()
-  // useEffect(() => {
-  //   dispatch(generateSingle());
-  // }, [])
 
 return(
   <>
    <h1>This is a single recipe</h1>
- 
    <Ingredients/>
-   {/* <Instructions/> */}
-
+   <Instructions/>
   </>
 )
 } 
