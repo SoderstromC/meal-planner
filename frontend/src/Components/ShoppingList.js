@@ -6,6 +6,7 @@ const ShoppingList = () => {
       <ShoppingListContainer>
         <div>
           <h1>This is our shopping list page</h1>
+          <p>branch test</p>
           <p>Core problems to solve:</p> 
               <li>User can see a list of which items to shop</li>
               <li>User can edit items according to food preference/allergies</li>
