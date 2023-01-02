@@ -17,7 +17,7 @@ return(
     { console.log('components in ingredients', components) }
     
     { /* We get errors when components are  undefined (or component.ingredient.name is undefined)... How do we write this in a way where it waits for components to get fetched from the store? */ }
-    {components?.map((component) => {
+    {components.map((component) => {
         return(
             <RecipeWrapper key={component.id}>
             <p>{component.ingredient.name}</p>
@@ -38,15 +38,9 @@ const RecipeWrapper = styled.div`
   flex-direction: column;
   `
 
-
-
-
 // 1. map out API to get single ingredient
 // 2. display all single ingredients in an ingredients list in the frontend
 // 3. export to SingleRecipe component
-
-
-
 
 
 /*

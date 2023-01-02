@@ -5,7 +5,7 @@ const recipes = createSlice({
     initialState: {
         results: [],
         error: null,
-        sections: [],
+        // sections: [],
         components:[],
         instructions:[],
     },
@@ -23,7 +23,8 @@ const recipes = createSlice({
             store.results.description = action.payload;
         },
         setMealComponents: (store, action) => {
-            store.components = [...store.components, action.payload];
+            // store.components = [...store.components, action.payload];
+            store.components = action.payload;
         }
     }
 
@@ -64,9 +65,11 @@ export const generateSingle = () => {
     fetch('https://tasty.p.rapidapi.com/recipes/get-more-info?id=8575', details)
         .then(response => response.json())
         .then((data) => {
-          console.log('dataSingle', data)
-            dispatch(recipes.actions.setMealComponents(data?.sections[0]?.components))
+            dispatch(recipes.actions.setMealComponents(data?.sections?.components))
             dispatch(recipes.actions.setMealInstructions(data?.instructions))
+        })
+        .then((data)=>{
+            console.log('SComponents', sections?.components)
         })
         .catch(err => console.error(err));
 }
@@ -83,7 +86,7 @@ export const generateSingle = () => {
 //         },
 //     };
 //     //const id = id; /{$id} at the end of the url
-//     fetch('https://tasty.p.rapidapi.com/recipes/get-more-info/?id=8138', details)
+//     fetch('https://tasty.p.rapidapi.com/recipes/get-more-info?id=8138', details)
 //         .then(response => response.json())
 //         .then((data) => {
 //           console.log('dataSingle', data)
