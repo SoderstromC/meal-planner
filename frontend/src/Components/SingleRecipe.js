@@ -12,14 +12,9 @@ return(
    <Instructions/>
   </>
 )
-} 
+}
 
 export default SingleRecipe;
-
-
-
-
-
 
 
 //   // 1. create a useSelector to mapp out path to single recipe data

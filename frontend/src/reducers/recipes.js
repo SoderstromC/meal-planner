@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RECIPE_URL, SINGLE_URL } from "utils/utils";
 
 const recipes = createSlice({
   name: "recipes",
@@ -40,10 +41,7 @@ export const generateRecipe = () => {
       },
     };
 
-    fetch(
-      "https://tasty.p.rapidapi.com/recipes/list?from=0&size=20&tags=under_30_minutes",
-      generate
-    )
+    fetch(RECIPE_URL, generate)
       .then((response) => response.json())
       .then((data) => {
         console.log("dataAllreducer", data);
@@ -54,6 +52,7 @@ export const generateRecipe = () => {
 };
 
 export const generateSingle = () => {
+
   return (dispatch) => {
     const details = {
       method: "GET",
@@ -62,8 +61,12 @@ export const generateSingle = () => {
         "X-RapidAPI-Host": "tasty.p.rapidapi.com",
       },
     };
+
+   
     //const id = id; /{$id} at the end of the url
-    fetch("https://tasty.p.rapidapi.com/recipes/get-more-info?id=8575", details)
+    //fetch(SINGLE_URL, details)
+    fetch(SINGLE_URL(recipe_id), details)
+    // console.log("recipe_id", recipe_id)
       .then((response) => response.json())
       .then((data) => {
         dispatch(

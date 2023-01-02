@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 export const RecipeCard = ({id, name, description, time, img}) => {
+  console.log({id})
 
 return(
   <>
   <ReceipeListCard>
-    <div>{id}</div>
+    <div>test{id}</div>
     <div>
       <h3>{name}</h3>
     </div>  

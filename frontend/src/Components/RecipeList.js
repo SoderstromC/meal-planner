@@ -27,10 +27,10 @@ return(
     return (
       <Link
           className="recipe-container"
-          key={recipe.id}
-          to={`/single`}>
+          id={recipe.id}
+          to={`/single/${recipe.id}`}>
       <RecipeCard
-      //  key= {recipe.id}
+       id= {recipe.id}
        name={recipe.name}
        time={recipe.total_time_minutes}
        description={recipe.description}
