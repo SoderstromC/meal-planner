@@ -65,11 +65,9 @@ export const generateSingle = () => {
     fetch('https://tasty.p.rapidapi.com/recipes/get-more-info?id=8575', details)
         .then(response => response.json())
         .then((data) => {
-            dispatch(recipes.actions.setMealComponents(data?.sections?.components))
+          console.log('dataSingle', data.sections[0].components) //works
+            dispatch(recipes.actions.setMealComponents(data?.sections[0].components))
             dispatch(recipes.actions.setMealInstructions(data?.instructions))
-        })
-        .then((data)=>{
-            console.log('SComponents', sections?.components)
         })
         .catch(err => console.error(err));
 }

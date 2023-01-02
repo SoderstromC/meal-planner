@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 export const Ingredients = () => {
   const components = useSelector((store) => store.recipes.components);
-
+  { console.log('COM in ingredients', components) } 
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(generateSingle());
@@ -13,8 +13,9 @@ export const Ingredients = () => {
 
 return(
   <>
-    <h2>Ingredients here</h2>
-    { console.log('components in ingredients', components) }
+    <h2>Ingredients here</h2> 
+    { console.log('components in ingredients', components) } 
+    
     
     { /* We get errors when components are  undefined (or component.ingredient.name is undefined)... How do we write this in a way where it waits for components to get fetched from the store? */ }
     {components.map((component) => {
