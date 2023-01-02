@@ -35,7 +35,12 @@ const UserSchema = new mongoose.Schema({
   accessToken: {
     type: String,
     default: () => crypto.randomBytes(128).toString("hex")
-  }
+  },
+  saved: [
+    {
+      type: String,
+    }
+  ]
 });
 
 const User = mongoose.model("User", UserSchema);
@@ -156,6 +161,36 @@ app.post("/thoughts", async (req, res) => {
     res.status(400).json({success: false, response: error});
   }
 });
+
+app.post("/saveRecipe", async (req, res) => {
+  const { message } = req.body; 
+  // 1. Få id from req
+  // 2. få fram användar id
+  // 3. kolla om id redan finns i listan
+  // 4: lägg till i listan med Id och spara i databasen (i mongo finns det kommando för att lägga till i listan, add item ro array)
+  // 5: returnera resultat
+  try {
+    const newThought = await new Thought({message}).save();
+    res.status(201).json({success: true, response: newThought});
+  } catch (error) {
+    res.status(400).json({success: false, response: error});
+  }
+});
+
+app.post("/removeRecipe", async (req, res) => {
+  const { message } = req.body; 
+  //steg 1: Få id from req
+  // kolla om id redan finns i listan
+  //steg 2: lägg till i listan med Id och spara i databasen (i mongo finns det kommando för att lägga till i listan, add item ro array)
+  //steg 3: returnera resultat
+  try {
+    const newThought = await new Thought({message}).save();
+    res.status(201).json({success: true, response: newThought});
+  } catch (error) {
+    res.status(400).json({success: false, response: error});
+  }
+});
+
 
 ///////
 // Start defining your routes here

@@ -5,6 +5,9 @@ export const RecipeCard = ({id, name, description, time, img}) => {
 
   const buttonClickSave = () => {
     console.log(id);
+    // Få fram id
+    // post req till /saveRecipe
+    // feedback till användaren (tex disabla knappen och ge info, loader)
   };
 
 return(
