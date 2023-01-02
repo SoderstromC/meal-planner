@@ -53,6 +53,7 @@ return(
       //<p>{recipe.name}</p>
       <RecipeCard
        key= {recipe.id}
+       id={recipe.id}
        name={recipe.name}
        time={recipe.total_time_minutes}
        description={recipe.description}

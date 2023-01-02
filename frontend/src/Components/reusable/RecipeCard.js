@@ -3,10 +3,13 @@ import styled from "styled-components";
 
 export const RecipeCard = ({id, name, description, time, img}) => {
 
+  const buttonClickSave = () => {
+    console.log(id);
+  };
+
 return(
   <>
   <ReceipeListCard>
-    <div>{id}</div>
     <div>
       <h3>{name}</h3>
     </div>  
@@ -20,6 +23,7 @@ return(
       <h4>Description:</h4>
       <p>{description}</p>
     </div>  
+    <button type="submit" onClick={buttonClickSave}>Save to My recipes</button>
   </ReceipeListCard>
   </>
 )
