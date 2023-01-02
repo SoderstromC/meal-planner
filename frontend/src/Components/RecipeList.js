@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { generateRecipe } from "reducers/recipes";
 import { RecipeCard } from "./reusable/RecipeCard";
+import { Link } from 'react-router-dom';
 
 const RecipeList = () => {
   const arrayOfRecipes = useSelector((store) => store.recipes.results)
@@ -24,14 +25,18 @@ return(
     <h1>List of recipes</h1>
     {arrayOfRecipes.map((recipe) => {
     return (
-      //<p>{recipe.name}</p>
+      <Link
+          className="recipe-container"
+          key={recipe.id}
+          to={`/single`}>
       <RecipeCard
-       key= {recipe.id}
+      //  key= {recipe.id}
        name={recipe.name}
        time={recipe.total_time_minutes}
        description={recipe.description}
        img={recipe.thumbnail_url}
        />
+     </Link>
      )
     })}
   </>
