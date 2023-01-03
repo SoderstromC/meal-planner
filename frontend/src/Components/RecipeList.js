@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { generateRecipe } from "reducers/recipes";
 import { RecipeCard } from "./reusable/RecipeCard";
-
 import { useNavigate } from "react-router-dom";
 import user from "reducers/user";
 

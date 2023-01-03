@@ -1,10 +1,33 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+
 
 export const RecipeCard = ({id, name, description, time, img}) => {
+  const userId = useSelector((store) => store.user.userId);
+  const accessToken = useSelector((store) => store.user.accessToken);
 
-  const buttonClickSave = () => {
-    console.log(id);
+/***SAVING A RECIPE ID TO SPECIFIC USER IN SERVER ****/
+
+  const buttonClickSave = (id) => {
+    console.log('recipeid', id);
+    console.log('userid', userId)
+    console.log('accessToken', accessToken)
+
+      const options = {
+      method: 'POST'
+      //HEADER?
+    };
+
+// ADD RECIPIE ID TO USER ID
+fetch(LIKES_URL(tweetId), options) // Catch the data and update with uniqe object (option)
+.then((res) => res.json())
+.then((data) => {
+  fetchTweets(data)
+  console.log('data2', data); // Gets/request all data again
+})
+.catch((error) => console.error('error2', error));    
+
     // Få fram id
     // post req till /saveRecipe
     // feedback till användaren (tex disabla knappen och ge info, loader)
