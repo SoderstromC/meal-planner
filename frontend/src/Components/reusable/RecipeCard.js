@@ -39,39 +39,30 @@ export const RecipeCard = ({ id, name, description, time, img }) => {
 
   return (
     <>
-      <ReceipeListCard>
-        <div>
+      <RecipeListCard>
           <h3>{name}</h3>
-        </div>
-        <div>
           <p>Cooking time in minutes: {time}</p>
-        </div>
-        <ImageWrapper>
           <img src={img} />
-        </ImageWrapper>
-        <div>
-          <h4>Description:</h4>
           <p>{description}</p>
-        </div>
         <button type='submit' onClick={buttonClickSave}>
           Save to My recipes
         </button>
-      </ReceipeListCard>
+      </RecipeListCard>
     </>
   );
 };
 
-const ReceipeListCard = styled.section`
+const RecipeListCard = styled.section`
   border: 1px solid #333;
   margin: 10px;
   padding: 20px;
-`;
-const ImageWrapper = styled.div`
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  word-wrap: break-word;
 
   img {
     width: 100%;
-    height: 100%;
+    height: 200px;
+    object-fit: cover;
   }
 `;
+

@@ -4,6 +4,7 @@ import { generateRecipe } from "reducers/recipes";
 import { RecipeCard } from "./reusable/RecipeCard";
 import { useNavigate } from "react-router-dom";
 import user from "reducers/user";
+import styled from "styled-components";
 
 const RecipeList = () => {
   const arrayOfRecipes = useSelector((store) => store.recipes.results);
@@ -47,6 +48,7 @@ return(
     <button type="button" onClick={() => navigate(-1)}>GO BACK TO MAIN</button>
     <button type="button" onClick={logOutOnClick}>LOG OUT</button>
     <h1>List of recipes</h1>
+    <RecipeListWrapper>
     {arrayOfRecipes.map((recipe) => {
     return (
       //<p>{recipe.name}</p>
@@ -60,8 +62,12 @@ return(
        />
      )
     })}
+    </RecipeListWrapper>
   </>
 )
 } 
 
 export default RecipeList;
+
+const RecipeListWrapper = styled.div`
+`
