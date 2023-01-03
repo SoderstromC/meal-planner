@@ -17,7 +17,7 @@ return(
 export default SingleRecipe;
 
 
-//   // 1. create a useSelector to mapp out path to single recipe data
+//   // 1. create a useSelector to mapp out path to single recipe data//CHECK
 
 //   // 2. build a function in reducer to fetch single recipe api (based on recipe-id)
 

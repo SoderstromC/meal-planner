@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 export const Ingredients = () => {
   const components = useSelector((store) => store.recipes.components);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(generateSingle());

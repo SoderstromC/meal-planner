@@ -51,8 +51,8 @@ export const generateRecipe = () => {
   };
 };
 
-export const generateSingle = () => {
-
+export const generateSingle = (recipe_id) => {
+//console.log('recipe_id', recipe_id) undefined
   return (dispatch) => {
     const details = {
       method: "GET",
@@ -62,7 +62,6 @@ export const generateSingle = () => {
       },
     };
 
-   
     //const id = id; /{$id} at the end of the url
     //fetch(SINGLE_URL, details)
     fetch(SINGLE_URL(recipe_id), details)

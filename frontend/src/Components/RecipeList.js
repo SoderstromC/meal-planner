@@ -7,12 +7,6 @@ import { Link } from 'react-router-dom';
 const RecipeList = () => {
   const arrayOfRecipes = useSelector((store) => store.recipes.results)
   console.log('arrayOfRecipes', arrayOfRecipes)
-  // const description = useSelector((store) => store.recipes.results[].description)
-  // console.log('description', description)
-
-  // const handleOnClick = (id) => {
-  //   dispatch(generateSingle(id));
-  // }
 
   const dispatch = useDispatch()
   useEffect(() => {

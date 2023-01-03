@@ -5,10 +5,12 @@ import styled from "styled-components";
 
 export const Instructions = () => {
   const instructions = useSelector((store) => store.recipes.instructions);
+  const recipeId = useSelector((store) => store.recipes.id);
+
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(generateSingle());
+    dispatch(generateSingle()); //add recipe_id here?
   }, []);
 
   return (
