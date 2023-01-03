@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { generateRecipe } from "reducers/recipes";
 import { RecipeCard } from "./reusable/RecipeCard";
+import { Link } from 'react-router-dom';
 
 import { useNavigate } from "react-router-dom";
 import user from "reducers/user";
@@ -50,14 +51,18 @@ return(
     <h1>List of recipes</h1>
     {arrayOfRecipes.map((recipe) => {
     return (
-      //<p>{recipe.name}</p>
+      <Link
+          className="recipe-container"
+          id={recipe.id}
+          to={`/single/${recipe.id}`}>
       <RecipeCard
-       key= {recipe.id}
+       id= {recipe.id}
        name={recipe.name}
        time={recipe.total_time_minutes}
        description={recipe.description}
        img={recipe.thumbnail_url}
        />
+     </Link>
      )
     })}
   </>
