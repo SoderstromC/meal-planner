@@ -2,14 +2,17 @@ import React, { useEffect } from "react";
 // import styled from "styled-components";
 import  { Ingredients } from "./reusable/Ingredients";
 import  { Instructions } from "./reusable/Instructions";
-
+import { useParams } from "react-router-dom";
 const SingleRecipe = () => {
+
+const {recipeId} = useParams();
+console.log('id', recipeId)
 
 return(
   <>
    <h1>This is a single recipe</h1>
-   <Ingredients/>
-   <Instructions/>
+   <Ingredients recipeId = {recipeId}/>
+   <Instructions recipeId = {recipeId}/>
   </>
 )
 }

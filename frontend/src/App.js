@@ -30,8 +30,8 @@ export const App = () => {
           <Route path='/recipes' element={<RecipeList/>} />
           <Route path='/saved' element={<MyRecipes/>} />
           <Route path='/shoppinglist' element={<ShoppingList/>}/>
-          {/* <Route path='/single' element={<SingleRecipe/>} /> */}
-          <Route path='/single/:recipe_id' element={<SingleRecipe/>} />
+          {/* <Route path='/single/:id' element={<SingleRecipe/>} /> */}
+          <Route path='/single/:recipeId' element={<SingleRecipe/>} />
           <Route path='/404' element={<NotFound/>}/>
           {/* <Route path="*" element={<Navigate to="/404" />} /> */}
 

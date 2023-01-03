@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { generateSingle } from "reducers/recipes";
 import styled from "styled-components";
 
-export const Ingredients = () => {
+export const Ingredients = ({recipeId}) => {
   const components = useSelector((store) => store.recipes.components);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(generateSingle());
+    dispatch(generateSingle(recipeId));
   }, []);
 
   return (
