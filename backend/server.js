@@ -36,11 +36,11 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: () => crypto.randomBytes(128).toString("hex")
   },
-  savedRecipeIds: [
-    {
-      type: String,
-    }
-  ],
+  savedRecipeIds: {
+      type: [],
+      default: []
+    
+},
   userId:{
     type: String,
   }
@@ -168,16 +168,18 @@ const authenticateUser = async (req, res, next) => {
 /**** Save recipe id****/
 
 app.post("/saveRecipe", async (req, res) => {
-  const { savedRecipeIds, userId } = req.body;
+  const { id, userId } = req.body;
+  console.log(id);
+  console.log(userId);
 
-  // 1. Get recipe id from req
+  // 1. Get recipe id from req  
   // 2. Get uesr id
   // 3. Check if recipe id is already in list
   // 4: Add recipe Id to list and save in db  (i mongo finns det kommando för att lägga till i listan, add item ro array)
   // 5: return resultat
   try {
-    const newUser = await new User({savedRecipeIds}).save();
-    res.status(201).json({success: true, response: newUser});
+    const user = await User.findByIdAndUpdate(userId, {$push: {savedRecipeIds: {id}}});
+    res.status(201).json({success: true, response: user});
   } catch (error) {
     res.status(400).json({success: false, response: error});
   }
