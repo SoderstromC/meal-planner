@@ -1,15 +1,29 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import user from "reducers/user";
 // import styled from "styled-components";
 import  { Ingredients } from "./reusable/Ingredients";
 import  { Instructions } from "./reusable/Instructions";
 import { useParams } from "react-router-dom";
+
 const SingleRecipe = () => {
 
 const {recipeId} = useParams();
 console.log('id', recipeId)
 
+const dispatch = useDispatch();
+const navigate = useNavigate();
+
+const logOutOnClick = () => {
+  dispatch(user.actions.setAccessToken(null));
+  navigate("/login");
+};
+
 return(
   <>
+   <button type="button" onClick={() => navigate(-1)}>GO BACK</button>
+   <button type="button" onClick={logOutOnClick}>LOG OUT</button>
    <h1>This is a single recipe</h1>
    <Ingredients recipeId = {recipeId}/>
    <Instructions recipeId = {recipeId}/>
