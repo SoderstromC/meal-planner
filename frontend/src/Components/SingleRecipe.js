@@ -1,38 +1,26 @@
 import React, { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { generateSingle } from "reducers/recipes";
 // import styled from "styled-components";
-// import  Ingredients  from "./reusable/Ingredients";
-// import  Instructions  from "./reusable/Instructions";
-
+import  { Ingredients } from "./reusable/Ingredients";
+import  { Instructions } from "./reusable/Instructions";
+import { useParams } from "react-router-dom";
 const SingleRecipe = () => {
-  // const components = useSelector((store) => store.recipes.components);
-  // console.log('singlerecipe', components)
 
-  // const dispatch = useDispatch()
-  // useEffect(() => {
-  //   dispatch(generateSingle());
-  // }, [])
+const {recipeId} = useParams();
+console.log('id', recipeId)
 
 return(
   <>
    <h1>This is a single recipe</h1>
-    {/* <Header/>
-    <Ingredients/>
-    <Instructions/>
-    <Footer/> */}
+   <Ingredients recipeId = {recipeId}/>
+   <Instructions recipeId = {recipeId}/>
   </>
 )
-} 
+}
 
 export default SingleRecipe;
 
 
-
-
-
-
-//   // 1. create a useSelector to mapp out path to single recipe data
+//   // 1. create a useSelector to mapp out path to single recipe data//CHECK
 
 //   // 2. build a function in reducer to fetch single recipe api (based on recipe-id)
 

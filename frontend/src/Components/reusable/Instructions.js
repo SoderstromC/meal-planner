@@ -1,29 +1,32 @@
-// 1. map out API to display instructions
-// 2. export to SingleRecipe component
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { generateSingle } from "reducers/recipes";
+import styled from "styled-components";
 
-
-
-/*
-
-/*
-{XXX.map((xxx) => {
-  return (
-    <XWrapper key={xxx.id}>
-    <h2>{component.raw_text}</h2>
-    {/* <p>{component.description}</p>
-    <p>{component.instructions}</p>
-    <p>{component.ingredient}</p>}
-    </RecipeWrapper>
-    )
-    })}
+export const Instructions = ({recipeId}) => {
+  const instructions = useSelector((store) => store.recipes.instructions);
+  const dispatch = useDispatch();
   
-  const RecipeWrapper = styled.div`
+  useEffect(() => {
+    dispatch(generateSingle(recipeId));
+  }, []);
+
+  return (
+    <>
+      <h2>Instructions</h2>
+      {instructions.map((instruction) => {
+        console.log('instructions',instructions)
+        return (
+          <RecipeWrapper key={instruction.id}>
+            <p>{instruction.display_text}</p>
+          </RecipeWrapper>
+        );
+      })}
+    </>
+  );
+};
+
+const RecipeWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  `
-*/
-
-// const Instructions = styled.div`
-//   display: flex;
-//   flex-direction: column;
-// `
+`;
