@@ -17,27 +17,6 @@ const Main = () => {
             navigate("/login");
         }
     }, []);
-    useEffect(() => {
-
-        const options = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": accessToken
-            }
-        }
-        fetch(API_URL("thoughts"), options)
-            .then(res => res.json())
-            .then(data => {
-                if(data.success) {
-                    dispatch(thoughts.actions.setItems(data.response));
-                    dispatch(thoughts.actions.setError(null));
-                } else {
-                    dispatch(thoughts.actions.setItems([]));
-                    dispatch(thoughts.actions.setError(data.response));
-                }
-            })
-    }, []);
 
     const logOutOnClick = () => {
         dispatch(user.actions.setAccessToken(null));
