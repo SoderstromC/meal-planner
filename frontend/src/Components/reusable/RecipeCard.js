@@ -15,12 +15,11 @@ export const RecipeCard = ({ id, name, description, time, img }) => {
   const buttonClickSave = () => {
 
     const SAVED_RECIPE_URL = `http://localhost:8090/saveRecipe`;
-    //const LIKES_URL = (tweetId) => `https://project-happy-thoughts-api-xjix6ss5fq-lz.a.run.app/thoughts/${tweetId}/like`;
 
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: id, userId: userId })  //something wrong here
+      body: JSON.stringify({ id: id, userId: userId })
     };
 
     // ADD RECIPIE ID TO USER ID
