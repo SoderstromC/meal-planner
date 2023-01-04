@@ -36,7 +36,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: () => crypto.randomBytes(128).toString("hex")
   },
-  savedRecipe: {
+  savedRecipes: {
       type: [],
       default: []
 },
