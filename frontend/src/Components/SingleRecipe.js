@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-// import styled from "styled-components";
 import  { Ingredients } from "./reusable/Ingredients";
 import  { Instructions } from "./reusable/Instructions";
 import { useParams } from "react-router-dom";
 import Nav from "./reusable/Nav";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 const SingleRecipe = () => {
 
@@ -15,15 +15,21 @@ const navigate = useNavigate();
 return(
   <>
    <Nav />
-   <button type="button" onClick={() => navigate(-1)}>GO BACK TO LIST</button>
-   <h1>This is a single recipe</h1>
-   <Ingredients recipeId = {recipeId}/>
-   <Instructions recipeId = {recipeId}/>
+   <SingleRecipeWrapper>
+    <button type="button" onClick={() => navigate(-1)}>GO BACK TO LIST</button>
+    <h1>This is a single recipe</h1>
+    <Ingredients recipeId = {recipeId}/>
+    <Instructions recipeId = {recipeId}/>
+  </SingleRecipeWrapper>
   </>
 )
 }
 
 export default SingleRecipe;
+
+const SingleRecipeWrapper = styled.div`
+padding: 50px;
+`
 
 
 //   // 1. create a useSelector to mapp out path to single recipe data//CHECK
