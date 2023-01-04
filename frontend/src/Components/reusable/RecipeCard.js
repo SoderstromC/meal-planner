@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 export const RecipeCard = ({ id, name, description, time, img }) => {
   const userId = useSelector((store) => store.user.userId);
-  const accessToken = useSelector((store) => store.user.accessToken);
+  const accessToken = useSelector((store) => store.user.accessToken); //remove?
   console.log("recipeid", id);
   console.log("userid", userId);
   console.log("accessToken", accessToken);
@@ -19,7 +19,7 @@ export const RecipeCard = ({ id, name, description, time, img }) => {
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: id, userId: userId })
+      body: JSON.stringify({ id: id, userId: userId, name: name })
     };
 
     // ADD RECIPIE ID TO USER ID
