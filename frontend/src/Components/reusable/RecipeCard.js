@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 
 export const RecipeCard = ({ id, name, description, time, img }) => {
   const userId = useSelector((store) => store.user.userId);
@@ -37,17 +38,22 @@ export const RecipeCard = ({ id, name, description, time, img }) => {
   };
 
   return (
-    <>
+    <RecipeCardWrapper>
+     <Link
+        className="recipe-container"
+        id={id}
+        to={`/single/${id}`}>
       <RecipeListCard>
-          <h3>{name}</h3>
-          <p>Cooking time in minutes: {time}</p>
-          <img src={img} />
-          <p>{description}</p>
-        <button type='submit' onClick={buttonClickSave}>
-          Save to My recipes
-        </button>
+        <h3>{name}</h3>
+        <p>Cooking time in minutes: {time}</p>
+        <img src={img} />
+        <p>{description}</p> 
       </RecipeListCard>
-    </>
+     </Link>
+     <button type='submit' onClick={buttonClickSave}>
+       Save to My recipes
+     </button>
+     </RecipeCardWrapper>
   );
 };
 
@@ -64,4 +70,8 @@ const RecipeListCard = styled.section`
     object-fit: cover;
   }
 `;
+
+const RecipeCardWrapper = styled.div`
+display: block;
+`
 

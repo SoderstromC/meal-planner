@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { generateRecipe } from "reducers/recipes";
 import { RecipeCard } from "./reusable/RecipeCard";
-import { Link } from 'react-router-dom';
 import Nav from "./reusable/Nav";
 
 import { useNavigate } from "react-router-dom";
@@ -47,20 +46,15 @@ return(
     <Innerwrapper>
       <RecipeListWrapper>
       {arrayOfRecipes.map((recipe) => {
-      return (
-        <Link
-            className="recipe-container"
-            id={recipe.id}
-            to={`/single/${recipe.id}`}>
+      return ( 
         <RecipeCard
-        key= {recipe.id}
-        id={recipe.id}
-        name={recipe.name}
-        time={recipe.total_time_minutes}
-        description={recipe.description}
-        img={recipe.thumbnail_url}
+         key= {recipe.id}
+         id={recipe.id}
+         name={recipe.name}
+         time={recipe.total_time_minutes}
+         description={recipe.description}
+         img={recipe.thumbnail_url}
         />
-      </Link>
       )
       })}
       </RecipeListWrapper>
