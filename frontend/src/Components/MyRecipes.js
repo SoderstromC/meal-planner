@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Nav from "./reusable/Nav";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 
 
 const MyRecipes = () => {
@@ -37,8 +38,19 @@ const MyRecipes = () => {
       <>
       <Nav />
       <SavedRecipesContainer>
-        <div>
-          <h1>This is our saved recipes page</h1>
+      <h1>My saved recipes</h1>
+      {recipeList.map((recipe) => {
+      return (
+        <Link
+            className="recipe-container"
+            id={recipe.id}
+            to={`/single/${recipe.id}`}
+            key={recipe.id}>
+          <p>{recipe.name}</p>
+      </Link>
+      )
+      })}
+        <div> 
               <p>Core problems to solve:</p> 
               <li>User can see which recipes they have saved</li>
               <li>User can generate a shopping list</li>
@@ -56,7 +68,9 @@ height: 100vh;
 display: flex;
 justify-content: center;
 align-items: center;
+flex-direction: column;
 `
+
 
 /**   const handleNewLikeSubmit = (tweetId) => {
     console.log('tweetId', tweetId)
