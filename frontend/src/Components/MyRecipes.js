@@ -1,8 +1,11 @@
 import React from "react";
+import Nav from "./reusable/Nav";
 import styled from "styled-components";
 
 const MyRecipes = () => {
     return (
+      <>
+      <Nav />
       <SavedRecipesContainer>
         <div>
           <h1>This is our saved recipes page</h1>
@@ -11,7 +14,7 @@ const MyRecipes = () => {
               <li>User can generate a shopping list</li>
         </div>
       </SavedRecipesContainer>
-
+      </>
     ) 
 }
 

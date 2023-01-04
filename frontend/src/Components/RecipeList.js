@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { generateRecipe } from "reducers/recipes";
 import { RecipeCard } from "./reusable/RecipeCard";
 import { Link } from 'react-router-dom';
+import Nav from "./reusable/Nav";
 
 import { useNavigate } from "react-router-dom";
-import user from "reducers/user";
 import styled from "styled-components";
 
 const RecipeList = () => {
@@ -40,15 +40,9 @@ const RecipeList = () => {
     dispatch(generateRecipe(), options);
   }, [])
 
-  const logOutOnClick = () => {
-    dispatch(user.actions.setAccessToken(null));
-    navigate("/login");
-};
-
 return(
   <>
-    <button type="button" onClick={() => navigate(-1)}>GO BACK</button>
-    <button type="button" onClick={logOutOnClick}>LOG OUT</button>
+    <Nav />
     <h1>List of recipes</h1>
     <RecipeListWrapper>
     {arrayOfRecipes.map((recipe) => {
