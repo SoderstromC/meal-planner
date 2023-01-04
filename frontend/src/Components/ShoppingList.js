@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import shopping from 'reducers/shopping'
+import Nav from "./reusable/Nav";
 import uniqid from 'uniqid'
 import styled from 'styled-components/macro'
 
@@ -19,6 +20,8 @@ const ShoppingList = () => {
   }
 
   return (
+    <>
+    <Nav />
     <Wrapper>
       <ListWrapper>
         <ComponentTitle>This is my shopping list</ComponentTitle>
@@ -44,6 +47,7 @@ const ShoppingList = () => {
           <NewListItem />
       </ListWrapper>
     </Wrapper>
+    </>
   )
 }
 

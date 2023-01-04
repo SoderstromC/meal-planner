@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import thoughts from "reducers/thoughts";
 import { API_URL } from "utils/utils";
 import { useNavigate, Link } from "react-router-dom";
-import user from "reducers/user";
+import Nav from "./reusable/Nav";
 import styled from "styled-components";
 
 const Main = () => {
@@ -18,15 +18,11 @@ const Main = () => {
         }
     }, []);
 
-    const logOutOnClick = () => {
-        dispatch(user.actions.setAccessToken(null));
-        navigate("/login");
-    };
-
     return (
+        <>
+        <Nav />
         <MainContainer>
-            <Link to="/login">GO TO LOGIN</Link>
-            
+            <Link to="/login">GO TO LOGIN</Link>   
             <h2>This is the landing page</h2>
             <Link to="/recipes">Go to: Recipes list!</Link>
             <Link to="/saved">Go to: My saved recipes!</Link>
@@ -35,8 +31,8 @@ const Main = () => {
             {/* {thoughtItems.map((item) => {
                 return <p key={item._id}>{item.message}</p>
             })} */}
-            <LogOutButton type="button" onClick={logOutOnClick}>LOG OUT</LogOutButton>
         </MainContainer>
+        </>
     )
 }
 
@@ -49,7 +45,4 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-`
-const LogOutButton = styled.button`
-margin-top: 40px;
 `

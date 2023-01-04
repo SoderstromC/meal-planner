@@ -39,6 +39,7 @@ const MyRecipes = () => {
       <Nav />
       <SavedRecipesContainer>
       <h1>My saved recipes</h1>
+      <RecipeListWrapper>
       {recipeList.map((recipe) => {
       return (
         <Link
@@ -50,9 +51,10 @@ const MyRecipes = () => {
       </Link>
       )
       })}
+      </RecipeListWrapper>
         <div> 
-              <p>Core problems to solve:</p> 
-              <li>User can see which recipes they have saved</li>
+              <p>Core problems left to solve:</p> 
+              <li>User can remove recipe from list</li>
               <li>User can generate a shopping list</li>
         </div>
       </SavedRecipesContainer>
@@ -69,6 +71,10 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
+`
+
+const RecipeListWrapper = styled.div`
+text-align: left;
 `
 
 

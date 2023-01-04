@@ -4,15 +4,18 @@ import  { Ingredients } from "./reusable/Ingredients";
 import  { Instructions } from "./reusable/Instructions";
 import { useParams } from "react-router-dom";
 import Nav from "./reusable/Nav";
+import { useNavigate } from "react-router-dom";
 
 const SingleRecipe = () => {
 
 const {recipeId} = useParams();
 console.log('id', recipeId)
+const navigate = useNavigate();
 
 return(
   <>
    <Nav />
+   <button type="button" onClick={() => navigate(-1)}>GO BACK TO LIST</button>
    <h1>This is a single recipe</h1>
    <Ingredients recipeId = {recipeId}/>
    <Instructions recipeId = {recipeId}/>

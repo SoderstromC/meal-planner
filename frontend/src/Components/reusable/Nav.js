@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import user from "reducers/user";
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
 const Nav = () => {
@@ -17,9 +18,19 @@ const logOutOnClick = () => {
   return (
     <NavContainer>
       <NavWrapper>
-        <h1 className='Here goes our menu'></h1>
-        <button type="button" onClick={() => navigate(-1)}>GO BACK</button>
-        <button type="button" onClick={logOutOnClick}>LOG OUT</button>
+      <Link to={`/`}>
+          <p>Main</p>
+      </Link>
+      <Link to={`/recipes`}>
+          <p>Recipes</p>
+      </Link>
+      <Link to={`/saved`}>
+          <p>My saved recipes</p>
+      </Link>
+      <Link to={`/shoppinglist`}>
+          <p>My shopping list</p>
+      </Link>
+        <LogOutButton type="button" onClick={logOutOnClick}>LOG OUT</LogOutButton>
       </NavWrapper>
     </NavContainer>
   );
@@ -33,4 +44,11 @@ const NavContainer = styled.div`
   const NavWrapper = styled.div`
   color: "white";
   margin: 0;
-`;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+`
+const LogOutButton = styled.button`
+height: 20px;
+margin-top: 20px;
+`
