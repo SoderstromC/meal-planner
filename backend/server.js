@@ -36,7 +36,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: () => crypto.randomBytes(128).toString("hex")
   },
-  savedRecipeIds: {
+  savedRecipeId: {
       type: [],
       default: []
     
@@ -169,8 +169,8 @@ const authenticateUser = async (req, res, next) => {
 
 app.post("/saveRecipe", async (req, res) => {
   const { id, userId } = req.body;
-  console.log(id);
-  console.log(userId);
+  console.log('ididid',id);
+  console.log('userId', userId); //jag förstår inte varför det är id här.. consolog ovan visas inte.
 
   // 1. Get recipe id from req  
   // 2. Get uesr id
@@ -178,7 +178,7 @@ app.post("/saveRecipe", async (req, res) => {
   // 4: Add recipe Id to list and save in db  (i mongo finns det kommando för att lägga till i listan, add item ro array)
   // 5: return resultat
   try {
-    const user = await User.findByIdAndUpdate(userId, {$push: {savedRecipeIds: {id}}});
+    const user = await User.findByIdAndUpdate(userId, {$push: {savedRecipeId: {id}}});
     res.status(201).json({success: true, response: user});
   } catch (error) {
     res.status(400).json({success: false, response: error});
@@ -186,13 +186,13 @@ app.post("/saveRecipe", async (req, res) => {
 });
 
 app.delete("/removeRecipe", async (req, res) => {
-  const { savedRecipeIds } = req.body; 
+  const {  id, userId } = req.body; 
   //steg 1: Få id from req
   // kolla om id redan finns i listan
   //steg 2: lägg till i listan med Id och spara i databasen (i mongo finns det kommando för att lägga till i listan, add item ro array)
   //steg 3: returnera resultat
   try {
-    const newUser = await new User({savedRecipeIds}).remove();
+    const removeRecipe = await User.findByIdAndUpdate(userId, {$pull: {savedRecipeId: {id}}})
     res.status(201).json({success: true, response: newUser});
   } catch (error) {
     res.status(400).json({success: false, response: error});
