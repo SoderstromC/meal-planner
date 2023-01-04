@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Nav from "./reusable/Nav";
 
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const RecipeList = () => {
   const arrayOfRecipes = useSelector((store) => store.recipes.results);
@@ -41,33 +41,57 @@ const RecipeList = () => {
   }, [])
 
 return(
-  <>
+  <Outerwrapper>
     <Nav />
-    <h1>List of recipes</h1>
-    <RecipeListWrapper>
-    {arrayOfRecipes.map((recipe) => {
-    return (
-      <Link
-          className="recipe-container"
-          id={recipe.id}
-          to={`/single/${recipe.id}`}>
-      <RecipeCard
-       key= {recipe.id}
-       id={recipe.id}
-       name={recipe.name}
-       time={recipe.total_time_minutes}
-       description={recipe.description}
-       img={recipe.thumbnail_url}
-       />
-     </Link>
-     )
-    })}
-    </RecipeListWrapper>
-  </>
+      <h1>List of recipes</h1>
+    <Innerwrapper>
+      <RecipeListWrapper>
+      {arrayOfRecipes.map((recipe) => {
+      return (
+        <Link
+            className="recipe-container"
+            id={recipe.id}
+            to={`/single/${recipe.id}`}>
+        <RecipeCard
+        key= {recipe.id}
+        id={recipe.id}
+        name={recipe.name}
+        time={recipe.total_time_minutes}
+        description={recipe.description}
+        img={recipe.thumbnail_url}
+        />
+      </Link>
+      )
+      })}
+      </RecipeListWrapper>
+    </Innerwrapper>
+  </Outerwrapper>
 )
 } 
 
 export default RecipeList;
 
+const Outerwrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+const Innerwrapper = styled.div `
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  width: auto;
+  box-sizing: border-box;
+  width: 80%;
+`
 const RecipeListWrapper = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  width: auto;
+  box-sizing: border-box;
 `
