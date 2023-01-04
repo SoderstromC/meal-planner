@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 export const RecipeCard = ({ id, name, description, time, img }) => {
   const userId = useSelector((store) => store.user.userId);
-  const accessToken = useSelector((store) => store.user.accessToken);
+  const accessToken = useSelector((store) => store.user.accessToken); //remove?
   console.log("recipeid", id);
   console.log("userid", userId);
   console.log("accessToken", accessToken);
