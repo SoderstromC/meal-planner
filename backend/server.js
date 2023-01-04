@@ -36,10 +36,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: () => crypto.randomBytes(128).toString("hex")
   },
-  savedRecipeId: {
+  savedRecipe: {
       type: [],
       default: []
-    
 },
   userId:{
     type: String,
@@ -131,44 +130,11 @@ const authenticateUser = async (req, res, next) => {
   }
 }
 
-// const ThoughtSchema = new mongoose.Schema({
-//   message: {
-//     type: String,
-//   },
-//   createdAt: {
-//     type: Date,
-//     default: () => new Date() 
-//   },
-//   hearts: {
-//     type: Number,
-//     default: 0
-//   }
-// }); 
-
-
-// const Thought = mongoose.model("Thought", ThoughtSchema);
-
-// app.get("/thoughts", authenticateUser);
-// app.get("/thoughts", async (req, res)=> {
-//   const thoughts = await Thought.find({});
-//   res.status(200).json({success: true, response: thoughts});
-// });
-
-// app.post("/thoughts", authenticateUser)
-// app.post("/thoughts", async (req, res) => {
-//   const { message } = req.body;
-//   try {
-//     const newThought = await new Thought({message}).save();
-//     res.status(201).json({success: true, response: newThought});
-//   } catch (error) {
-//     res.status(400).json({success: false, response: error});
-//   }
-// });
-
-/**** Save recipe id****/
+/**************** SAVE RECIPE ID AND NAME ****************/
 
 app.post("/saveRecipe", async (req, res) => {
-  const { id, userId } = req.body;
+  const { id, userId, name } = req.body;
+  console.log('name', name);
   console.log('ididid',id);
   console.log('userId', userId); //jag förstår inte varför det är id här.. consolog ovan visas inte.
 
@@ -178,7 +144,7 @@ app.post("/saveRecipe", async (req, res) => {
   // 4: Add recipe Id to list and save in db  (i mongo finns det kommando för att lägga till i listan, add item ro array)
   // 5: return resultat
   try {
-    const user = await User.findByIdAndUpdate(userId, {$push: {savedRecipeId: {id}}});
+    const user = await User.findByIdAndUpdate(userId, {$push: {savedRecipes: {id, name}}});
     res.status(201).json({success: true, response: user});
   } catch (error) {
     res.status(400).json({success: false, response: error});
@@ -186,29 +152,30 @@ app.post("/saveRecipe", async (req, res) => {
 });
 
 app.delete("/removeRecipe", async (req, res) => {
-  const {  id, userId } = req.body; 
+  const {  id, userId, name } = req.body; 
   //steg 1: Få id from req
   // kolla om id redan finns i listan
   //steg 2: lägg till i listan med Id och spara i databasen (i mongo finns det kommando för att lägga till i listan, add item ro array)
   //steg 3: returnera resultat
   try {
-    const removeRecipe = await User.findByIdAndRemove(userId, {$pull: {savedRecipeId: {id}}})
-    res.status(201).json({success: true, response: newUser});
+    const removeRecipe = await User.findByIdAndRemove(userId, {$pull: {savedRecipes: {id, name}}})
+    res.status(201).json({success: true, response: removeRecipe});
   } catch (error) {
     res.status(400).json({success: false, response: error});
   }
 });
 
 /**** Show saved recipes****/
-app.get("/saveRecipe", async (req, res) => {
-  const { userId } = req.body;
+app.get("/saveRecipe/:userId", async (req, res) => {
+  const { userId } = req.params;
   try {
-    const user = await User.findById(userId, {$pull: {savedRecipeId}});
-    res.status(201).json({success: true, response: user});
+    const user = await User.findById(userId);
+    res.status(201).json({success: true, response: user.savedRecipes});
   } catch (error) {
     res.status(400).json({success: false, response: error});
   }
 });
+
 
 // Start defining your routes here
 app.get("/", (req, res) => {

@@ -19,7 +19,7 @@ export const RecipeCard = ({ id, name, description, time, img }) => {
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: id, userId: userId })
+      body: JSON.stringify({ id: id, userId: userId, name: name })
     };
 
     // ADD RECIPIE ID TO USER ID

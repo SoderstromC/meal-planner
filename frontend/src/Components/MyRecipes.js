@@ -11,19 +11,20 @@ const MyRecipes = () => {
   //const [loading, setLoading] = useState(false);
 
   const fetchMyRecipes = () => {
-    const MY_RECIPES_URL = `http://localhost:8090/saveRecipe;`;
+    const MY_RECIPES_URL = `http://localhost:8090/saveRecipe/${userId}`;
 
     const options = {
       method: "GET",
-      // headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" },
       // body: JSON.stringify({ userId: userId })
     };
 
     //setLoading(true);
     fetch(MY_RECIPES_URL, options)
       .then((res) => res.json())
-      .then((data) => setRecipeList(data))
-      .then((data) => console('RecipeData', data))
+      .then((data) => {
+        setRecipeList(data.response)
+        console.log('data.response', data.response)})
       .catch((error) => console.error('error1', error));
       //.finally(() => setLoading(false))
   };
@@ -38,7 +39,7 @@ const MyRecipes = () => {
       <SavedRecipesContainer>
         <div>
           <h1>This is our saved recipes page</h1>
-          <p>Core problems to solve:</p> 
+              <p>Core problems to solve:</p> 
               <li>User can see which recipes they have saved</li>
               <li>User can generate a shopping list</li>
         </div>
