@@ -34,6 +34,24 @@ const MyRecipes = () => {
     fetchMyRecipes();
   }, []);
 
+  // REMOVE RECIPE FROM SAVED RECIPES
+  const buttonClickRemove = ({ id }) => {
+    const REMOVE_RECIPE_URL = `http://localhost:8090/removeRecipe`;
+
+    const options = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: id, userId: userId, name: name })
+    };
+    // remove recipe from user
+    fetch(REMOVE_RECIPE_URL, options) 
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("removedData", data.response); 
+      })
+      .catch((error) => console.error("error2", error));
+  };
+
     return (
       <>
       <Nav />
@@ -42,6 +60,7 @@ const MyRecipes = () => {
       <RecipeListWrapper>
       {recipeList.map((recipe) => {
       return (
+        <>
         <Link
             className="recipe-container"
             id={recipe.id}
@@ -49,6 +68,8 @@ const MyRecipes = () => {
             key={recipe.id}>
           <p>{recipe.name}</p>
       </Link>
+      <button type='submit' id={recipe.id} onClick={buttonClickRemove}>Remove</button>
+      </>
       )
       })}
       </RecipeListWrapper>

@@ -151,14 +151,12 @@ app.post("/saveRecipe", async (req, res) => {
   }
 });
 
-app.delete("/removeRecipe", async (req, res) => {
+// REMOVE RECIPE ID FROM USER'S SAVED LIST
+app.put("/removeRecipe", async (req, res) => {
   const {  id, userId, name } = req.body; 
-  //steg 1: Få id from req
-  // kolla om id redan finns i listan
-  //steg 2: lägg till i listan med Id och spara i databasen (i mongo finns det kommando för att lägga till i listan, add item ro array)
-  //steg 3: returnera resultat
+  console.log('RecipeId',id);
   try {
-    const removeRecipe = await User.findByIdAndRemove(userId, {$pull: {savedRecipes: {id, name}}})
+    const removeRecipe = await User.findByIdAndUpdate(userId, {$pull: {savedRecipes: {id, name}}})
     res.status(201).json({success: true, response: removeRecipe});
   } catch (error) {
     res.status(400).json({success: false, response: error});

@@ -23,7 +23,7 @@ export const RecipeCard = ({ id, name, description, time, img }) => {
       body: JSON.stringify({ id: id, userId: userId, name: name })
     };
 
-    // ADD RECIPIE ID TO USER ID
+    // ADD RECIPE ID TO USER ID
     fetch(SAVED_RECIPE_URL, options) // Catch the data and update with uniqe object (option)./Shouldn't we add userId in URL?
       .then((res) => res.json())
       .then((data) => {
