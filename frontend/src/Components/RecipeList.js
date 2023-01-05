@@ -79,7 +79,7 @@ const Innerwrapper = styled.div `
   gap: 10px;
   width: auto;
   box-sizing: border-box;
-  width: 80%;
+  width: 100%;
 `
 const RecipeListWrapper = styled.div`
   width: 100%;
