@@ -5,6 +5,8 @@ import styled from "styled-components";
 
 export const Ingredients = ({recipeId}) => {
   const components = useSelector((store) => store.recipes.components);
+  const portions = useSelector((store) => store.recipes.sections);
+
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -17,7 +19,10 @@ export const Ingredients = ({recipeId}) => {
       {components.map((component) => {
         return (
           <RecipeWrapper key={component.id}>
-            <p>{component.ingredient.name}</p>
+             <p>{component.raw_text}</p>
+             {/* <p>{component.ingredient.name}</p>
+            <p>{component.measurements[0].unit.name}</p>
+            <p>{component.measurements[0].quantity}</p> */}
           </RecipeWrapper>
         );
       })}
