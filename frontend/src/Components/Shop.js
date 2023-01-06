@@ -6,7 +6,7 @@ import { Ingredients } from './reusable/Ingredients';
 
 
 const MyShoppingList = () => {
-  const [shoppingListItems, setShoppingListItems] = useState([]);
+  const [shoppingList, setShoppingList] = useState([]);
   const userId = useSelector((store) => store.user.userId);
 
   //const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ const MyShoppingList = () => {
     fetch(MY_SHOPPINGLIST_URL, options)
       .then((res) => res.json())
       .then((data) => {
-        setShoppingListItems(data.response)
+        setShoppingList(data.response)
         console.log('data response shoppinglist', data.response)})
       .catch((error) => console.error('error3', error));
       //.finally(() => setLoading(false))
@@ -39,11 +39,11 @@ const MyShoppingList = () => {
       <ShoppingListContainer>
       <h1>My Shopping List</h1>
       <ListWrapper>
-      {shoppingListItems.map((item) => {
+      {shoppingList.map((component) => {
       return (
         <Ingredients
-        key= {item.id}
-        item={item.raw_text}
+        key= {component.id}
+        item={component.raw_text}
        />
       )
       })}

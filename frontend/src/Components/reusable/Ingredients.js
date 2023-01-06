@@ -7,7 +7,7 @@ export const Ingredients = ({recipeId}) => {
   const components = useSelector((store) => store.recipes.components);
   const portions = useSelector((store) => store.recipes.sections);
   const userId = useSelector((store) => store.user.userId);
-  const raw_text = useSelector((store) => store.recipes.components.raw_text);
+ 
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -21,7 +21,7 @@ export const Ingredients = ({recipeId}) => {
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: userId, raw_text: raw_text })
+      body: JSON.stringify({ userId: userId, components: components })
     };
 
     // ADD INGREDIENTS TO SHOPPING LIST IN SERVER

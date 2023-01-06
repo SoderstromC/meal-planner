@@ -40,9 +40,13 @@ const UserSchema = new mongoose.Schema({
     default: () => crypto.randomBytes(128).toString("hex")
   },
   savedRecipes: {
-      type: [],
-      default: []
-},
+    type: [],
+    default: []
+  },
+  recipeComponents: {
+    type: [],
+    default: [],
+  },
   userId:{
     type: String,
   }
@@ -197,29 +201,29 @@ app.get("/saveRecipe/:userId", async (req, res) => {
 
 // SHOPPING LIST SCHEMA
 
-const ShoppingListSchema = new mongoose.Schema({
-  recipeIngredientRawTexts: {
-    type: [],
-    default: [],
-},
-  userId:{
-    type: String,
-  }
-});
+// const ShoppingListSchema = new mongoose.Schema({
+//   recipeComponents: {
+//     type: [],
+//     default: [],
+// },
+//   userId:{
+//     type: String,
+//   }
+// });
 
-const ShoppingList = mongoose.model("ShoppingList", ShoppingListSchema);
+// const ShoppingList = mongoose.model("ShoppingList", ShoppingListSchema);
 
 
 //SAVE INGREDIENTS TO SHOPPING LIST
 
 app.post("/saveListItem", async (req, res) => {
-  const { userId, id, raw_text } = req.body;
-  console.log('ingredients', raw_text);
+  const { userId, components } = req.body;
+  console.log('ingredients', components);
   console.log('userIdShop', userId);
 
   try {
-    const shoppinglist = await ShoppingList.findOneAndUpdate({userId: userId}, {$push: {recipeIngredientRawTexts: {id: id, raw_text: raw_text}}}, {upsert: true});
-    res.status(201).json({success: true, response: shoppinglist});
+    const user = await User.findOneAndUpdate({userId: userId}, {$push: {recipeComponents: {components: components}}}, {upsert: true});
+    res.status(201).json({success: true, response: user.recipeComponents});
   } catch (error) {
     res.status(400).json({success: false, response: error});
   }
@@ -230,8 +234,8 @@ app.post("/saveListItem", async (req, res) => {
 app.get("/listItems/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
-    const shoppinglist = await ShoppingList.findById(userId);
-    res.status(201).json({success: true, response: shoppinglist.recipeIngredientRawTexts});
+    const user = await User.findById(userId);
+    res.status(201).json({success: true, response: user.recipeComponents});
   } catch (error) {
     res.status(400).json({success: false, response: error});
   }
