@@ -18,6 +18,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+// USER SCHEMA
+
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -46,6 +49,9 @@ const UserSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model("User", UserSchema);
+
+
+// REGISTER AS A USER
 
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
@@ -82,6 +88,9 @@ app.post("/register", async (req, res) => {
   }
 });
 
+
+//LOGIN
+
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
@@ -110,6 +119,9 @@ app.post("/login", async (req, res) => {
   }
 });
 
+
+//AUTHENTICATE USER
+
 const authenticateUser = async (req, res, next) => {
   const accessToken = req.header("Authorization");
   try {
@@ -130,7 +142,8 @@ const authenticateUser = async (req, res, next) => {
   }
 }
 
-/**************** SAVE RECIPE ID AND NAME ****************/
+
+// SAVE RECIPE ID AND NAME 
 
 app.post("/saveRecipe", async (req, res) => {
   const { id, userId, name } = req.body;
@@ -151,6 +164,9 @@ app.post("/saveRecipe", async (req, res) => {
   }
 });
 
+
+// REMOVE A RECIPE FROM SAVED
+
 app.delete("/removeRecipe", async (req, res) => {
   const {  id, userId, name } = req.body; 
   //steg 1: Få id from req
@@ -165,12 +181,56 @@ app.delete("/removeRecipe", async (req, res) => {
   }
 });
 
-/**** Show saved recipes****/
+// SHOW SAVED RECIPES
+
 app.get("/saveRecipe/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
     const user = await User.findById(userId);
     res.status(201).json({success: true, response: user.savedRecipes});
+  } catch (error) {
+    res.status(400).json({success: false, response: error});
+  }
+});
+
+
+// SHOPPING LIST SCHEMA
+
+const ShoppingListSchema = new mongoose.Schema({
+  recipeIngredientRawTexts: {
+    type: [],
+    default: [],
+},
+  userId:{
+    type: String,
+  }
+});
+
+const ShoppingList = mongoose.model("ShoppingList", ShoppingListSchema);
+
+
+//SAVE INGREDIENTS TO SHOPPING LIST
+
+app.post("/saveListItem", async (req, res) => {
+  const { userId, id, raw_text } = req.body;
+  console.log('ingredients', raw_text);
+  console.log('userIdShop', userId);
+
+  try {
+    const shoppinglist = await ShoppingList.findOneAndUpdate({userId: userId}, {$push: {recipeIngredientRawTexts: {id: id, raw_text: raw_text}}}, {upsert: true});
+    res.status(201).json({success: true, response: shoppinglist});
+  } catch (error) {
+    res.status(400).json({success: false, response: error});
+  }
+});
+
+// SHOW SHOPPING LIST
+
+app.get("/listItems/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const shoppinglist = await ShoppingList.findById(userId);
+    res.status(201).json({success: true, response: shoppinglist.recipeIngredientRawTexts});
   } catch (error) {
     res.status(400).json({success: false, response: error});
   }
