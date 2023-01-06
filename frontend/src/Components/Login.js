@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { API_URL } from "utils/utils";
 import user from "reducers/user";
 import styled from "styled-components";
+import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -51,58 +52,62 @@ const Login = () => {
       });
   };
   return (
-    <>
       <OuterWrapper>
         <InnerWrapper>
-          <InputWrapper>
-          <form onSubmit={onFormSubmit}>
+          <FormWrapper>
+           <form onSubmit={onFormSubmit}>
             <h1> { mode === "register" && "Register" || "Log in" } </h1>
-            <label htmlFor='username'>Username</label>
-            <InputForm
-              type='text'
-              id='username'
-              value={username}
-              placeholder='Username'
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <label htmlFor='password'>Password</label>
-            <InputForm
-              type='password'
-              id='password'
-              placeholder='Password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {password && password.length < 8
+            <Radiobuttons>
+             <label htmlFor='register'>{mode === "register" ? "" : "Not having an account yet? Sign up" }
+              <RadioInput
+              type='radio'
+              id='register'
+              checked={mode === "register"}
+              onChange={() => setMode("register")}
+              />
+             </label>
+             <label htmlFor='login'>{mode === "login" ? "" : "Already got an account? log in" }
+              <RadioInput
+               type='radio'
+               id='login'
+               checked={mode === "login"}
+               onChange={() => setMode("login")}
+               />
+             </label>
+            </Radiobuttons>
+            <InputWrapper>
+             <InputLabelWrapper>
+              <label htmlFor='username'>Username</label>
+              <Input
+               type='text'
+               id='username'
+               value={username}
+               placeholder='Username'
+               onChange={(e) => setUsername(e.target.value)}
+             />
+             </InputLabelWrapper>
+             <InputLabelWrapper>
+              <label htmlFor='password'>Password</label>
+              <Input
+               type='password'
+               id='password'
+               placeholder='Password'
+               value={password}
+               onChange={(e) => setPassword(e.target.value)}
+               />
+              {password && password.length < 8
                 ? 'Password must be over 8 characters'
                 : ''}
-            <button type='submit'>{ mode === "register" && "Register" || "Log in" }</button>
-            {error !== null && (
-              <p>{error}</p>
-            )}
-          </form>
-          </InputWrapper>
-          <Radiobuttons>
-          <label htmlFor='register'>{mode === "register" ? "" : "Click here to register" }
-          <RadioInput
-            type='radio'
-            id='register'
-            checked={mode === "register"}
-            onChange={() => setMode("register")}
-          />
-          </label>
-          <label htmlFor='login'>{mode === "login" ? "" : "Click here to log in" }
-          <RadioInput
-            type='radio'
-            id='login'
-            checked={mode === "login"}
-            onChange={() => setMode("login")}
-          />
-          </label>
-          </Radiobuttons>
+             </InputLabelWrapper>
+             <button type='submit'>{ mode === "register" && "Register" || "Log in" }</button>
+              {error !== null && (
+               <p>{error}</p>
+              )}
+            </InputWrapper>
+           </form>
+          </FormWrapper>
         </InnerWrapper>
       </OuterWrapper>
-    </>
   );
 };
 
@@ -112,37 +117,36 @@ export default Login;
 //     ? alert(`password must be over 8 characters`)
 //     : ''}
 
-const OuterWrapper = styled.div`
-padding: 20px 0 0 0;
-`;
-
-const InnerWrapper = styled.div`
-  // max-width: 940px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+const FormWrapper = styled.div`
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ text-align: center;
+ padding: 100px;
+`
+const InputWrapper = styled.div`
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ border: 1px solid #333;
+ gap: 20px; 
+ padding: 20px;
+`
+const InputLabelWrapper = styled.div`
+ text-align: left;
+`
+const Input = styled.input`
+ padding: 10px; 
+ display: flex;
+ flex-direction: column;
+`
 
 const Radiobuttons = styled.div`
 display: flex;
 flex-direction: row;
 margin: 15px;
 `
-
-const InputWrapper = styled.div`
-display: flex;
-flex-direction: column;
-margin: 15px;
-`
-
-const InputForm = styled.input`
-padding: 10px;
-display: flex;
-flex-direction: column;
-`;
 
 const RadioInput = styled.input`
 -webkit-appearance: none;
@@ -154,4 +158,4 @@ text-align: center;
 &:checked {
   visibility:hidden;
 }
-`;
+`
