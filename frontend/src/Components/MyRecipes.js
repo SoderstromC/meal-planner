@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 
-
 const MyRecipes = () => {
   const [recipeList, setRecipeList] = useState([]);
   const userId = useSelector((store) => store.user.userId);
@@ -41,7 +40,8 @@ const MyRecipes = () => {
     const options = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: id, userId: userId })
+      body: JSON.stringify({ id: id, userId: userId }) 
+      //we only need id and userId not name since we are removing and only need to find the id
     };
     // remove recipe from user
     fetch(REMOVE_RECIPE_URL, options) 
