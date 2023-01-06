@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 
-
 const MyRecipes = () => {
   const [recipeList, setRecipeList] = useState([]);
   const userId = useSelector((store) => store.user.userId);
@@ -34,14 +33,35 @@ const MyRecipes = () => {
     fetchMyRecipes();
   }, []);
 
+  // REMOVE RECIPE FROM SAVED RECIPES
+  const buttonClickRemove = (id) => {
+    const REMOVE_RECIPE_URL = `http://localhost:8090/removeRecipe`;
+    console.log('idTEST', id)
+    const options = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: id, userId: userId }) 
+      //we only need id and userId not name since we are removing and only need to find the id
+    };
+    // remove recipe from user
+    fetch(REMOVE_RECIPE_URL, options) 
+      .then((res) => res.json())
+      .then((data) => {
+        setRecipeList(data.response)
+      })
+      .catch((error) => console.error("error2", error));
+  };
+
     return (
       <>
       <Nav />
       <SavedRecipesContainer>
       <h1>My saved recipes</h1>
       <RecipeListWrapper>
+      { console.log('new recipe list', recipeList) }
       {recipeList.map((recipe) => {
       return (
+        <>
         <Link
             className="recipe-container"
             id={recipe.id}
@@ -49,6 +69,9 @@ const MyRecipes = () => {
             key={recipe.id}>
           <p>{recipe.name}</p>
       </Link>
+      <button onClick={() => buttonClickRemove(recipe.id)}>Remove</button> 
+      {/*chnged to arrow function*/}
+      </>
       )
       })}
       </RecipeListWrapper>

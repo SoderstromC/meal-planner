@@ -151,18 +151,22 @@ app.post("/saveRecipe", async (req, res) => {
   }
 });
 
-app.delete("/removeRecipe", async (req, res) => {
-  const {  id, userId, name } = req.body; 
-  //steg 1: Få id from req
-  // kolla om id redan finns i listan
-  //steg 2: lägg till i listan med Id och spara i databasen (i mongo finns det kommando för att lägga till i listan, add item ro array)
-  //steg 3: returnera resultat
+// REMOVE RECIPE ID FROM USER'S SAVED LIST
+app.put("/removeRecipe", async (req, res) => {
+  const {  id, userId } = req.body; 
+  console.log('RecipeIdRemove',id);
+  console.log('UserIdRemove2',userId);
+
   try {
-    const removeRecipe = await User.findByIdAndRemove(userId, {$pull: {savedRecipes: {id, name}}})
-    res.status(201).json({success: true, response: removeRecipe});
+    console.log('removing...');
+    const removeRecipe = await User.findByIdAndUpdate(userId, {$pull: {savedRecipes: { id }}}, {new: true})
+    console.log(removeRecipe);
+    res.status(201).json({success: true, response: removeRecipe.savedRecipes});
   } catch (error) {
     res.status(400).json({success: false, response: error});
   }
+
+  /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
 });
 
 /**** Show saved recipes****/
@@ -175,7 +179,6 @@ app.get("/saveRecipe/:userId", async (req, res) => {
     res.status(400).json({success: false, response: error});
   }
 });
-
 
 // Start defining your routes here
 app.get("/", (req, res) => {
