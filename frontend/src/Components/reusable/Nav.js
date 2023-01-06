@@ -16,8 +16,7 @@ const logOutOnClick = () => {
 };
 
   return (
-    <NavContainer>
-      <NavWrapper>
+      <NavContainer>
       <Link to={`/`}>
           <p>Main</p>
       </Link>
@@ -30,25 +29,15 @@ const logOutOnClick = () => {
       <Link to={`/shoppinglist`}>
           <p>My shopping list</p>
       </Link>
-        <LogOutButton type="button" onClick={logOutOnClick}>LOG OUT</LogOutButton>
-      </NavWrapper>
-    </NavContainer>
+        <button type="button" onClick={logOutOnClick}>LOG OUT</button>
+      </NavContainer>
   );
 };
 export default Nav;
 
-const NavContainer = styled.div`
-    color: "white";
-    margin: 0;
-  `
-  const NavWrapper = styled.div`
-  color: "white";
-  margin: 0;
+  const NavContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 10px;
-`
-const LogOutButton = styled.button`
-height: 20px;
-margin-top: 20px;
-`
+  `
+

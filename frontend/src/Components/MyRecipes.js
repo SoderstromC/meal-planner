@@ -3,6 +3,7 @@ import Nav from "./reusable/Nav";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
+import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
 
 const MyRecipes = () => {
   const [recipeList, setRecipeList] = useState([]);
@@ -53,35 +54,37 @@ const MyRecipes = () => {
   };
 
     return (
-      <>
-      <Nav />
-      <SavedRecipesContainer>
-      <h1>My saved recipes</h1>
-      <RecipeListWrapper>
-      { console.log('new recipe list', recipeList) }
-      {recipeList.map((recipe) => {
-      return (
-        <>
-        <Link
-            className="recipe-container"
-            id={recipe.id}
-            to={`/single/${recipe.id}`}
-            key={recipe.id}>
-          <p>{recipe.name}</p>
-      </Link>
-      <button onClick={() => buttonClickRemove(recipe.id)}>Remove</button> 
-      {/*chnged to arrow function*/}
-      </>
-      )
-      })}
-      </RecipeListWrapper>
+      <OuterWrapper>
+        <InnerWrapper>
+          <Nav />
+          <SavedRecipesContainer>
+            <h1>My saved recipes</h1>
+          <RecipeListWrapper>
+          { console.log('new recipe list', recipeList) }
+          {recipeList.map((recipe) => {
+           return (
+           <>
+            <Link
+              className="recipe-container"
+              id={recipe.id}
+              to={`/single/${recipe.id}`}
+              key={recipe.id}>
+             <p>{recipe.name}</p>
+           </Link>
+           <button onClick={() => buttonClickRemove(recipe.id)}>Remove</button> 
+           {/*chnged to arrow function*/}
+           </>
+          )
+         })}
+        </RecipeListWrapper>
         <div> 
               <p>Core problems left to solve:</p> 
               <li>User can remove recipe from list</li>
               <li>User can generate a shopping list</li>
         </div>
       </SavedRecipesContainer>
-      </>
+     </InnerWrapper>
+  </OuterWrapper>
     ) 
 }
 
