@@ -153,14 +153,20 @@ app.post("/saveRecipe", async (req, res) => {
 
 // REMOVE RECIPE ID FROM USER'S SAVED LIST
 app.put("/removeRecipe", async (req, res) => {
-  const {  id, userId, name } = req.body; 
-  console.log('RecipeId',id);
+  const {  id, userId } = req.body; 
+  console.log('RecipeIdRemove',id);
+  console.log('UserIdRemove2',userId);
+
   try {
-    const removeRecipe = await User.findByIdAndUpdate(userId, {$pull: {savedRecipes: {id, name}}})
-    res.status(201).json({success: true, response: removeRecipe});
+    console.log('removing...');
+    const removeRecipe = await User.findByIdAndUpdate(userId, {$pull: {savedRecipes: { id }}}, {new: true})
+    console.log(removeRecipe);
+    res.status(201).json({success: true, response: removeRecipe.savedRecipes});
   } catch (error) {
     res.status(400).json({success: false, response: error});
   }
+
+  /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
 });
 
 /**** Show saved recipes****/

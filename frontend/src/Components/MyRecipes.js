@@ -35,19 +35,19 @@ const MyRecipes = () => {
   }, []);
 
   // REMOVE RECIPE FROM SAVED RECIPES
-  const buttonClickRemove = ({ id }) => {
+  const buttonClickRemove = (id) => {
     const REMOVE_RECIPE_URL = `http://localhost:8090/removeRecipe`;
-
+    console.log('idTEST', id)
     const options = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: id, userId: userId, name: name })
+      body: JSON.stringify({ id: id, userId: userId })
     };
     // remove recipe from user
     fetch(REMOVE_RECIPE_URL, options) 
       .then((res) => res.json())
       .then((data) => {
-        console.log("removedData", data.response); 
+        setRecipeList(data.response)
       })
       .catch((error) => console.error("error2", error));
   };
@@ -58,6 +58,7 @@ const MyRecipes = () => {
       <SavedRecipesContainer>
       <h1>My saved recipes</h1>
       <RecipeListWrapper>
+      { console.log('new recipe list', recipeList) }
       {recipeList.map((recipe) => {
       return (
         <>
@@ -68,7 +69,8 @@ const MyRecipes = () => {
             key={recipe.id}>
           <p>{recipe.name}</p>
       </Link>
-      <button type='submit' id={recipe.id} onClick={buttonClickRemove}>Remove</button>
+      <button onClick={() => buttonClickRemove(recipe.id)}>Remove</button> 
+      {/*chnged to arrow function*/}
       </>
       )
       })}
