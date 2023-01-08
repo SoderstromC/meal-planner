@@ -217,12 +217,12 @@ app.get("/saveRecipe/:userId", async (req, res) => {
 //SAVE INGREDIENTS TO SHOPPING LIST
 
 app.post("/saveListItem", async (req, res) => {
-  const { userId, components } = req.body;
-  console.log('ingredients', components);
+  const { userId, itemsToSave } = req.body;
+  console.log('ingredients', itemsToSave);
   console.log('userIdShop', userId);
 
   try {
-    const user = await User.findOneAndUpdate({userId: userId}, {$push: {recipeComponents: {components: components}}}, {upsert: true});
+    const user = await User.findOneAndUpdate({userId: userId}, {$push: {recipeComponents: {$each: itemsToSave}}}, {upsert: true, new: true});
     res.status(201).json({success: true, response: user.recipeComponents});
   } catch (error) {
     res.status(400).json({success: false, response: error});

@@ -18,10 +18,18 @@ export const Ingredients = ({recipeId}) => {
 
     const SAVED_SHOPPINGLIST_URL = `http://localhost:8090/saveListItem`;
 
+    let itemsToSave = [];
+    components.map((component) => {
+      itemsToSave.push({
+        "raw_text": component.raw_text,
+        "id": component.id
+      })
+    })
+
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: userId, components: components })
+      body: JSON.stringify({ userId: userId, itemsToSave: itemsToSave })
     };
 
     // ADD INGREDIENTS TO SHOPPING LIST IN SERVER
