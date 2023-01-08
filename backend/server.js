@@ -195,22 +195,6 @@ app.get("/saveRecipe/:userId", async (req, res) => {
   }
 });
 
-
-// SHOPPING LIST SCHEMA
-
-// const ShoppingListSchema = new mongoose.Schema({
-//   recipeComponents: {
-//     type: [],
-//     default: [],
-// },
-//   userId:{
-//     type: String,
-//   }
-// });
-
-// const ShoppingList = mongoose.model("ShoppingList", ShoppingListSchema);
-
-
 //SAVE INGREDIENTS TO SHOPPING LIST
 
 app.post("/saveListItem", async (req, res) => {
