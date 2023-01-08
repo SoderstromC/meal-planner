@@ -45,6 +45,7 @@ export const Ingredients = ({recipeId}) => {
   return (
     <>
       <h2>Ingredients</h2>
+      <button type='button' onClick={buttonClickSave}>Add all ingredients to Shopping list</button>
       {components.map((component) => {
         return (
           <>
@@ -54,12 +55,10 @@ export const Ingredients = ({recipeId}) => {
               <p>{component.measurements[0].unit.name}</p>
               <p>{component.measurements[0].quantity}</p> */}
             </RecipeWrapper>
-            <button type='button' onClick={buttonClickSave}>
-                Add to Shopping list
-            </button>
           </>
         );
       })}
+      <button type='button' onClick={buttonClickSave}>Add all ingredients to Shopping list</button>
     </>
   );
 };

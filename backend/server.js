@@ -222,7 +222,7 @@ app.post("/saveListItem", async (req, res) => {
   console.log('userIdShop', userId);
 
   try {
-    const user = await User.findOneAndUpdate({userId: userId}, {$push: {recipeComponents: {$each: itemsToSave}}}, {upsert: true, new: true});
+    const user = await User.findByIdAndUpdate(userId, {$push: {recipeComponents: {$each: itemsToSave}}}, {new: true});
     res.status(201).json({success: true, response: user.recipeComponents});
   } catch (error) {
     res.status(400).json({success: false, response: error});
