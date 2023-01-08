@@ -46,9 +46,6 @@ const UserSchema = new mongoose.Schema({
   recipeComponents: {
     type: [],
     default: [],
-  },
-  userId:{
-    type: String,
   }
 });
 
