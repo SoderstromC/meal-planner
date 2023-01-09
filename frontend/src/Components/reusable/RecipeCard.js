@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faClock } from "@fortawesome/free-solid-svg-icons"
 
-export const RecipeCard = ({ id, name, description, time, img }) => {
+export const RecipeCard = ({ id, name, time, img }) => {
   const userId = useSelector((store) => store.user.userId);
   const accessToken = useSelector((store) => store.user.accessToken); //remove?
 
@@ -41,10 +43,11 @@ export const RecipeCard = ({ id, name, description, time, img }) => {
         id={id}
         to={`/single/${id}`}>
       <RecipeListCard>
-        <h3>{name}</h3>
-        <p>Cooking time in minutes: {time}</p>
         <img src={img} />
-        <p>{description}</p> 
+        <TextWrapper>
+          <h3>{name}</h3>
+          <p><FontAwesomeIcon icon={faClock} /> {time} minutes</p>
+        </TextWrapper>  
       </RecipeListCard>
      </Link>
      <button type='submit' onClick={buttonClickSave}>
@@ -56,19 +59,28 @@ export const RecipeCard = ({ id, name, description, time, img }) => {
 
 const RecipeListCard = styled.section`
   border: 1px solid #333;
-  margin: 10px;
-  padding: 20px;
-  width: 300px;
+  width: 100%;
   word-wrap: break-word;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  border-radius: 5px;
 
   img {
-    width: 100%;
-    height: 200px;
+    position: absolute; 
     object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
-`;
+`
+const TextWrapper = styled.div`
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+`
 
 const RecipeCardWrapper = styled.div`
-display: block;
+
 `
 
