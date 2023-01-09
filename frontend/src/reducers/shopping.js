@@ -7,7 +7,7 @@ const shopping = createSlice({
   initialState: { items: initialItems },
   reducers: {
     setAllItems: (store, action) => {
-      store.item = action.payload
+      store.items = action.payload
     },
     toggleItem: (store, action) => {
       console.log(store)

@@ -3,6 +3,8 @@ import Nav from "./reusable/Nav";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import NoIngredients from "./NoIngredients";
+
 
 
 const MyShoppingList = () => {
@@ -34,7 +36,7 @@ const MyShoppingList = () => {
       .then((res) => res.json())
       .then((data) => {
         setShoppingList(data.response)
-        console.log('data response shoppinglist', data.response)})
+        console.log('shoppinglist1loading', data.response)})
       .catch((error) => console.error('error3', error));
       //.finally(() => setLoading(false))
   };
@@ -43,17 +45,37 @@ const MyShoppingList = () => {
     fetchMyShoppingList();
   }, []);
 
+ // REMOVE INGREDIENT FROM USERS SAVED SHOPPINGLIST
+ const buttonClickRemove = (id) => {
+  const REMOVE_INGREDIENT_URL = `http://localhost:8090/removeIngredient`;
+  console.log('idTESTShop', id)
+  const options = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id: id, userId: userId }) 
+    //we only need id and userId not name since we are removing and only need to find the id
+  };
+  fetch(REMOVE_INGREDIENT_URL, options)
+    .then((res) => res.json())
+    .then((data) => {
+      setShoppingList(data.response)
+      console.log('shoppinglistupdated', data.response)})
+    .catch((error) => console.error("error3", error));
+};
+
     return (
       <>
       <Nav />
-      <ShoppingListContainer>
+      {console.log('shoppinglistbefore deciding on what to show', shoppingList)}
+      <ShoppingListContainer> 
       <h1>My Shopping List</h1>
       <ListWrapper>
         <ul>
           {shoppingList.map((component) => {
             return (
-              <li key={`${counter++}-${component.id}`}>{component.raw_text}</li>
-            )
+              <><li key={`${counter++}-${component.id}`}>{component.raw_text}</li>
+              <button onClick={() => buttonClickRemove(component.id)}>X</button></>
+              )
           })}
         </ul>
       </ListWrapper>
@@ -76,3 +98,19 @@ flex-direction: column;
 const ListWrapper = styled.div`
 text-align: left;
 `
+/*   {console.log('shoppingList', shoppingList)}
+      {shoppingList.lenght === 0 && <NoIngredients />} 
+      /{shoppingList.lenght > 0 &&  
+      <ShoppingListContainer> 
+      <h1>My Shopping List</h1>
+      <ListWrapper>
+        <ul>
+          {shoppingList.map((component) => {
+            return (
+              <><li key={`${counter++}-${component.id}`}>{component.raw_text}</li>
+              <button onClick={() => buttonClickRemove(component.id)}>X</button></>
+              )
+          })}
+        </ul>
+      </ListWrapper>
+      </ShoppingListContainer> } */

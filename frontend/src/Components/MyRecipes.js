@@ -2,13 +2,21 @@ import React, { useState, useEffect } from 'react';
 import Nav from "./reusable/Nav";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const MyRecipes = () => {
   const [recipeList, setRecipeList] = useState([]);
   const userId = useSelector((store) => store.user.userId);
 
   //const [loading, setLoading] = useState(false);
+  const accessToken = useSelector((store) => store.user.accessToken);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!accessToken) {
+        navigate("/login");
+    }
+  }, []);
 
   const fetchMyRecipes = () => {
     const MY_RECIPES_URL = `http://localhost:8090/saveRecipe/${userId}`;
@@ -70,7 +78,6 @@ const MyRecipes = () => {
           <p>{recipe.name}</p>
       </Link>
       <button onClick={() => buttonClickRemove(recipe.id)}>Remove</button> 
-      {/*chnged to arrow function*/}
       </>
       )
       })}
