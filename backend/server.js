@@ -210,6 +210,7 @@ app.post("/saveListItem", async (req, res) => {
   }
 });
 
+
 // SHOW SHOPPING LIST
 
 app.get("/listItems/:userId", async (req, res) => {
@@ -226,13 +227,13 @@ app.get("/listItems/:userId", async (req, res) => {
 //REMOVE INGREDIENT FROM SHOPPING LIST
 app.put("/removeIngredient", async (req, res) => {
   const {  id, userId } = req.body; 
-  console.log('id', id);
+  console.log('IngredientRawTextid', id);
   console.log('UserIdRemove3', userId);
 
   try {
     console.log('removing...');
     const removeIngredient = await User.findByIdAndUpdate(userId, {$pull: {recipeComponents: { id }}}, {new: true})
-    console.log(removeIngredient);
+    console.log('removeIngredient', removeIngredient);
     res.status(201).json({success: true, response: removeIngredient.recipeComponents});
   } catch (error) {
     res.status(400).json({success: false, response: error});
@@ -240,6 +241,57 @@ app.put("/removeIngredient", async (req, res) => {
 
   /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
 });
+
+//UPDATE INGREDIENT FROM SHOPPING LIST
+app.put("/updateIngredient", async (req, res) => {
+  const {  id, userId, text } = req.body; 
+  // console.log('IngredientRawTextid', id);
+  // console.log('IngredientRawTextid', text);
+
+  try {
+    console.log('update...');
+
+    
+
+    const editResult = await User.findOneAndUpdate({ _id: userId, 'recipeComponents.id': id }, { $set: { "recipeComponents.$.raw_text" : text } }, {new: true});
+
+
+    //https://www.mongodb.com/docs/drivers/node/current/fundamentals/crud/write-operations/embedded-arrays/
+    //const updateIngredient = await User.findByIdAndUpdate(userId, {new: true}, { $ : {recipeComponents: { id }}},)
+    
+  
+    console.log('resultEditIngredient', editResult);
+    res.status(201).json({success: true, response: editResult.recipeComponents});
+  } catch (error) {
+    res.status(400).json({success: false, response: error});
+  }
+
+  /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
+});
+
+// //CHECK/UNCHECK INGREDIENT IN SHOPPINGLIST
+// app.put("/checkIngredient", async (req, res) => {
+//   const {  id, userId } = req.body; 
+//   console.log('id', id);
+//   console.log('UserIdRemove3', userId);
+//   console.log('recipeComponents', recipeComponents);
+
+//   try {
+//     console.log('checking/unchecking...');
+//     const checkIngredient = await User.findByIdAndUpdate(userId, {$pull: {recipeComponents: { id }}}, {new: true})
+//     console.log('checkIngredient',checkIngredient);
+//     res.status(201).json({success: true, response: checkIngredient.recipeComponents});
+//   } catch (error) {
+//     res.status(400).json({success: false, response: error});
+//   }
+
+//   /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
+// });
+
+
+//updateIngredient
+
+
 
 
 // Start defining your routes here
