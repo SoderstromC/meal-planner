@@ -65,7 +65,7 @@ const MyShoppingList = () => {
     // UPDATE INGREDIENT FROM USERS SAVED SHOPPINGLIST
 
     const buttonClickEditIngredient = (id, raw_text) => {
-      
+
     }
 
 
