@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faClock } from "@fortawesome/free-solid-svg-icons"
+import { faClock, faHeart } from "@fortawesome/free-solid-svg-icons"
 
 export const RecipeCard = ({ id, name, time, img }) => {
   const userId = useSelector((store) => store.user.userId);
@@ -50,15 +50,17 @@ export const RecipeCard = ({ id, name, time, img }) => {
         </TextWrapper>  
       </RecipeListCard>
      </Link>
-     <button type='submit' onClick={buttonClickSave}>
-       Save to My recipes
-     </button>
-     </RecipeCardWrapper>
+     <SaveButton type='submit' onClick={buttonClickSave}>
+      <FontAwesomeIcon icon={faHeart} />
+     </SaveButton>
+    </RecipeCardWrapper>
   );
 };
 
+const RecipeCardWrapper = styled.div`
+  position: relative;
+`
 const RecipeListCard = styled.section`
-  border: 1px solid #333;
   width: 100%;
   word-wrap: break-word;
   height: 250px;
@@ -78,9 +80,19 @@ const TextWrapper = styled.div`
   position: absolute;
   bottom: 8px;
   left: 10px;
+
+  p, h3 {
+    text-shadow: 1px 1px 2px #333;
+  }
 `
-
-const RecipeCardWrapper = styled.div`
-
+const SaveButton = styled.button`
+ background-color: white;
+ border: none;
+ color: #333;
+ cursor: pointer;
+ position: absolute;
+ top: 8px;
+ right: 10px;
+ border-radius: 5px;
 `
 
