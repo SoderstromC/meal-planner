@@ -2,14 +2,18 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { generateRecipe } from "reducers/recipes";
 import { RecipeCard } from "./reusable/RecipeCard";
+import Loading from "./reusable/Loading";
 import Nav from "./reusable/Nav";
 
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
 
+
 const RecipeList = () => {
   const arrayOfRecipes = useSelector((store) => store.recipes.results);
   console.log("arrayOfRecipes", arrayOfRecipes);
+  const loading = useSelector((store) => store.recipes.loading);
+
   // const description = useSelector((store) => store.recipes.results[].description)
   // console.log('description', description)
 
@@ -40,26 +44,32 @@ const RecipeList = () => {
   }, [])
 
 return(
-  <Outerwrapper>
-    <Nav />
+  <>
+  {loading && <Loading />}
+  {!loading && (
+    <Outerwrapper>
+    <>
+      <Nav />
       <h1>List of recipes</h1>
-    <Innerwrapper>
-      <RecipeListWrapper>
-      {arrayOfRecipes.map((recipe) => {
-      return ( 
-        <RecipeCard
-         key= {recipe.id}
-         id={recipe.id}
-         name={recipe.name}
-         time={recipe.total_time_minutes}
-         description={recipe.description}
-         img={recipe.thumbnail_url}
-        />
-      )
-      })}
-      </RecipeListWrapper>
-    </Innerwrapper>
+      <Innerwrapper>
+        <RecipeListWrapper>
+          {arrayOfRecipes.map((recipe) => {
+            return (
+              <RecipeCard
+                key={recipe.id}
+                id={recipe.id}
+                name={recipe.name}
+                time={recipe.total_time_minutes}
+                description={recipe.description}
+                img={recipe.thumbnail_url} />
+            );
+          })}
+        </RecipeListWrapper>
+      </Innerwrapper>
+    </>
   </Outerwrapper>
+  )}
+</>
 )
 } 
 

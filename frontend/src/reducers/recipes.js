@@ -8,6 +8,7 @@ const recipes = createSlice({
     error: null,
     components: [],
     instructions: [],
+    loading: false,
   },
   reducers: {
     setRecipe: (store, action) => {
@@ -25,14 +26,17 @@ const recipes = createSlice({
     setMealComponents: (store, action) => {
       store.components = action.payload;
     },
+    isLoading: (store, action) => {
+      store.loading = action.payload;
+    },
   },
 });
 
 export default recipes;
 
 export const generateRecipe = () => {
-  //change name to generateRecipeList when we are all together and merged
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    dispatch(recipes.actions.isLoading(true))
     const generate = {
       method: "GET",
       headers: {
@@ -47,7 +51,9 @@ export const generateRecipe = () => {
         console.log("dataAllreducer", data);
         dispatch(recipes.actions.setRecipe(data?.results));
       })
-      .catch((err) => console.error(err));
+      .finally(() => {
+        dispatch(game.actions.isLoading(false))
+      })
   };
 };
 
