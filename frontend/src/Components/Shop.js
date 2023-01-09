@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import NoIngredients from "./NoIngredients";
+import Item from "./Item";
 
 
 
@@ -67,17 +68,16 @@ const MyShoppingList = () => {
       <>
       <Nav />
       {console.log('shoppinglistbefore deciding on what to show', shoppingList)}
-      <ShoppingListContainer> 
+      <ShoppingListContainer>
       <h1>My Shopping List</h1>
       <ListWrapper>
-        <ul>
-          {shoppingList.map((component) => {
-            return (
-              <><li key={`${counter++}-${component.id}`}>{component.raw_text}</li>
-              <button onClick={() => buttonClickRemove(component.id)}>X</button></>
-              )
-          })}
-        </ul>
+       
+          {shoppingList.map((component) => (
+           <Item
+          key= {component.id}
+          componentData={component}
+          />
+          ))}
       </ListWrapper>
       </ShoppingListContainer>
       </>
@@ -98,7 +98,20 @@ flex-direction: column;
 const ListWrapper = styled.div`
 text-align: left;
 `
-/*   {console.log('shoppingList', shoppingList)}
+/*  
+ <ListWrapper>
+        <ul>
+          {shoppingList.map((component) => {
+            return (
+              <><li key={`${counter++}-${component.id}`}>{component.raw_text}</li>
+              <button onClick={() => buttonClickRemove(component.id)}>X</button></>
+              )
+          })}
+        </ul>
+      </ListWrapper>
+
+
+{console.log('shoppingList', shoppingList)}
       {shoppingList.lenght === 0 && <NoIngredients />} 
       /{shoppingList.lenght > 0 &&  
       <ShoppingListContainer> 
