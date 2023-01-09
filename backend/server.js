@@ -46,9 +46,6 @@ const UserSchema = new mongoose.Schema({
   recipeComponents: {
     type: [],
     default: [],
-  },
-  userId:{
-    type: String,
   }
 });
 
@@ -168,21 +165,22 @@ app.post("/saveRecipe", async (req, res) => {
   }
 });
 
+// REMOVE RECIPE ID FROM USER'S SAVED LIST
+app.put("/removeRecipe", async (req, res) => {
+  const {  id, userId } = req.body; 
+  console.log('RecipeIdRemove',id);
+  console.log('UserIdRemove2',userId);
 
-// REMOVE A RECIPE FROM SAVED
-
-app.delete("/removeRecipe", async (req, res) => {
-  const {  id, userId, name } = req.body; 
-  //steg 1: Få id from req
-  // kolla om id redan finns i listan
-  //steg 2: lägg till i listan med Id och spara i databasen (i mongo finns det kommando för att lägga till i listan, add item ro array)
-  //steg 3: returnera resultat
   try {
-    const removeRecipe = await User.findByIdAndRemove(userId, {$pull: {savedRecipes: {id, name}}})
-    res.status(201).json({success: true, response: removeRecipe});
+    console.log('removing...');
+    const removeRecipe = await User.findByIdAndUpdate(userId, {$pull: {savedRecipes: { id }}}, {new: true})
+    console.log(removeRecipe);
+    res.status(201).json({success: true, response: removeRecipe.savedRecipes});
   } catch (error) {
     res.status(400).json({success: false, response: error});
   }
+
+  /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
 });
 
 // SHOW SAVED RECIPES
@@ -192,6 +190,33 @@ app.get("/saveRecipe/:userId", async (req, res) => {
   try {
     const user = await User.findById(userId);
     res.status(201).json({success: true, response: user.savedRecipes});
+  } catch (error) {
+    res.status(400).json({success: false, response: error});
+  }
+});
+
+//SAVE INGREDIENTS TO SHOPPING LIST
+
+app.post("/saveListItem", async (req, res) => {
+  const { userId, itemsToSave } = req.body;
+  console.log('ingredients', itemsToSave);
+  console.log('userIdShop', userId);
+
+  try {
+    const user = await User.findByIdAndUpdate(userId, {$push: {recipeComponents: {$each: itemsToSave}}}, {new: true});
+    res.status(201).json({success: true, response: user.recipeComponents});
+  } catch (error) {
+    res.status(400).json({success: false, response: error});
+  }
+});
+
+// SHOW SHOPPING LIST
+
+app.get("/listItems/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const user = await User.findById(userId);
+    res.status(201).json({success: true, response: user.recipeComponents});
   } catch (error) {
     res.status(400).json({success: false, response: error});
   }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Nav from "./reusable/Nav";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { Ingredients } from './reusable/Ingredients';
+import { useNavigate } from "react-router-dom";
 
 
 const MyShoppingList = () => {
@@ -10,6 +10,16 @@ const MyShoppingList = () => {
   const userId = useSelector((store) => store.user.userId);
 
   //const [loading, setLoading] = useState(false);
+
+  const accessToken = useSelector((store) => store.user.accessToken);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!accessToken) {
+        navigate("/login");
+    }
+  }, []);
+
+  let counter = 0;
 
   const fetchMyShoppingList = () => {
     const MY_SHOPPINGLIST_URL = `http://localhost:8090/listItems/${userId}`;
@@ -39,14 +49,13 @@ const MyShoppingList = () => {
       <ShoppingListContainer>
       <h1>My Shopping List</h1>
       <ListWrapper>
-      {shoppingList.map((component) => {
-      return (
-        <Ingredients
-        key= {component.id}
-        item={component.raw_text}
-       />
-      )
-      })}
+        <ul>
+          {shoppingList.map((component) => {
+            return (
+              <li key={`${counter++}-${component.id}`}>{component.raw_text}</li>
+            )
+          })}
+        </ul>
       </ListWrapper>
       </ShoppingListContainer>
       </>

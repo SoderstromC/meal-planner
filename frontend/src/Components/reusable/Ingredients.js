@@ -18,10 +18,18 @@ export const Ingredients = ({recipeId}) => {
 
     const SAVED_SHOPPINGLIST_URL = `http://localhost:8090/saveListItem`;
 
+    let itemsToSave = [];
+    components.map((component) => {
+      itemsToSave.push({
+        "raw_text": component.raw_text,
+        "id": component.id
+      })
+    })
+
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: userId, components: components })
+      body: JSON.stringify({ userId: userId, itemsToSave: itemsToSave })
     };
 
     // ADD INGREDIENTS TO SHOPPING LIST IN SERVER
@@ -37,6 +45,7 @@ export const Ingredients = ({recipeId}) => {
   return (
     <>
       <h2>Ingredients</h2>
+      <button type='button' onClick={buttonClickSave}>Add all ingredients to Shopping list</button>
       {components.map((component) => {
         return (
           <>
@@ -46,12 +55,10 @@ export const Ingredients = ({recipeId}) => {
               <p>{component.measurements[0].unit.name}</p>
               <p>{component.measurements[0].quantity}</p> */}
             </RecipeWrapper>
-            <button type='button' onClick={buttonClickSave}>
-                Add to Shopping list
-            </button>
           </>
         );
       })}
+      <button type='button' onClick={buttonClickSave}>Add all ingredients to Shopping list</button>
     </>
   );
 };

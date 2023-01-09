@@ -6,12 +6,8 @@ import { Link } from 'react-router-dom';
 export const RecipeCard = ({ id, name, description, time, img }) => {
   const userId = useSelector((store) => store.user.userId);
   const accessToken = useSelector((store) => store.user.accessToken); //remove?
-  console.log("recipeid", id);
-  console.log("userid", userId);
-  console.log("accessToken", accessToken);
 
-  
-  //SAVING A RECIPE ID TO SPECIFIC USER IN SERVER 
+  /**** SAVING A RECIPE ID TO SPECIFIC USER IN SERVER ****/
 
   const buttonClickSave = () => {
 
@@ -23,7 +19,8 @@ export const RecipeCard = ({ id, name, description, time, img }) => {
       body: JSON.stringify({ id: id, userId: userId, name: name })
     };
 
-    // ADD RECIPIE ID TO USER ID
+    /**** ADD RECIPE ID TO USER ID ****/
+
     fetch(SAVED_RECIPE_URL, options) // Catch the data and update with uniqe object (option)./Shouldn't we add userId in URL?
       .then((res) => res.json())
       .then((data) => {
