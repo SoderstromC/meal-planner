@@ -2,23 +2,24 @@ import React from "react";
 import styled from "styled-components";
 
 
-const Item = ({ key, componentData }) => {
+const Item = ({ componentData }) => {
 
   return(
     <>
    <ItemWrapper>
        <div className="item-row">
+        
       {/* <CheckButton
         role="button"
-        onClick={() => onIsCompletedToggle(taskData.id)}
-        complete={taskData.isCompleted}
+        onClick={() => onIsCompletedToggle(componentData.id)}
+        complete={componentData.isCompleted}
         aria-label={
-          taskData.isCompleted
+          componentData.isCompleted
             ? 'task complete. press enter to toggle.'
             : 'task incomplete. press enter to toggle.'
         }>
-        {taskData.isCompleted ? '' : <IncompleteCheckIcon src={Check} />}
-        {taskData.isCompleted ? <CheckIcon src={Check} /> : ''}
+        {componentData.isCompleted ? '' : <IncompleteCheckIcon src={Check} />}
+        {componentData.isCompleted ? <CheckIcon src={Check} /> : ''}
       </CheckButton> */}
 
       <p>{componentData.raw_text}</p>
