@@ -52,7 +52,7 @@ export const generateRecipe = () => {
         dispatch(recipes.actions.setRecipe(data?.results));
       })
       .finally(() => {
-        dispatch(game.actions.isLoading(false))
+        dispatch(recipes.actions.isLoading(false))
       })
   };
 };
