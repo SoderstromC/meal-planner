@@ -26,6 +26,7 @@ export const RecipeCard = ({ id, name, time, img }) => {
     fetch(SAVED_RECIPE_URL, options) // Catch the data and update with uniqe object (option)./Shouldn't we add userId in URL?
       .then((res) => res.json())
       .then((data) => {
+        alert("Recipe saved!")
         //functionGivingFeedbackThatWeHaveSavedTheDATA(data)
         console.log("savedData", data); // Gets/request all data again
       })
