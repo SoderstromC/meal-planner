@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons"
 
 const MyRecipes = () => {
   const [recipeList, setRecipeList] = useState([]);
@@ -58,13 +60,14 @@ const MyRecipes = () => {
         <InnerWrapper>
           <Nav />
           <SavedRecipesContainer>
-            <h3>My saved recipes</h3>
+            <h3>My recipes</h3>
           <RecipeListWrapper>
           { console.log('new recipe list', recipeList) }
           {recipeList.map((recipe) => {
            return (
            <>
            <SingleRecipeWrapper>
+            <LinkWrapper>
             <Link
               className="recipe-container"
               id={recipe.id}
@@ -72,8 +75,13 @@ const MyRecipes = () => {
               key={recipe.id}>
              <p>{recipe.name}</p>
            </Link>
-           <button onClick={() => buttonClickRemove(recipe.id)}>Remove</button> 
+           </LinkWrapper>
+           <ButtonWrapper>
+           <RemoveButton onClick={() => buttonClickRemove(recipe.id)}>
+            <FontAwesomeIcon icon={faTrashCan} />
+           </RemoveButton> 
            {/*chnged to arrow function*/}
+           </ButtonWrapper>
            </SingleRecipeWrapper>
            </>
           )
@@ -94,9 +102,25 @@ margin-top: 50px;
 
 const RecipeListWrapper = styled.div`
  width: 100%;
+ border: 1px solid #333;
+ border-radius: 5px;
+ padding: 30px;
+ margin-top: 10px;
 `
 const SingleRecipeWrapper = styled.div`
 display: flex;
+`
+const LinkWrapper = styled.div`
+ width: 50%;
+`
+const ButtonWrapper = styled.div`
+ width: 50%;
+ display: flex;
+ justify-content: flex-end;
+`
+const RemoveButton = styled.button`
+ background-color: transparent;
+ border: none;
 `
 
 
