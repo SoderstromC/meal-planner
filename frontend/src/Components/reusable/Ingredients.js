@@ -7,7 +7,7 @@ export const Ingredients = ({recipeId}) => {
   const components = useSelector((store) => store.recipes.components);
   const portions = useSelector((store) => store.recipes.sections);
   const userId = useSelector((store) => store.user.userId);
- 
+
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -19,6 +19,7 @@ export const Ingredients = ({recipeId}) => {
     const SAVED_SHOPPINGLIST_URL = `http://localhost:8090/saveListItem`;
 
     let itemsToSave = [];
+    console.log('components2', components)
     components.map((component) => {
       itemsToSave.push({
         "raw_text": component.raw_text,
