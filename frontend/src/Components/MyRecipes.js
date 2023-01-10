@@ -78,7 +78,7 @@ const MyRecipes = () => {
            </LinkWrapper>
            <ButtonWrapper>
            <RemoveButton onClick={() => buttonClickRemove(recipe.id)}>
-            <FontAwesomeIcon icon={faTrashCan} />
+            <FontAwesomeIcon className="trash-icon" icon={faTrashCan} />
            </RemoveButton> 
            {/*chnged to arrow function*/}
            </ButtonWrapper>
@@ -97,9 +97,7 @@ export default MyRecipes;
 
 const SavedRecipesContainer = styled.div`
 width: 100%;
-
 `
-
 const RecipeListWrapper = styled.div`
  width: 100%;
  border: 1px solid #333;
@@ -121,6 +119,15 @@ const ButtonWrapper = styled.div`
 const RemoveButton = styled.button`
  background-color: transparent;
  border: none;
+ cursor: pointer;
+
+ .trash-icon {
+  color: red;
+ }
+
+ &:hover {
+  transform: scale(1.2);
+ }
 `
 
 
