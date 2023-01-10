@@ -107,6 +107,8 @@ const MyShoppingList = () => {
     <>
       <Nav />
       {console.log("shoppinglistbefore deciding on what to show", shoppingList)}
+      {shoppingList.length === 0 && <NoIngredients />} 
+      {shoppingList.length > 0 &&  
       <ShoppingListContainer>
         <h1>My Shopping List</h1>
         <ListWrapper>
@@ -133,7 +135,7 @@ const MyShoppingList = () => {
             );
           })}
         </ListWrapper>
-      </ShoppingListContainer>
+      </ShoppingListContainer>}
     </>
   );
 };
