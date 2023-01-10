@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faClock, faHeart } from "@fortawesome/free-solid-svg-icons"
 
-export const RecipeCard = ({ id, name, description, time, img }) => {
+export const RecipeCard = ({ id, name, time, img }) => {
   const userId = useSelector((store) => store.user.userId);
   const accessToken = useSelector((store) => store.user.accessToken); //remove?
 
@@ -24,6 +26,7 @@ export const RecipeCard = ({ id, name, description, time, img }) => {
     fetch(SAVED_RECIPE_URL, options) // Catch the data and update with uniqe object (option)./Shouldn't we add userId in URL?
       .then((res) => res.json())
       .then((data) => {
+        alert("Recipe saved!")
         //functionGivingFeedbackThatWeHaveSavedTheDATA(data)
         console.log("savedData", data); // Gets/request all data again
       })
@@ -41,34 +44,56 @@ export const RecipeCard = ({ id, name, description, time, img }) => {
         id={id}
         to={`/single/${id}`}>
       <RecipeListCard>
-        <h3>{name}</h3>
-        <p>Cooking time in minutes: {time}</p>
         <img src={img} />
-        <p>{description}</p> 
+        <TextWrapper>
+          <h3>{name}</h3>
+          <p><FontAwesomeIcon icon={faClock} /> {time} minutes</p>
+        </TextWrapper>  
       </RecipeListCard>
      </Link>
-     <button type='submit' onClick={buttonClickSave}>
-       Save to My recipes
-     </button>
-     </RecipeCardWrapper>
+     <SaveButton type='submit' onClick={buttonClickSave}>
+      <FontAwesomeIcon icon={faHeart} />
+     </SaveButton>
+    </RecipeCardWrapper>
   );
 };
 
+const RecipeCardWrapper = styled.div`
+  position: relative;
+`
 const RecipeListCard = styled.section`
-  border: 1px solid #333;
-  margin: 10px;
-  padding: 20px;
-  width: 300px;
+  width: 100%;
   word-wrap: break-word;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  border-radius: 5px;
 
   img {
-    width: 100%;
-    height: 200px;
+    position: absolute; 
     object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
-`;
+`
+const TextWrapper = styled.div`
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
 
-const RecipeCardWrapper = styled.div`
-display: block;
+  p, h3 {
+    text-shadow: 1px 1px 2px #333;
+  }
+`
+const SaveButton = styled.button`
+ background-color: white;
+ border: none;
+ color: #333;
+ cursor: pointer;
+ position: absolute;
+ top: 8px;
+ right: 10px;
+ border-radius: 5px;
 `
 

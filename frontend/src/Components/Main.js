@@ -5,6 +5,7 @@ import { API_URL } from "utils/utils";
 import { useNavigate, Link } from "react-router-dom";
 import Nav from "./reusable/Nav";
 import styled from "styled-components";
+import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
 
 const Main = () => {
     const thoughtItems = useSelector((store) => store.thoughts.items);
@@ -19,20 +20,21 @@ const Main = () => {
     }, []);
 
     return (
-        <>
-        <Nav />
-        <MainContainer>
-            <Link to="/login">GO TO LOGIN</Link>   
-            <h2>This is the landing page</h2>
-            <Link to="/recipes">Go to: Recipes list!</Link>
-            <Link to="/saved">Go to: My saved recipes!</Link>
-            <Link to="/shoppinglist">Go to: My shopping list!</Link>
-
+      <OuterWrapper>
+        <InnerWrapper>
+          <Nav />
+            <MainContainer>
+              <Link to="/login">GO TO LOGIN</Link>   
+              <h2>This is the landing page</h2>
+              <Link to="/recipes">Go to: Recipes list!</Link>
+              <Link to="/saved">Go to: My saved recipes!</Link>
+              <Link to="/shoppinglist">Go to: My shopping list!</Link>
             {/* {thoughtItems.map((item) => {
                 return <p key={item._id}>{item.message}</p>
             })} */}
-        </MainContainer>
-        </>
+           </MainContainer>
+        </InnerWrapper>
+      </OuterWrapper>
     )
 }
 

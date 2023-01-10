@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Nav from "./reusable/Nav";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
 
 const SingleRecipe = () => {
 
@@ -13,15 +14,17 @@ console.log('id', recipeId)
 const navigate = useNavigate();
 
 return(
-  <>
-   <Nav />
-   <SingleRecipeWrapper>
-    <button type="button" onClick={() => navigate(-1)}>GO BACK TO LIST</button>
-    <h1>This is a single recipe</h1>
-    <Ingredients recipeId = {recipeId}/>
-    <Instructions recipeId = {recipeId}/>
-  </SingleRecipeWrapper>
-  </>
+  <OuterWrapper>
+    <InnerWrapper>
+      <Nav />
+      <SingleRecipeWrapper>
+        <button type="button" onClick={() => navigate(-1)}>GO BACK TO LIST</button>
+        <h1>This is a single recipe</h1>
+        <Ingredients recipeId = {recipeId}/>
+        <Instructions recipeId = {recipeId}/>
+      </SingleRecipeWrapper>
+    </InnerWrapper>
+  </OuterWrapper>
 )
 }
 

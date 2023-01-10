@@ -4,6 +4,7 @@ import shopping from 'reducers/shopping'
 import Nav from "./reusable/Nav";
 import uniqid from 'uniqid'
 import styled from 'styled-components/macro'
+import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
 
 
 const ShoppingList = () => {
@@ -20,49 +21,51 @@ const ShoppingList = () => {
   }
 
   return (
-    <>
-    <Nav />
-    <Wrapper>
-      <ListWrapper>
-        <ComponentTitle>This is my shopping list</ComponentTitle>
-          {shoppingList.map((shoppingItem, index) => {
-            return (
-              <ArticleWrapper key={shoppingItem.id}>
-                  <h2>{shoppingItem.name}</h2>
-                <TodoWrapper>
-                  <label>
-                    <CheckBox
-                      type="checkbox"
-                      checked={shoppingItem.isCompleted}
-                      onChange={() => onIsCompletedToggle(shoppingItem.id)} />
-                  </label>
-                  <DeleteButton
-                    onClick={() => onDeleteButtonClick(index)}
-                    type="button">&#128465;&#65039;
-                  </DeleteButton>
-                </TodoWrapper>
-              </ArticleWrapper>
-            )
-          })}
-          <NewListItem />
-      </ListWrapper>
-    </Wrapper>
-    </>
+    <OuterWrapper>
+      <InnerWrapper>
+       <Nav />
+        <Wrapper>
+          <ListWrapper>
+            <ComponentTitle>This is my shopping list</ComponentTitle>
+              {shoppingList.map((shoppingItem, index) => {
+                return (
+                  <ArticleWrapper key={shoppingItem.id}>
+                      <h2>{shoppingItem.name}</h2>
+                    <TodoWrapper>
+                      <label>
+                        <CheckBox
+                          type="checkbox"
+                          checked={shoppingItem.isCompleted}
+                          onChange={() => onIsCompletedToggle(shoppingItem.id)} />
+                      </label>
+                      <DeleteButton
+                        onClick={() => onDeleteButtonClick(index)}
+                        type="button">&#128465;&#65039;
+                      </DeleteButton>
+                    </TodoWrapper>
+                  </ArticleWrapper>
+                )
+              })}
+              <NewListItem />
+          </ListWrapper>
+        </Wrapper>
+      </InnerWrapper>
+    </OuterWrapper>
   )
 }
 
 const Wrapper = styled.section`
-  display: flex;
-  width: 100%;
-  justify-content: center;
+display: flex;
+width: 100%;
+justify-content: center;
 `
 
 const ListWrapper = styled.div`
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+width: 70%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 `
 
 const ComponentTitle = styled.h2`
@@ -72,10 +75,10 @@ const ComponentTitle = styled.h2`
 `
 
 const ArticleWrapper = styled.article`
-  display: flex;
-  justify-content: space-between;
-  width: 50%;
-  // padding: 10px;
+display: flex;
+justify-content: space-between;
+width: 50%;
+// padding: 10px;
 `
 const TodoWrapper = styled.div`
   display: flex;
