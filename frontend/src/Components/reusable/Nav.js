@@ -21,15 +21,15 @@ const logOutOnClick = () => {
           <p>Main</p>
       </Link>
       <Link to={`/recipes`}>
-          <p>Recipes</p>
+          <p>Find recipes</p>
       </Link>
       <Link to={`/saved`}>
-          <p>My saved recipes</p>
+          <p>My recipes</p>
       </Link>
       <Link to={`/shoppinglist`}>
-          <p>My shopping list</p>
+          <p>Shoppinglist</p>
       </Link>
-        <button type="button" onClick={logOutOnClick}>LOG OUT</button>
+        <LogOutButton type="button" onClick={logOutOnClick}>Logout</LogOutButton>
       </NavContainer>
   );
 };
@@ -37,7 +37,20 @@ export default Nav;
 
   const NavContainer = styled.div`
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  justify-content: right;
+  gap: 15px;
+
+  a {
+    text-decoration: none;
+    }
+
+  a:visited {
+    color: black;
+    }
   `
+  const LogOutButton = styled.button`
+    background: transparent;
+    border: none;
+    cursor: pointer;
+`
 

@@ -58,12 +58,13 @@ const MyRecipes = () => {
         <InnerWrapper>
           <Nav />
           <SavedRecipesContainer>
-            <h1>My saved recipes</h1>
+            <h3>My saved recipes</h3>
           <RecipeListWrapper>
           { console.log('new recipe list', recipeList) }
           {recipeList.map((recipe) => {
            return (
            <>
+           <SingleRecipeWrapper>
             <Link
               className="recipe-container"
               id={recipe.id}
@@ -73,15 +74,11 @@ const MyRecipes = () => {
            </Link>
            <button onClick={() => buttonClickRemove(recipe.id)}>Remove</button> 
            {/*chnged to arrow function*/}
+           </SingleRecipeWrapper>
            </>
           )
          })}
         </RecipeListWrapper>
-        <div> 
-              <p>Core problems left to solve:</p> 
-              <li>User can remove recipe from list</li>
-              <li>User can generate a shopping list</li>
-        </div>
       </SavedRecipesContainer>
      </InnerWrapper>
   </OuterWrapper>
@@ -92,15 +89,14 @@ export default MyRecipes;
 
 const SavedRecipesContainer = styled.div`
 width: 100%;
-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
+margin-top: 50px;
 `
 
 const RecipeListWrapper = styled.div`
-text-align: left;
+ width: 100%;
+`
+const SingleRecipeWrapper = styled.div`
+display: flex;
 `
 
 
