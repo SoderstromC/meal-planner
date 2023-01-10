@@ -281,26 +281,25 @@ app.put("/updateIngredient", async (req, res) => {
   /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
 });
 
-// //CHECK/UNCHECK INGREDIENT IN SHOPPINGLIST
-// app.put("/checkIngredient", async (req, res) => {
-//   const {  id, userId } = req.body;
-//   console.log('id', id);
-//   console.log('UserIdRemove3', userId);
-//   console.log('recipeComponents', recipeComponents);
+//CHECK/UNCHECK INGREDIENT IN SHOPPINGLIST
+app.put("/checkIngredient", async (req, res) => {
+  const {  id, userId } = req.body;
+  console.log('id', id);
+  console.log('UserIdRemove3', userId);
+  console.log('recipeComponents', recipeComponents);
 
-//   try {
-//     console.log('checking/unchecking...');
-//     const checkIngredient = await User.findByIdAndUpdate(userId, {$pull: {recipeComponents: { id }}}, {new: true})
-//     console.log('checkIngredient',checkIngredient);
-//     res.status(201).json({success: true, response: checkIngredient.recipeComponents});
-//   } catch (error) {
-//     res.status(400).json({success: false, response: error});
-//   }
+  try {
+    console.log('checking/unchecking...');
+    const checkIngredient = await User.findByIdAndUpdate(userId, {$pull: {recipeComponents: { id }}}, {new: true})
+    console.log('checkIngredient',checkIngredient);
+    res.status(201).json({success: true, response: checkIngredient.recipeComponents});
+  } catch (error) {
+    res.status(400).json({success: false, response: error});
+  }
 
-//   /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
-// });
+  /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
+});
 
-//updateIngredient
 
 // Start defining your routes here
 app.get("/", (req, res) => {
