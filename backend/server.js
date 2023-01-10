@@ -18,77 +18,77 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
 // USER SCHEMA
 
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
     required: true,
     minlenght: 8,
-    maxlenght: 12
+    maxlenght: 12,
     /// My_B4nK_P4$$word
   },
   // npm install crypto
   accessToken: {
     type: String,
-    default: () => crypto.randomBytes(128).toString("hex")
+    default: () => crypto.randomBytes(128).toString("hex"),
   },
   savedRecipes: {
     type: [],
-    default: []
+    default: [],
   },
   recipeComponents: {
     type: [],
     default: [],
-  }
+  },
 });
 
 const User = mongoose.model("User", UserSchema);
-
 
 // REGISTER AS A USER
 
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
-// npm install bcrypt
-// const code = [1, 2, 4, 4];
-// const makeCodeSecret = (codeArr) => {
-    // const secretMessage = codeArr.map(singleNumber => singleNumber + 1);
-    // return secretMessage
-//}
-// transformedCode = makeCodeSecret(code)
+  // npm install bcrypt
+  // const code = [1, 2, 4, 4];
+  // const makeCodeSecret = (codeArr) => {
+  // const secretMessage = codeArr.map(singleNumber => singleNumber + 1);
+  // return secretMessage
+  //}
+  // transformedCode = makeCodeSecret(code)
   try {
     const salt = bcrypt.genSaltSync();
     if (password.length < 8) {
       res.status(400).json({
         success: false,
-        response: "Password must be at least 8 characters long"
+        response: "Password must be at least 8 characters long",
       });
     } else {
-      const newUser = await new User({username: username, password: bcrypt.hashSync(password, salt)}).save();
+      const newUser = await new User({
+        username: username,
+        password: bcrypt.hashSync(password, salt),
+      }).save();
       res.status(201).json({
         success: true,
         response: {
           username: newUser.username,
           accessToken: newUser.accessToken,
-          id: newUser._id
-        }
+          id: newUser._id,
+        },
       });
     }
-  } catch(error) {
-      res.status(400).json({
-        success: false,
-        response: "Something went wrong. Try again"
-      });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      response: "Something went wrong. Try again",
+    });
   }
 });
-
 
 //LOGIN
 
@@ -96,88 +96,94 @@ app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const user = await User.findOne({username});
+    const user = await User.findOne({ username });
     if (user && bcrypt.compareSync(password, user.password)) {
       res.status(200).json({
         success: true,
         response: {
           username: user.username,
           id: user._id,
-          accessToken: user.accessToken
-        }
+          accessToken: user.accessToken,
+        },
       });
     } else {
       res.status(400).json({
         success: false,
-        response: "Credentials didn't match"
+        response: "Credentials didn't match",
       });
     }
   } catch (error) {
     res.status(500).json({
       success: false,
-      response: error
+      response: error,
     });
   }
 });
-
 
 //AUTHENTICATE USER
 
 const authenticateUser = async (req, res, next) => {
   const accessToken = req.header("Authorization");
   try {
-    const user = await User.findOne({accessToken: accessToken});
+    const user = await User.findOne({ accessToken: accessToken });
     if (user) {
       next();
     } else {
       res.status(401).json({
         response: "Please log in",
-        success: false
-      })
+        success: false,
+      });
     }
   } catch (error) {
     res.status(400).json({
       response: error,
-      success: false
-    })
+      success: false,
+    });
   }
-}
+};
 
-
-// SAVE RECIPE ID AND NAME 
+// SAVE RECIPE ID AND NAME
 
 app.post("/saveRecipe", async (req, res) => {
   const { id, userId, name } = req.body;
-  console.log('name', name);
-  console.log('ididid',id);
-  console.log('userId', userId); //jag förstår inte varför det är id här.. consolog ovan visas inte.
+  console.log("name", name);
+  console.log("ididid", id);
+  console.log("userId", userId); //jag förstår inte varför det är id här.. consolog ovan visas inte.
 
-  // 1. Get recipe id from req  
+  // 1. Get recipe id from req
   // 2. Get uesr id
   // 3. Check if recipe id is already in list
   // 4: Add recipe Id to list and save in db  (i mongo finns det kommando för att lägga till i listan, add item ro array)
   // 5: return resultat
   try {
-    const user = await User.findByIdAndUpdate(userId, {$push: {savedRecipes: {id, name}}});
-    res.status(201).json({success: true, response: user});
+    const user = await User.findByIdAndUpdate(userId, {
+      $push: { savedRecipes: { id, name } },
+    });
+    res.status(201).json({ success: true, response: user });
   } catch (error) {
-    res.status(400).json({success: false, response: error});
+    res.status(400).json({ success: false, response: error });
   }
 });
 
 // REMOVE RECIPE ID FROM USER'S SAVED LIST
 app.put("/removeRecipe", async (req, res) => {
-  const {  id, userId } = req.body; 
-  console.log('RecipeIdRemove',id);
-  console.log('UserIdRemove2',userId);
+  const { id, userId } = req.body;
+  console.log("RecipeIdRemove", id);
+  console.log("UserIdRemove2", userId);
 
   try {
-    console.log('removing...');
-    const removeRecipe = await User.findByIdAndUpdate(userId, {$pull: {savedRecipes: { id }}}, {new: true})
+    console.log("removing...");
+    const removeRecipe = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { savedRecipes: { id } } },
+      { new: true }
+    );
     console.log(removeRecipe);
-    res.status(201).json({success: true, response: removeRecipe.savedRecipes});
+    res
+      .status(201)
+      .json({ success: true, response: removeRecipe.savedRecipes });
   } catch (error) {
-    res.status(400).json({success: false, response: error});
+    res.status(400).json({ success: false, response: error });
   }
 
   /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
@@ -189,9 +195,9 @@ app.get("/saveRecipe/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
     const user = await User.findById(userId);
-    res.status(201).json({success: true, response: user.savedRecipes});
+    res.status(201).json({ success: true, response: user.savedRecipes });
   } catch (error) {
-    res.status(400).json({success: false, response: error});
+    res.status(400).json({ success: false, response: error });
   }
 });
 
@@ -199,17 +205,20 @@ app.get("/saveRecipe/:userId", async (req, res) => {
 
 app.post("/saveListItem", async (req, res) => {
   const { userId, itemsToSave } = req.body;
-  console.log('ingredients', itemsToSave);
-  console.log('userIdShop', userId);
+  console.log("ingredients", itemsToSave);
+  console.log("userIdShop", userId);
 
   try {
-    const user = await User.findByIdAndUpdate(userId, {$push: {recipeComponents: {$each: itemsToSave}}}, {new: true});
-    res.status(201).json({success: true, response: user.recipeComponents});
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $push: { recipeComponents: { $each: itemsToSave } } },
+      { new: true }
+    );
+    res.status(201).json({ success: true, response: user.recipeComponents });
   } catch (error) {
-    res.status(400).json({success: false, response: error});
+    res.status(400).json({ success: false, response: error });
   }
 });
-
 
 // SHOW SHOPPING LIST
 
@@ -217,26 +226,31 @@ app.get("/listItems/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
     const user = await User.findById(userId);
-    res.status(201).json({success: true, response: user.recipeComponents});
+    res.status(201).json({ success: true, response: user.recipeComponents });
   } catch (error) {
-    res.status(400).json({success: false, response: error});
+    res.status(400).json({ success: false, response: error });
   }
 });
 
-
 //REMOVE INGREDIENT FROM SHOPPING LIST
 app.put("/removeIngredient", async (req, res) => {
-  const {  id, userId } = req.body; 
-  console.log('IngredientRawTextid', id);
-  console.log('UserIdRemove3', userId);
+  const { id, userId } = req.body;
+  console.log("IngredientRawTextid", id);
+  console.log("UserIdRemove3", userId);
 
   try {
-    console.log('removing...');
-    const removeIngredient = await User.findByIdAndUpdate(userId, {$pull: {recipeComponents: { id }}}, {new: true})
-    console.log('removeIngredient', removeIngredient);
-    res.status(201).json({success: true, response: removeIngredient.recipeComponents});
+    console.log("removing...");
+    const removeIngredient = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { recipeComponents: { id } } },
+      { new: true }
+    );
+    console.log("removeIngredient", removeIngredient);
+    res
+      .status(201)
+      .json({ success: true, response: removeIngredient.recipeComponents });
   } catch (error) {
-    res.status(400).json({success: false, response: error});
+    res.status(400).json({ success: false, response: error });
   }
 
   /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
@@ -244,26 +258,24 @@ app.put("/removeIngredient", async (req, res) => {
 
 //UPDATE INGREDIENT FROM SHOPPING LIST
 app.put("/updateIngredient", async (req, res) => {
-  const {  id, userId, text } = req.body; 
-  // console.log('IngredientRawTextid', id);
-  // console.log('IngredientRawTextid', text);
+  const { userId, id, text } = req.body;
 
   try {
-    console.log('update...');
-
-    
-
-    const editResult = await User.findOneAndUpdate({ _id: userId, 'recipeComponents.id': id }, { $set: { "recipeComponents.$.raw_text" : text } }, {new: true});
-
-
+    console.log("update...");
+    const editResult = await User.findOneAndUpdate(
+      { _id: userId, "recipeComponents.id": id },
+      { $set: { "recipeComponents.$.raw_text": text } },
+      { new: true }
+    );
     //https://www.mongodb.com/docs/drivers/node/current/fundamentals/crud/write-operations/embedded-arrays/
     //const updateIngredient = await User.findByIdAndUpdate(userId, {new: true}, { $ : {recipeComponents: { id }}},)
-    
-  
-    console.log('resultEditIngredient', editResult);
-    res.status(201).json({success: true, response: editResult.recipeComponents});
+
+    console.log("resultEditIngredient", editResult);
+    res
+      .status(201)
+      .json({ success: true, response: editResult.recipeComponents });
   } catch (error) {
-    res.status(400).json({success: false, response: error});
+    res.status(400).json({ success: false, response: error });
   }
 
   /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
@@ -271,7 +283,7 @@ app.put("/updateIngredient", async (req, res) => {
 
 // //CHECK/UNCHECK INGREDIENT IN SHOPPINGLIST
 // app.put("/checkIngredient", async (req, res) => {
-//   const {  id, userId } = req.body; 
+//   const {  id, userId } = req.body;
 //   console.log('id', id);
 //   console.log('UserIdRemove3', userId);
 //   console.log('recipeComponents', recipeComponents);
@@ -288,11 +300,7 @@ app.put("/updateIngredient", async (req, res) => {
 //   /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
 // });
 
-
 //updateIngredient
-
-
-
 
 // Start defining your routes here
 app.get("/", (req, res) => {

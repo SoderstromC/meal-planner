@@ -78,7 +78,7 @@ const MyShoppingList = () => {
       const options = {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: id, userId: userId, text: test}),
+        body: JSON.stringify({ userId: userId, id: id, text: test}),
         //we only need id and userId not name since we are updating value and only need to find the id
       };
       fetch(UPDATE_INGREDIENT_URL, options)
