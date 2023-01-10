@@ -5,6 +5,7 @@ import { API_URL } from "utils/utils";
 import user from "reducers/user";
 import styled from "styled-components";
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
+import Logo from "../assets/icons/logofoodify.svg"
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -54,6 +55,9 @@ const Login = () => {
   return (
       <OuterWrapper>
         <InnerWrapper>
+          <LoginHeader>
+            <img src={Logo} alt="Logo" />
+          </LoginHeader>
           <FormWrapper>
            <form onSubmit={onFormSubmit}>
             <h1> { mode === "register" && "Register" || "Log in" } </h1>
@@ -122,7 +126,6 @@ const FormWrapper = styled.div`
  align-items: center;
  justify-content: center;
  text-align: center;
- padding: 100px;
 `
 const InputWrapper = styled.div`
  display: flex;
@@ -130,6 +133,7 @@ const InputWrapper = styled.div`
  align-items: center;
  flex-direction: column;
  border: 1px solid #333;
+ border-radius: 5px;
  gap: 20px; 
  padding: 20px;
 `
@@ -158,4 +162,9 @@ text-align: center;
 &:checked {
   visibility:hidden;
 }
+`
+const LoginHeader = styled.div`
+display: flex;
+height: 200px;
+align-items: center;
 `

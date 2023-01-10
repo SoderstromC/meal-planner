@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { generateRecipe } from "reducers/recipes";
 import { RecipeCard } from "./reusable/RecipeCard";
-import Nav from "./reusable/Nav";
+import { Header } from "./reusable/Header";
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
 
 import { useNavigate } from "react-router-dom";
@@ -43,7 +43,7 @@ const RecipeList = () => {
 return(
   <OuterWrapper>
     <InnerWrapper>
-      <Nav />
+      <Header />
       <ContentWrapper>
         <h2>All recipes</h2>
         <RecipeListWrapper>
@@ -69,7 +69,6 @@ export default RecipeList;
 
 const ContentWrapper = styled.div`
   width: 100%;
-  margin-top: 50px;
 `
 
 const RecipeListWrapper = styled.div`

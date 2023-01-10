@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import shopping from 'reducers/shopping'
-import Nav from "./reusable/Nav";
+import { Header } from "./reusable/Header";
 import uniqid from 'uniqid'
 import styled from 'styled-components/macro'
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
@@ -23,7 +23,7 @@ const ShoppingList = () => {
   return (
     <OuterWrapper>
       <InnerWrapper>
-       <Nav />
+       <Header />
         <Wrapper>
           <ListWrapper>
             <ComponentTitle>This is my shopping list</ComponentTitle>

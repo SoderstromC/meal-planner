@@ -1,25 +1,35 @@
 import React from "react";
 import styled from "styled-components";
 import Nav from "./Nav";
+import Logo from "../../assets/icons/logofoodify.svg"
 
 export const Header = () => {
-  const HeaderContainer = styled.div`
-    color: "white";
-    margin: 0;
-    `
-  const HeaderWrapper = styled.div`
-  color: "white";
-  margin: 0;
-`
-;
-
   return (
     <HeaderContainer>
       <HeaderWrapper>
-        <h1 className='headerText'>Here goes our header</h1>
-        <p>Here goes our Navigation</p>
+      <LogoWrapper>
+        <img src={Logo} alt="Logo" />
+      </LogoWrapper>
+      <NavWrapper>
         <Nav/>
-      </HeaderWrapper>
+      </NavWrapper>
+    </HeaderWrapper>
     </HeaderContainer>
   );
 };
+
+const HeaderContainer = styled.div`
+  width: 100%;
+`
+const HeaderWrapper = styled.div`
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center; 
+`
+const LogoWrapper = styled.div`
+  width: 50%;
+`
+const NavWrapper = styled.div`
+  width: 50%;
+`

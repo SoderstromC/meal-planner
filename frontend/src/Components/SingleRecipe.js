@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import  { Ingredients } from "./reusable/Ingredients";
 import  { Instructions } from "./reusable/Instructions";
 import { useParams } from "react-router-dom";
-import Nav from "./reusable/Nav";
+import { Header } from "./reusable/Header";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
@@ -16,7 +16,7 @@ const navigate = useNavigate();
 return(
   <OuterWrapper>
     <InnerWrapper>
-      <Nav />
+      <Header />
       <SingleRecipeWrapper>
         <button type="button" onClick={() => navigate(-1)}>GO BACK TO LIST</button>
         <h1>This is a single recipe</h1>

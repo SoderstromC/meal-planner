@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Nav from "./reusable/Nav";
+import { Header } from "./reusable/Header";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
 
 
 const MyShoppingList = () => {
@@ -44,21 +45,23 @@ const MyShoppingList = () => {
   }, []);
 
     return (
-      <>
-      <Nav />
-      <ShoppingListContainer>
-      <h1>My Shopping List</h1>
-      <ListWrapper>
-        <ul>
-          {shoppingList.map((component) => {
-            return (
-              <li key={`${counter++}-${component.id}`}>{component.raw_text}</li>
-            )
-          })}
-        </ul>
-      </ListWrapper>
-      </ShoppingListContainer>
-      </>
+    <OuterWrapper>
+      <InnerWrapper>
+        <Header />
+        <ShoppingListContainer>
+          <h1>My Shopping List</h1>
+          <ListWrapper>
+            <ul>
+              {shoppingList.map((component) => {
+                return (
+                  <li key={`${counter++}-${component.id}`}>{component.raw_text}</li>
+                )
+              })}
+            </ul>
+          </ListWrapper>
+        </ShoppingListContainer>
+      </InnerWrapper>
+    </OuterWrapper>
     ) 
 }
 

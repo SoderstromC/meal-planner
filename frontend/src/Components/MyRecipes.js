@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Nav from "./reusable/Nav";
+import { Header } from "./reusable/Header";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
@@ -58,7 +58,7 @@ const MyRecipes = () => {
     return (
       <OuterWrapper>
         <InnerWrapper>
-          <Nav />
+          <Header />
           <SavedRecipesContainer>
             <h3>My recipes</h3>
           <RecipeListWrapper>
@@ -97,7 +97,7 @@ export default MyRecipes;
 
 const SavedRecipesContainer = styled.div`
 width: 100%;
-margin-top: 50px;
+
 `
 
 const RecipeListWrapper = styled.div`

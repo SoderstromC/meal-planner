@@ -38,7 +38,8 @@ export default Nav;
   const NavContainer = styled.div`
   display: flex;
   justify-content: right;
-  gap: 15px;
+  gap: 10px;
+  font-size: 14px;
 
   a {
     text-decoration: none;
@@ -47,6 +48,14 @@ export default Nav;
   a:visited {
     color: black;
     }
+  
+  a:hover {
+    font-weight: 700;
+  }
+
+  button:hover {
+    font-weight: 700;
+  }
   `
   const LogOutButton = styled.button`
     background: transparent;

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import thoughts from "reducers/thoughts";
 import { API_URL } from "utils/utils";
 import { useNavigate, Link } from "react-router-dom";
-import Nav from "./reusable/Nav";
+import { Header } from "./reusable/Header";
 import styled from "styled-components";
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
 
@@ -22,7 +22,7 @@ const Main = () => {
     return (
       <OuterWrapper>
         <InnerWrapper>
-          <Nav />
+          <Header />
             <MainContainer>
               <Link to="/login">GO TO LOGIN</Link>   
               <h2>This is the landing page</h2>
