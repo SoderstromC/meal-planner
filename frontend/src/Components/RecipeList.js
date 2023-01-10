@@ -45,7 +45,7 @@ const RecipeList = () => {
 
 return(
   <>
-  {loading && <Loading />}
+  {loading && <LoaderWrapper><Loading /></LoaderWrapper>}
   {!loading && (
     <Outerwrapper>
     <>
@@ -98,4 +98,8 @@ const RecipeListWrapper = styled.div`
   gap: 10px;
   width: auto;
   box-sizing: border-box;
+`
+const LoaderWrapper = styled.div`
+ width: 300px;
+ height: 300px;
 `
