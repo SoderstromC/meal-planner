@@ -40,7 +40,7 @@ export const generateRecipe = () => {
     const generate = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "14dcad3da4msh194f38471e51b0fp1d748cjsndf695bebd2fa",
+        "X-RapidAPI-Key": "05ce32baddmsh1dbc226d22c6d58p17606ejsn8489212bcecc",
         "X-RapidAPI-Host": "tasty.p.rapidapi.com",
       },
     };
@@ -62,7 +62,7 @@ export const generateSingle = (recipeId) => {
     const details = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "14dcad3da4msh194f38471e51b0fp1d748cjsndf695bebd2fa",
+        "X-RapidAPI-Key": "05ce32baddmsh1dbc226d22c6d58p17606ejsn8489212bcecc",
         "X-RapidAPI-Host": "tasty.p.rapidapi.com",
       },
     };
@@ -79,4 +79,26 @@ export const generateSingle = (recipeId) => {
       })
       .catch((err) => console.error(err));
   };
+};
+
+  export const generateSingleHeader = (recipeId) => {
+    return (dispatch) => {
+      const header = {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key": "05ce32baddmsh1dbc226d22c6d58p17606ejsn8489212bcecc",
+          "X-RapidAPI-Host": "tasty.p.rapidapi.com",
+        },
+      };
+  
+      console.log('recipeId header', recipeId)
+      console.log('SINGLE_URL header', SINGLE_URL(recipeId))
+      fetch(SINGLE_URL(recipeId), header)
+        .then((response) => response.json())
+        .then((data) => {
+          dispatch(
+            recipes.actions.setRecipe(data?.results));
+        })
+        .catch((err) => console.error(err));
+    };
 };

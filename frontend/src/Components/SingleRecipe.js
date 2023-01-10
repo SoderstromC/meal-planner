@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+// import { SingleHeader } from "./reusable/SingleHeader";
 import  { Ingredients } from "./reusable/Ingredients";
 import  { Instructions } from "./reusable/Instructions";
 import { useParams } from "react-router-dom";
@@ -8,27 +9,127 @@ import styled from "styled-components";
 
 const SingleRecipe = () => {
 
-const {recipeId} = useParams();
-console.log('id', recipeId)
-const navigate = useNavigate();
+  const {recipeId} = useParams();
+  console.log('id', recipeId)
+  const navigate = useNavigate();
+
 
 return(
-  <>
-   <Nav />
-   <SingleRecipeWrapper>
-    <button type="button" onClick={() => navigate(-1)}>GO BACK TO LIST</button>
-    <h1>This is a single recipe</h1>
-    <Ingredients recipeId = {recipeId}/>
-    <Instructions recipeId = {recipeId}/>
-  </SingleRecipeWrapper>
-  </>
+  <OuterWrapper>
+    <GoBackButton type="button" onClick={() => navigate(-1)}>←</GoBackButton>
+    <InnerWrapper>
+      <Nav />
+        <Placeholder>
+        <h1>This is a single recipe placeholder for</h1>
+        <p>Recipe image</p>
+        <p>Recipe title</p>
+        <p>Recipe cooking time</p>
+        </Placeholder>
+        {/* <SingleHeader recipeId = {recipeId}/> */}
+        <SingleRecipeWrapper>
+          <IngredientsWrapper>
+            <h2>Ingredients</h2>
+            <IngredientsCard>
+              <Ingredients recipeId = {recipeId}/>
+            </IngredientsCard>
+          </IngredientsWrapper>
+          <InstructionsWrapper>
+            <h2>Instructions</h2>
+            <InstructionsCard>
+              <Instructions recipeId = {recipeId}/>
+            </InstructionsCard>
+        </InstructionsWrapper>
+      </SingleRecipeWrapper>
+    </InnerWrapper>
+  </OuterWrapper>
 )
 }
 
 export default SingleRecipe;
 
+const OuterWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+const GoBackButton = styled.button`
+  align-self: flex-start;
+  margin: 10px 0px 0px 0px;
+  font-size: 25px;
+  width: 65px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  // display: none;
+`
+
+const InnerWrapper = styled.div`
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+`
+
 const SingleRecipeWrapper = styled.div`
-padding: 50px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 14px;
+`
+const Placeholder = styled.div`
+width: 100%;
+height: 200px;
+padding: 10px;
+background-color: linen;
+color: black;
+border-radius: 13px;
+text-align: center;
+margin-top: 15px;
+  h1{
+    font-size: 17px;
+    margin-top: 30px;
+  }
+  p{
+    font-size: 13px;
+  }
+`
+const IngredientsWrapper = styled.div`
+display: flex;
+flex-direction: column;
+h2{
+  font-size: 15px;
+  margin-left: 20px;
+}
+`
+const IngredientsCard = styled.div`
+padding: 10px 25px;
+background-color: whitesmoke;
+border-radius: 13px;
+text-align: left;
+border: lightgrey solid 1px;
+height: 550px;
+}
+`
+const InstructionsWrapper = styled.div`
+display: flex;
+flex-direction: column;
+h2{
+  font-size: 15px;
+  margin-left: 20px;
+}
+`
+const InstructionsCard = styled.div`
+padding: 10px 25px;
+background-color: whitesmoke;
+border-radius: 13px;
+text-align: left;
+border: lightgrey solid 1px;
+height: 550px;
+}
 `
 
 

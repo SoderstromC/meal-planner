@@ -13,7 +13,7 @@ export const Instructions = ({recipeId}) => {
 
   return (
     <>
-      <h2>Instructions</h2>
+      
       {instructions.map((instruction) => {
         console.log('instructions',instructions)
         return (

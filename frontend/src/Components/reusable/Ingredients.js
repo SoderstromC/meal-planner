@@ -7,12 +7,6 @@ export const Ingredients = ({recipeId}) => {
   const components = useSelector((store) => store.recipes.components);
   const portions = useSelector((store) => store.recipes.sections);
   const userId = useSelector((store) => store.user.userId);
- 
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(generateSingle(recipeId));
-  }, []);
 
   const buttonClickSave = () => {
 
@@ -40,12 +34,18 @@ export const Ingredients = ({recipeId}) => {
         console.log("savedShoppingListData", data);
       })
       .catch((error) => console.error("error2", error));
-  };
+    };
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(generateSingle(recipeId));
+    }, []);
 
   return (
-    <>
-      <h2>Ingredients</h2>
-      <button type='button' onClick={buttonClickSave}>Add all ingredients to Shopping list</button>
+    <OuterWrapper>
+      
+      <AddToShopping type='button' onClick={buttonClickSave}>Add</AddToShopping>
+      <InnerWrapper>
       {components.map((component) => {
         return (
           <>
@@ -58,12 +58,33 @@ export const Ingredients = ({recipeId}) => {
           </>
         );
       })}
-      <button type='button' onClick={buttonClickSave}>Add all ingredients to Shopping list</button>
-    </>
+      {/* <AddToShopping type='button' onClick={buttonClickSave}>Add all ingredients to Shopping list</AddToShopping> */}
+      </InnerWrapper>
+    </OuterWrapper>
   );
 };
+
+const OuterWrapper = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+`;
+
+const InnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const RecipeWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+const AddToShopping = styled.button`
+  width: 95px;
+  height: 35px;
+  background-color: white;
+  border: solid black 2px;
+  border-radius: 13px;
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 10px;
 `;
