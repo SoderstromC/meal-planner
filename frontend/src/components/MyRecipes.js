@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_URL } from "utils/utils";
 import { Header } from "./reusable/Header";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
@@ -21,7 +22,8 @@ const MyRecipes = () => {
   }, []);
 
   const fetchMyRecipes = () => {
-    const MY_RECIPES_URL = `http://localhost:8090/saveRecipe/${userId}`;
+    // const MY_RECIPES_URL = `http://localhost:8090/saveRecipe/${userId}`;
+    const MY_RECIPES_URL = API_URL(`saveRecipe/${userId}`);
 
     const options = {
       method: "GET",
@@ -45,7 +47,9 @@ const MyRecipes = () => {
 
   // REMOVE RECIPE FROM SAVED RECIPES
   const buttonClickRemove = (id) => {
-    const REMOVE_RECIPE_URL = `http://localhost:8090/removeRecipe`;
+    // const REMOVE_RECIPE_URL = `http://localhost:8090/removeRecipe`;
+    const REMOVE_RECIPE_URL = API_URL('removeRecipe');
+
     console.log('idTEST', id)
     const options = {
       method: "PUT",

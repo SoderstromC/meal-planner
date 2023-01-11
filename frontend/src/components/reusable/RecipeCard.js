@@ -1,4 +1,5 @@
 import React from "react";
+import { API_URL } from "utils/utils";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
@@ -13,7 +14,8 @@ export const RecipeCard = ({ id, name, time, img }) => {
 
   const buttonClickSave = () => {
 
-    const SAVED_RECIPE_URL = `http://localhost:8090/saveRecipe`;
+    // const SAVED_RECIPE_URL = `http://localhost:8090/saveRecipe`;
+    const SAVED_RECIPE_URL = API_URL('saveRecipe');
 
     const options = {
       method: "POST",

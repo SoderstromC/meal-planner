@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from "./reusable/Header";
+import { API_URL } from "utils/utils";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -31,7 +32,8 @@ const MyShoppingList = () => {
   let counter = 0;
 
   const fetchMyShoppingList = () => {
-    const MY_SHOPPINGLIST_URL = `http://localhost:8090/listItems/${userId}`;
+    // const MY_SHOPPINGLIST_URL = `http://localhost:8090/listItems/${userId}`;
+    const MY_SHOPPINGLIST_URL = API_URL(`listItems/${userId}`)
 
     const options = {
       method: "GET",
@@ -56,7 +58,9 @@ const MyShoppingList = () => {
   /****  REMOVE INGREDIENT FROM USERS SAVED SHOPPINGLIST ****/
 
   const buttonClickRemove = (id) => {
-    const REMOVE_INGREDIENT_URL = `http://localhost:8090/removeIngredient`;
+    // const REMOVE_INGREDIENT_URL = `http://localhost:8090/removeIngredient`;
+    const REMOVE_INGREDIENT_URL = API_URL('removeIngredient')
+
     const options = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -81,7 +85,8 @@ const MyShoppingList = () => {
   };
 
   const buttonClickSave = (id) => {
-    const EDIT_INGREDIENT_URL = `http://localhost:8090/editIngredient`;
+    // const EDIT_INGREDIENT_URL = `http://localhost:8090/editIngredient`;
+    const EDIT_INGREDIENT_URL = API_URL('editIngredient');
 
     const options = {
       method: "PUT",

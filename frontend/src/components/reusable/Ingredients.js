@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { API_URL } from "utils/utils";
 // import { generateSingle } from "reducers/recipes";
 import styled from "styled-components";
 
@@ -11,8 +12,7 @@ export const Ingredients = ({components}) => {
   console.log('components', components)
 
   const buttonClickSave = () => {
-
-    const SAVED_SHOPPINGLIST_URL = `http://localhost:8090/saveListItem`;
+    const SAVED_SHOPPINGLIST_URL = API_URL('saveListItem');
 
     let itemsToSave = [];
     console.log('components2', components)
