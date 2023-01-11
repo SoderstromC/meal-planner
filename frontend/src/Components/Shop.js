@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
 import Nav from "./reusable/Nav";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import NoIngredients from "./NoIngredients";
-import Item from "./Item";
+// import Item from "./Item";
+import shopping from 'reducers/shopping';
 
 const MyShoppingList = () => {
   const [shoppingList, setShoppingList] = useState([]);
   const [inputValue, setInputValue] = useState("");
   //const [loading, setLoading] = useState(false);
   const userId = useSelector((store) => store.user.userId);
+
+  const dispatch = useDispatch()
+  const buttonClickToggleCheck = (id) => {
+    dispatch(shopping.actions.toggleItem(id))
+  };
 
   console.log("inputValue", inputValue);
 
@@ -75,9 +81,9 @@ const MyShoppingList = () => {
     alert("visar rad med item");
   };
 
-  const buttonClickSave = (id, raw_text) => {
+  const buttonClickSave = (id) => {
     const EDIT_INGREDIENT_URL = `http://localhost:8090/editIngredient`;
-    console.log("Testar vad text innehåller", raw_text);
+    console.log("Testar vad text innehåller", inputValue);
 
     // const test = value;
 
@@ -115,20 +121,17 @@ const MyShoppingList = () => {
                         checked={component.isCompleted}
                         onChange={() => buttonClickToggleCheck(component.id)}
                       />
-
                       {/* <Item 
                       key={component.id} 
                       componentData={component} /> */}
                       <Item
-                        key={`${counter++}-${component.id}`}
-                        componentData={component}
-                      />
+                        key={`${counter++}-${component.id}`}>{component.raw_text}</Item>
+                        {/* componentData={component}
+                      /> */}
                       {/* <li key={`${counter++}-${component.id}`}>{component.raw_text}</li> */}
-
-                      <button onClick={() => buttonClickRemove(component.id)}>
-                        Delete
-                      </button>
-                      <button
+                      <div className = "buttonwrapper">
+                      <RemoveItem onClick={() => buttonClickRemove(component.id)}>delete</RemoveItem>
+                      <EditItem
                         onClick={() =>
                           buttonClickEditIngredient(
                             component.id
@@ -138,9 +141,9 @@ const MyShoppingList = () => {
                         }
                       >
                         Edit
-                      </button>
-                    
-
+                      </EditItem>
+                      </div>
+                
                     </ShoppingItemWrapper>
                     <EditItemWrapper>
                       <EditTextInput
@@ -151,12 +154,15 @@ const MyShoppingList = () => {
                         placeholder='edit item'
                         aria-label='Type and click save to create edit item.'
                       />
-                      <button onClick={() => buttonClickSave(component.id)}>
+                      <div className = "buttonwrapper">
+                      <SaveItem onClick={() => buttonClickSave(component.id)}>
                         Save
-                      </button>
-                      <button onClick={() => buttonClickExit(component.id)}>
+                      </SaveItem>
+                      
+                      <Exit onClick={() => buttonClickExit(component.id)}>
                         Exit
-                      </button>
+                      </Exit>
+                      </div>
                     </EditItemWrapper>
                   </ShoppingItemContainer>
                 </>
@@ -177,37 +183,64 @@ const ShoppingListContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column;  
 `;
 
 const ListWrapper = styled.div`
   text-align: left;
+  border: solid;
+  width: 70%;
 `;
 
 const ShoppingItemContainer = styled.div`
-  display: flex;
+// border-bottom: 3px solid var(--border);
+margin: 10px 14px 10px 43px;
+display: flex;
+flex-direction: column;
+
 `;
 
 const ShoppingItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  border: solid;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 15px 0 15px; 
+  
+  .buttonwrapper{
+    margin-left: auto;
+
+  }
 `;
 const EditItemWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: row;  
+  border: solid;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 15px 0 15px;
+  
+
+  .buttonwrapper{
+    margin-left: auto;
+
+  }
 `;
 
+const Item = styled.div`
+margin: 10px 10px 10px 50px;
+
+`;
 const CheckBox = styled.input`
   cursor: pointer;
   appearance: none;
   margin: 5px;
-  margin-right: -42px;
   font: inherit;
   color: white;
   width: 2em;
   height: 2em;
   border: 0.15em solid black;
-  margin-top: 15px;
   transform: translateY(-0.075em);
   display: grid;
   place-content: center;
@@ -229,23 +262,50 @@ const CheckBox = styled.input`
     height: 1em;
   }
 `;
-// const RemoveItemButton = styled.button`
-// margin-left: auto;
-// border: none;
-// background-color: transparent;
-// `;
+const RemoveItem = styled.button`
+margin-left: auto;
+border: solid;
+height: 25px;
+width: 80px;
+background-color: transparent;
+`;
 
 const EditTextInput = styled.input`
-  // width: 70%;
   // font-size: 13px;
   border: 1px;
   align-self: center;
   padding: 3px 0 3px 10px;
-  margin: 25px 0 0 0;
+  margin: 10px 10px 10px 50px;
   height: 30px;
+  width: 60%;
   font-family: "Montserrat", sans-serif;
   // outline: none;
 `;
+
+const EditItem = styled.button`
+margin-left: auto;
+border: solid;
+height: 25px;
+width: 80px;
+background-color: transparent;
+`;
+
+const SaveItem = styled.button`
+margin-left: auto;
+border: solid;
+height: 25px;
+width: 80px;
+background-color: transparent;
+`;
+
+const Exit= styled.button`
+margin-left: auto;
+border: solid;
+height: 25px;
+width: 80px;
+background-color: transparent;
+`;
+
 
 /* Carolines kod  
  <ListWrapper>
