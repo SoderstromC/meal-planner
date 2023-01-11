@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { API_URL } from "utils/utils";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
@@ -7,13 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClock, faHeart } from "@fortawesome/free-solid-svg-icons"
 
 export const RecipeCard = ({ id, name, time, img }) => {
+  const [savedRecipe, setSavedRecipe] = useState(false);
   const userId = useSelector((store) => store.user.userId);
   const accessToken = useSelector((store) => store.user.accessToken); //remove?
 
   /**** SAVING A RECIPE ID TO SPECIFIC USER IN SERVER ****/
 
   const buttonClickSave = () => {
-
+    setSavedRecipe (true);
     // const SAVED_RECIPE_URL = `http://localhost:8090/saveRecipe`;
     const SAVED_RECIPE_URL = API_URL('saveRecipe');
 
@@ -54,7 +55,8 @@ export const RecipeCard = ({ id, name, time, img }) => {
       </RecipeListCard>
      </Link>
      <SaveButton type='submit' onClick={buttonClickSave}>
-      <FontAwesomeIcon icon={faHeart} />
+   
+      { savedRecipe? <FontAwesomeIcon className="red-heart" icon={faHeart} /> : <FontAwesomeIcon className="grey-heart" icon={faHeart} />}
      </SaveButton>
     </RecipeCardWrapper>
   );
@@ -97,5 +99,14 @@ const SaveButton = styled.button`
  top: 8px;
  right: 10px;
  border-radius: 5px;
-`
+
+ .red-heart {
+  color: red;
+ }
+
+ .grey-heart {
+  color: grey;
+ }
+ `
+
 
