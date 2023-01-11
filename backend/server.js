@@ -29,8 +29,8 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: 8,
-    maxlength: 12,
+    // minlength: 8,
+    // maxlength: 12,
     /// My_B4nK_P4$$word
   },
   // npm install crypto
@@ -257,30 +257,30 @@ app.put("/removeIngredient", async (req, res) => {
   /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
 });
 
-// //EDIT INGREDIENT FROM SHOPPING LIST
-// app.put("/editIngredient", async (req, res) => {
-//   const { userId, id, text } = req.body;
+//EDIT INGREDIENT FROM SHOPPING LIST
+app.put("/editIngredient", async (req, res) => {
+  const { userId, id, text } = req.body;
 
-//   try {
-//     console.log("update...");
-//     const editResult = await User.findOneAndUpdate(
-//       { _id: userId, "recipeComponents.id": id },
-//       { $set: { "recipeComponents.$.raw_text": text } },
-//       { new: true }
-//     );
-//     //https://www.mongodb.com/docs/drivers/node/current/fundamentals/crud/write-operations/embedded-arrays/
-//     //const updateIngredient = await User.findByIdAndUpdate(userId, {new: true}, { $ : {recipeComponents: { id }}},)
+  try {
+    console.log("update...");
+    const editResult = await User.findOneAndUpdate(
+      { _id: userId, "recipeComponents.id": id },
+      { $set: { "recipeComponents.$.raw_text": text } },
+      { new: true }
+    );
+    //https://www.mongodb.com/docs/drivers/node/current/fundamentals/crud/write-operations/embedded-arrays/
+    //const updateIngredient = await User.findByIdAndUpdate(userId, {new: true}, { $ : {recipeComponents: { id }}},)
 
-//     console.log("resultEditIngredient", editResult);
-//     res
-//       .status(201)
-//       .json({ success: true, response: editResult.recipeComponents });
-//   } catch (error) {
-//     res.status(400).json({ success: false, response: error });
-//   }
+    console.log("resultEditIngredient", editResult);
+    res
+      .status(201)
+      .json({ success: true, response: editResult.recipeComponents });
+  } catch (error) {
+    res.status(400).json({ success: false, response: error });
+  }
 
-//   /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
-// });
+  /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
+});
 
 // //CHECK/UNCHECK INGREDIENT IN SHOPPINGLIST
 

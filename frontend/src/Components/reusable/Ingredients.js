@@ -59,7 +59,7 @@ export const Ingredients = ({recipeId}) => {
           </>
         );
       })}
-      <button type='button' onClick={buttonClickSave}>Add all ingredients to Shopping list</button>
+      {/* <button type='button' onClick={buttonClickSave}>Add all ingredients to Shopping list</button> */}
     </>
   );
 };

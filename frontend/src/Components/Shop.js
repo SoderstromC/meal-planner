@@ -8,9 +8,11 @@ import Item from "./Item";
 
 const MyShoppingList = () => {
   const [shoppingList, setShoppingList] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  //const [loading, setLoading] = useState(false);
   const userId = useSelector((store) => store.user.userId);
 
-  //const [loading, setLoading] = useState(false);
+  console.log("inputValue", inputValue);
 
   const accessToken = useSelector((store) => store.user.accessToken);
   const navigate = useNavigate();
@@ -45,7 +47,8 @@ const MyShoppingList = () => {
     fetchMyShoppingList();
   }, []);
 
-  // REMOVE INGREDIENT FROM USERS SAVED SHOPPINGLIST
+  /****  REMOVE INGREDIENT FROM USERS SAVED SHOPPINGLIST ****/
+
   const buttonClickRemove = (id) => {
     const REMOVE_INGREDIENT_URL = `http://localhost:8090/removeIngredient`;
     const options = {
@@ -62,18 +65,26 @@ const MyShoppingList = () => {
       })
       .catch((error) => console.error("error3", error));
   };
-  // UPDATE INGREDIENT FROM USERS SAVED SHOPPINGLIST
+  /**** UPDATE INGREDIENT FROM USERS SAVED SHOPPINGLIST ****/
 
-  const buttonClickEditIngredient = (id, raw_text) => {
+  const buttonClickEditIngredient = (id) => {
+    alert("visar inputfield");
+  };
+
+  const buttonClickExit = (id) => {
+    alert("visar rad med item");
+  };
+
+  const buttonClickSave = (id, raw_text) => {
     const EDIT_INGREDIENT_URL = `http://localhost:8090/editIngredient`;
     console.log("Testar vad text innehåller", raw_text);
 
-    const test = "bää";
+    // const test = value;
 
     const options = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: userId, id: id, text: test }),
+      body: JSON.stringify({ userId: userId, id: id, text: inputValue }),
       //we only need id and userId not name since we are updating value and only need to find the id
     };
     fetch(EDIT_INGREDIENT_URL, options)
@@ -85,57 +96,75 @@ const MyShoppingList = () => {
       .catch((error) => console.error("error3", error));
   };
 
-  // CHECK/UNCHECK INGREDIENT FROM USERS SAVED SHOPPINGLIST
-  const buttonClickToggleCheck = (id) => {
-    const CHECK_INGREDIENT_URL = `http://localhost:8090/checkIngredient`;
-    console.log("checkIngredient", id);
-    const options = {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: userId, id: id, check: true }), //hur togglar man i mongoDb? Kan man göra ternary?
-    };
-    fetch(CHECK_INGREDIENT_URL, options)
-      .then((res) => res.json())
-      .then((data) => {
-        setShoppingList(data.response);
-        console.log("check ingredient", data.response);
-      })
-      .catch((error) => console.error("error3", error));
-  };
-
   return (
     <>
       <Nav />
       {console.log("shoppinglistbefore deciding on what to show", shoppingList)}
-      {shoppingList.length === 0 && <NoIngredients />} 
-      {shoppingList.length > 0 &&  
-      <ShoppingListContainer>
-        <h1>My Shopping List</h1>
-        <ListWrapper>
-          {shoppingList.map((component) => {
-            return (
-              <>
-                <CheckBox
-                  type='checkbox'
-                  checked={component.isCompleted} // vad göra här?
-                  onChange={() => buttonClickToggleCheck(component.id)}
-                />
-                <Item key={component.id} componentData={component} />
-                <button onClick={() => buttonClickRemove(component.id)}>
-                  X
-                </button>
-                <button
-                  onClick={() =>
-                    buttonClickEditIngredient(component.id, component.raw_text)
-                  }
-                >
-                  Edit
-                </button>
-              </>
-            );
-          })}
-        </ListWrapper>
-      </ShoppingListContainer>}
+      {shoppingList.length === 0 && <NoIngredients />}
+      {shoppingList.length > 0 && (
+        <ShoppingListContainer>
+          <h1>My Shopping List</h1>
+          <ListWrapper>
+            {shoppingList.map((component) => {
+              return (
+                <>
+                  <ShoppingItemContainer>
+                    <ShoppingItemWrapper>
+                      <CheckBox
+                        type='checkbox'
+                        checked={component.isCompleted}
+                        onChange={() => buttonClickToggleCheck(component.id)}
+                      />
+
+                      {/* <Item 
+                      key={component.id} 
+                      componentData={component} /> */}
+                      <Item
+                        key={`${counter++}-${component.id}`}
+                        componentData={component}
+                      />
+                      {/* <li key={`${counter++}-${component.id}`}>{component.raw_text}</li> */}
+
+                      <button onClick={() => buttonClickRemove(component.id)}>
+                        Delete
+                      </button>
+                      <button
+                        onClick={() =>
+                          buttonClickEditIngredient(
+                            component.id
+                            // component.raw_text
+                            //Show input field
+                          )
+                        }
+                      >
+                        Edit
+                      </button>
+                    
+
+                    </ShoppingItemWrapper>
+                    <EditItemWrapper>
+                      <EditTextInput
+                        type='text'
+                        name='edit item'
+                        value={inputValue}
+                        onChange={(event) => setInputValue(event.target.value)}
+                        placeholder='edit item'
+                        aria-label='Type and click save to create edit item.'
+                      />
+                      <button onClick={() => buttonClickSave(component.id)}>
+                        Save
+                      </button>
+                      <button onClick={() => buttonClickExit(component.id)}>
+                        Exit
+                      </button>
+                    </EditItemWrapper>
+                  </ShoppingItemContainer>
+                </>
+              );
+            })}
+          </ListWrapper>
+        </ShoppingListContainer>
+      )}
     </>
   );
 };
@@ -153,6 +182,19 @@ const ShoppingListContainer = styled.div`
 
 const ListWrapper = styled.div`
   text-align: left;
+`;
+
+const ShoppingItemContainer = styled.div`
+  display: flex;
+`;
+
+const ShoppingItemWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const EditItemWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 const CheckBox = styled.input`
@@ -187,6 +229,23 @@ const CheckBox = styled.input`
     height: 1em;
   }
 `;
+// const RemoveItemButton = styled.button`
+// margin-left: auto;
+// border: none;
+// background-color: transparent;
+// `;
+
+const EditTextInput = styled.input`
+  // width: 70%;
+  // font-size: 13px;
+  border: 1px;
+  align-self: center;
+  padding: 3px 0 3px 10px;
+  margin: 25px 0 0 0;
+  height: 30px;
+  font-family: "Montserrat", sans-serif;
+  // outline: none;
+`;
 
 /* Carolines kod  
  <ListWrapper>
@@ -217,3 +276,21 @@ const CheckBox = styled.input`
         </ul>
       </ListWrapper>
       </ShoppingListContainer> } */
+
+// // CHECK/UNCHECK INGREDIENT FROM USERS SAVED SHOPPINGLIST
+// const buttonClickToggleCheck = (id) => {
+//   const CHECK_INGREDIENT_URL = `http://localhost:8090/checkIngredient`;
+//   console.log("checkIngredient", id);
+//   const options = {
+//     method: "PUT",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({ userId: userId, id: id, check: true }), //hur togglar man i mongoDb? Kan man göra ternary?
+//   };
+//   fetch(CHECK_INGREDIENT_URL, options)
+//     .then((res) => res.json())
+//     .then((data) => {
+//       setShoppingList(data.response);
+//       console.log("check ingredient", data.response);
+//     })
+//     .catch((error) => console.error("error3", error));
+// };
