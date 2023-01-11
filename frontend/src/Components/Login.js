@@ -5,7 +5,8 @@ import { API_URL } from "utils/utils";
 import user from "reducers/user";
 import styled from "styled-components";
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
-import Logo from "../assets/icons/logofoodify.svg"
+import Logo from "../assets/icons/logofoodify.svg";
+import MobileImg from "../assets/icons/mobileImg.jpg";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -58,6 +59,9 @@ const Login = () => {
           <LoginHeader>
             <img src={Logo} alt="Logo" />
           </LoginHeader>
+          <MobileImage className="mobile-show">
+            <img src={MobileImg} />
+          </MobileImage>
           <FormWrapper>
            <form onSubmit={onFormSubmit}>
             <h1> { mode === "register" && "Register" || "Log in" } </h1>
@@ -70,7 +74,7 @@ const Login = () => {
               onChange={() => setMode("register")}
               />
              </label>
-             <label htmlFor='login'>{mode === "login" ? "" : "Already got an account? log in" }
+             <label htmlFor='login'>{mode === "login" ? "" : "Already got an account? Log in" }
               <RadioInput
                type='radio'
                id='login'
@@ -88,6 +92,7 @@ const Login = () => {
                value={username}
                placeholder='Username'
                onChange={(e) => setUsername(e.target.value)}
+               required
              />
              </InputLabelWrapper>
              <InputLabelWrapper>
@@ -98,15 +103,20 @@ const Login = () => {
                placeholder='Password'
                value={password}
                onChange={(e) => setPassword(e.target.value)}
-               />
+               required
+               /> 
+             </InputLabelWrapper>
+             <UserInputText>
               {password && password.length < 8
                 ? 'Password must be over 8 characters'
                 : ''}
-             </InputLabelWrapper>
-             <button type='submit'>{ mode === "register" && "Register" || "Log in" }</button>
+              </UserInputText>
+             <SubmitButton type='submit'>{ mode === "register" && "Register" || "Log in" }</SubmitButton>
+             <UserInputText>
               {error !== null && (
                <p>{error}</p>
               )}
+              </UserInputText>
             </InputWrapper>
            </form>
           </FormWrapper>
@@ -126,16 +136,19 @@ const FormWrapper = styled.div`
  align-items: center;
  justify-content: center;
  text-align: center;
+ max-width: 100%;
+ margin-bottom: 20px;
 `
 const InputWrapper = styled.div`
  display: flex;
  justify-content: center;
  align-items: center;
  flex-direction: column;
- border: 1px solid #333;
+ border: 1px solid #ACACAC;
  border-radius: 5px;
  gap: 20px; 
- padding: 20px;
+ padding: 50px;
+ background-color: #fafafa;
 `
 const InputLabelWrapper = styled.div`
  text-align: left;
@@ -144,6 +157,9 @@ const Input = styled.input`
  padding: 10px; 
  display: flex;
  flex-direction: column;
+ border: 1px solid #ACACAC;
+ border-radius: 5px;
+ background-color: #fafafa;
 `
 
 const Radiobuttons = styled.div`
@@ -165,6 +181,37 @@ text-align: center;
 `
 const LoginHeader = styled.div`
 display: flex;
-height: 200px;
+height: 150px;
 align-items: center;
+justify-content: center;
+
+@media (min-width: 667px) {
+  justify-content: left;
+  height: 200px;
+}
+`
+const SubmitButton = styled.button`
+ border: 1px solid #ACACAC;
+ background-color: #F5F0F0;
+ border-radius: 5px;
+ padding: 2px 20px;
+`
+const UserInputText = styled.div`
+ color: red;
+ font-size: 12px;
+`
+const MobileImage = styled.div`
+ width: 100%;
+ margin-bottom: 20px;
+ display: flex;
+ justify-content: center;
+
+ img {
+  border-radius: 5px;
+  width: 90%;
+ }
+
+ @media screen and (min-width: 600px) {
+    display: none !important;
+ }
 `
