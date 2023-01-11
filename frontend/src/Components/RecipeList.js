@@ -5,7 +5,6 @@ import { RecipeCard } from "./reusable/RecipeCard";
 import { Header } from "./reusable/Header";
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
 import Loading from "./reusable/Loading";
-import Nav from "./reusable/Nav";
 
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
@@ -50,25 +49,25 @@ return(
   {loading && <LoaderWrapper><Loading /></LoaderWrapper>}
   {!loading && (
     <OuterWrapper>
-    <>
-      <Nav />
-      <h1>List of recipes</h1>
-      <InnerWrapper>
+    <InnerWrapper>
+      <Header />
+      <ContentWrapper>
+        <h2>All recipes</h2>
         <RecipeListWrapper>
           {arrayOfRecipes.map((recipe) => {
-            return (
-              <RecipeCard
-                key={recipe.id}
-                id={recipe.id}
-                name={recipe.name}
-                time={recipe.total_time_minutes}
-                description={recipe.description}
-                img={recipe.thumbnail_url} />
-            );
+          return ( 
+            <RecipeCard
+              key= {recipe.id}
+              id={recipe.id}
+              name={recipe.name}
+              time={recipe.total_time_minutes}
+              img={recipe.thumbnail_url}
+            />
+          )
           })}
         </RecipeListWrapper>
+      </ContentWrapper>
       </InnerWrapper>
-    </>
   </OuterWrapper>
   )}
 </>
@@ -86,20 +85,15 @@ const RecipeListWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 10px;
-
   @media (min-width: 400px) {
     grid-template-columns: repeat(2, 1fr);
   }
-
   @media (min-width: 667px) {
     grid-template-columns: repeat(3, 1fr);
   }
-
   @media (min-width: 1020px) {
     grid-template-columns: repeat(4, 1fr);
   }
-  width: auto;
-  box-sizing: border-box;
 `
 const LoaderWrapper = styled.div`
  width: 300px;
