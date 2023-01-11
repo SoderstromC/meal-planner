@@ -38,7 +38,7 @@ export default Nav;
   const NavContainer = styled.div`
   display: flex;
   justify-content: right;
-  gap: 10px;
+  gap: 15px;
   font-size: 14px;
 
   a {

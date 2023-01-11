@@ -4,7 +4,8 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 const MyRecipes = () => {
   const [recipeList, setRecipeList] = useState([]);
@@ -84,7 +85,7 @@ const MyRecipes = () => {
            </LinkWrapper>
            <ButtonWrapper>
            <RemoveButton onClick={() => buttonClickRemove(recipe.id)}>
-            {/* <FontAwesomeIcon className="trash-icon" icon={faTrashCan} /> */}
+            <FontAwesomeIcon className="trash-icon" icon={faTrashCan} />
            </RemoveButton> 
            {/*chnged to arrow function*/}
            </ButtonWrapper>

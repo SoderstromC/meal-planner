@@ -27,7 +27,7 @@ return(
   <OuterWrapper>
     <GoBackButton type="button" onClick={() => navigate(-1)}>←</GoBackButton>
     <InnerWrapper>
-      <Nav />
+      <Header />
         <SingleHeader singleRecipe = {singleRecipe}/>
         <SingleRecipeWrapper>
           <IngredientsWrapper>
