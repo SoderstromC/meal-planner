@@ -6,8 +6,9 @@ const recipes = createSlice({
   initialState: {
     results: [],
     error: null,
-    components: [],
+    singleRecipe: null,
     instructions: [],
+    loading: false,
   },
   reducers: {
     setRecipe: (store, action) => {
@@ -22,8 +23,11 @@ const recipes = createSlice({
     setMealDescription: (store, action) => {
       store.results.description = action.payload;
     },
-    setMealComponents: (store, action) => {
-      store.components = action.payload;
+    setSingleRecipe: (store, action) => {
+      store.singleRecipe = action.payload;
+    },
+    isLoading: (store, action) => {
+      store.loading = action.payload;
     },
   },
 });
@@ -31,8 +35,8 @@ const recipes = createSlice({
 export default recipes;
 
 export const generateRecipe = () => {
-  //change name to generateRecipeList when we are all together and merged
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    dispatch(recipes.actions.isLoading(true))
     const generate = {
       method: "GET",
       headers: {
@@ -47,11 +51,13 @@ export const generateRecipe = () => {
         console.log("dataAllreducer", data);
         dispatch(recipes.actions.setRecipe(data?.results));
       })
-      .catch((err) => console.error(err));
+      .finally(() => {
+        dispatch(recipes.actions.isLoading(false))
+      })
   };
 };
 
-export const generateSingle = (recipeId) => {
+export const generateSingleRecipe = (recipeId) => {
   return (dispatch) => {
     const details = {
       method: "GET",
@@ -68,10 +74,9 @@ export const generateSingle = (recipeId) => {
       .then((data) => {
         console.log('data', data)
         dispatch(
-            recipes.actions.setMealComponents(data?.sections[0].components));
-        dispatch(
-            recipes.actions.setMealInstructions(data?.instructions));
+            recipes.actions.setSingleRecipe(data));
       })
       .catch((err) => console.error(err));
   };
 };
+

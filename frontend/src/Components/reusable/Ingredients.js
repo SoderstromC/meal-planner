@@ -1,18 +1,14 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { generateSingle } from "reducers/recipes";
+import React from "react";
+import { useSelector } from "react-redux";
+// import { generateSingle } from "reducers/recipes";
 import styled from "styled-components";
 
-export const Ingredients = ({recipeId}) => {
-  const components = useSelector((store) => store.recipes.components);
-  const portions = useSelector((store) => store.recipes.sections);
+export const Ingredients = ({components}) => {
+  // const components = useSelector((store) => store.recipes.components);
+  // const portions = useSelector((store) => store.recipes.sections);
   const userId = useSelector((store) => store.user.userId);
 
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(generateSingle(recipeId));
-  }, []);
+  console.log('components', components)
 
   const buttonClickSave = () => {
 
@@ -41,12 +37,13 @@ export const Ingredients = ({recipeId}) => {
         console.log("savedShoppingListData", data);
       })
       .catch((error) => console.error("error2", error));
-  };
+    };
 
   return (
-    <>
-      <h2>Ingredients</h2>
-      <button type='button' onClick={buttonClickSave}>Add all ingredients to Shopping list</button>
+    <OuterWrapper>
+      
+      <AddToShopping type='button' onClick={buttonClickSave}>Add to shoppinglist</AddToShopping>
+      <InnerWrapper>
       {components.map((component) => {
         return (
           <>
@@ -59,12 +56,33 @@ export const Ingredients = ({recipeId}) => {
           </>
         );
       })}
-      {/* <button type='button' onClick={buttonClickSave}>Add all ingredients to Shopping list</button> */}
-    </>
+      <AddToShopping type='button' onClick={buttonClickSave}>Add to shoppinglist</AddToShopping>
+      </InnerWrapper>
+    </OuterWrapper>
   );
 };
+
+const OuterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const InnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const RecipeWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+const AddToShopping = styled.button`
+  width: 200px;
+  height: 34px;
+  background-color: white;
+  border: solid black 2px;
+  border-radius: 13px;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 15px 0;
 `;

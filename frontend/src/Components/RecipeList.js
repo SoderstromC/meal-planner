@@ -4,13 +4,18 @@ import { generateRecipe } from "reducers/recipes";
 import { RecipeCard } from "./reusable/RecipeCard";
 import { Header } from "./reusable/Header";
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
+import Loading from "./reusable/Loading";
+import Nav from "./reusable/Nav";
 
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
 
+
 const RecipeList = () => {
   const arrayOfRecipes = useSelector((store) => store.recipes.results);
   console.log("arrayOfRecipes", arrayOfRecipes);
+  const loading = useSelector((store) => store.recipes.loading);
+
   // const description = useSelector((store) => store.recipes.results[].description)
   // console.log('description', description)
 
@@ -41,27 +46,32 @@ const RecipeList = () => {
   }, [])
 
 return(
-  <OuterWrapper>
-    <InnerWrapper>
-      <Header />
-      <ContentWrapper>
-        <h2>All recipes</h2>
+  <>
+  {loading && <LoaderWrapper><Loading /></LoaderWrapper>}
+  {!loading && (
+    <OuterWrapper>
+    <>
+      <Nav />
+      <h1>List of recipes</h1>
+      <InnerWrapper>
         <RecipeListWrapper>
           {arrayOfRecipes.map((recipe) => {
-          return ( 
-            <RecipeCard
-              key= {recipe.id}
-              id={recipe.id}
-              name={recipe.name}
-              time={recipe.total_time_minutes}
-              img={recipe.thumbnail_url}
-            />
-          )
+            return (
+              <RecipeCard
+                key={recipe.id}
+                id={recipe.id}
+                name={recipe.name}
+                time={recipe.total_time_minutes}
+                description={recipe.description}
+                img={recipe.thumbnail_url} />
+            );
           })}
         </RecipeListWrapper>
-      </ContentWrapper>
-    </InnerWrapper>
-  </OuterWrapper>
+      </Innerwrapper>
+    </>
+  </Outerwrapper>
+  )}
+</>
 )
 } 
 
@@ -88,4 +98,10 @@ const RecipeListWrapper = styled.div`
   @media (min-width: 1020px) {
     grid-template-columns: repeat(4, 1fr);
   }
+  width: auto;
+  box-sizing: border-box;
+`
+const LoaderWrapper = styled.div`
+ width: 300px;
+ height: 300px;
 `
