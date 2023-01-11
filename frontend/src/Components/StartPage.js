@@ -23,15 +23,31 @@ const StartPage = () => {
       <OuterWrapper>
         <InnerWrapper>
           <Header />
+          <Link to="/login">GO TO LOGIN</Link> 
             <MainContainer>
-              <Link to="/login">GO TO LOGIN</Link>   
-              <h2>This is the landing page</h2>
-              <Link to="/recipes">Go to: Recipes list!</Link>
-              <Link to="/saved">Go to: My saved recipes!</Link>
-              <Link to="/shoppinglist">Go to: My shopping list!</Link>
-            {/* {thoughtItems.map((item) => {
-                return <p key={item._id}>{item.message}</p>
-            })} */}
+            <>
+              <Link
+                to={`/recipes`}>
+                <MainPageNavWrapper>
+                   <h3>Find recipes</h3>
+                   <p>Lorem ipsum is simply a dummy text of the printing and typesetting industry</p>
+                </MainPageNavWrapper>
+              </Link>
+              <Link
+                to={`/saved`}>
+                <MainPageNavWrapper>
+                   <h3>My recipes</h3>
+                   <p>Lorem ipsum is simply a dummy text of the printing and typesetting industry</p>
+                </MainPageNavWrapper>
+              </Link>
+              <Link
+                to={`/shoppinglist`}>
+                <MainPageNavWrapper>
+                   <h3>Shoppinglist</h3>
+                   <p>Lorem ipsum is simply a dummy text of the printing and typesetting industry</p>
+                </MainPageNavWrapper>
+              </Link>
+            </>
            </MainContainer>
         </InnerWrapper>
       </OuterWrapper>
@@ -41,10 +57,34 @@ const StartPage = () => {
 export default StartPage;
 
 const MainContainer = styled.div`
-width: 100%;
-height: 100vh;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  a {
+    text-decoration: none;
+    }
+`
+
+const MainPageNavWrapper = styled.div`
+  border: 1px solid #ACACAC;
+  border-radius: 5px;
+  max-width: 250px;
+  padding: 50px;
+  background-color: #fafafa;
+
+  p, h3 {
+    color: black;
+  }
+
+  &:hover {
+    background-color: #e1d1d1;
+
+   p, h3 {
+      color: white;
+    }
+  }
 `
