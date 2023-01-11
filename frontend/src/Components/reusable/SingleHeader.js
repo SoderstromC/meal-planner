@@ -1,35 +1,28 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { generateSingleHeader } from "reducers/recipes";
+import React from "react";
 import styled from "styled-components/macro";
 
 
-export const SingleHeader = ({recipeId}) => {
-  const recipeHeader = useSelector((store) => store.recipes.results);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(generateSingleHeader(recipeId));
-  }, []);
+export const SingleHeader = ({singleRecipe}) => {
 
 
-return(
-  <>
-    <SingleHeaderCard>
-      {recipeHeader.map((recipe) => {
-        return (
-            <SingleImageWrapper key={recipe.id}>
-              <h3>{recipe.name}</h3>
-              <p>{recipe.total_time_minutes}</p>
-              <img src={recipe.thumbnail_url}/>
-            </SingleImageWrapper>
-        )
-      })}
-    </SingleHeaderCard> 
-  </>
-)
-} 
+  if (!singleRecipe) {
+    return (null)
+  } else {
+    return(
+      <>
+        <SingleHeaderCard>
+      
+                <SingleImageWrapper key={singleRecipe.id}>
+                  <h3>{singleRecipe.name}</h3>
+                  <p>{singleRecipe.total_time_minutes}</p>
+                  <img src={singleRecipe.thumbnail_url}/>
+                </SingleImageWrapper>
+          
+        </SingleHeaderCard> 
+      </>
+    )
+  } 
+}
 
 
 const SingleHeaderCard = styled.div`

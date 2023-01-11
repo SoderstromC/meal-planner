@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { generateSingle } from "reducers/recipes";
+import React from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { generateSingle } from "reducers/recipes";
 import styled from "styled-components";
 
-export const Instructions = ({recipeId}) => {
-  const instructions = useSelector((store) => store.recipes.instructions);
-  const dispatch = useDispatch();
+export const Instructions = ({instructions}) => {
+  // const instructions = useSelector((store) => store.recipes.instructions);
+  // const dispatch = useDispatch();
   
-  useEffect(() => {
-    dispatch(generateSingle(recipeId));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(generateSingle(recipeId));
+  // }, []);
 
   return (
     <>
       
       {instructions.map((instruction) => {
-        console.log('instructions',instructions)
+        // console.log('instructions',instructions)
         return (
           <RecipeWrapper key={instruction.id}>
             <p>{instruction.display_text}</p>

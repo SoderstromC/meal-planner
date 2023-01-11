@@ -1,5 +1,7 @@
-import React from "react";
-// import { SingleHeader } from "./reusable/SingleHeader";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { generateSingleRecipe } from "reducers/recipes";
+import { SingleHeader } from "./reusable/SingleHeader";
 import  { Ingredients } from "./reusable/Ingredients";
 import  { Instructions } from "./reusable/Instructions";
 import { useParams } from "react-router-dom";
@@ -8,35 +10,41 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const SingleRecipe = () => {
+  const singleRecipe = useSelector((store) => store.recipes.singleRecipe);
+  console.log('singleRecipe', singleRecipe)
 
   const {recipeId} = useParams();
   console.log('id', recipeId)
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(generateSingleRecipe(recipeId));
+  }, []);
 
 return(
   <OuterWrapper>
     <GoBackButton type="button" onClick={() => navigate(-1)}>←</GoBackButton>
     <InnerWrapper>
       <Nav />
-        <Placeholder>
+        {/* <Placeholder>
         <h1>This is a single recipe placeholder for</h1>
         <p>Recipe image</p>
         <p>Recipe title</p>
         <p>Recipe cooking time</p>
-        </Placeholder>
-        {/* <SingleHeader recipeId = {recipeId}/> */}
+        </Placeholder> */}
+        <SingleHeader singleRecipe = {singleRecipe}/>
         <SingleRecipeWrapper>
           <IngredientsWrapper>
             <h2>Ingredients</h2>
             <IngredientsCard>
-              <Ingredients recipeId = {recipeId}/>
+              <Ingredients components = {singleRecipe?.sections[0].components || []}/>
             </IngredientsCard>
           </IngredientsWrapper>
           <InstructionsWrapper>
             <h2>Instructions</h2>
             <InstructionsCard>
-              <Instructions recipeId = {recipeId}/>
+              <Instructions instructions = {singleRecipe?.instructions || []}/>
             </InstructionsCard>
         </InstructionsWrapper>
       </SingleRecipeWrapper>

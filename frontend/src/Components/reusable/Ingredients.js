@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { generateSingle } from "reducers/recipes";
+import React from "react";
+import { useSelector } from "react-redux";
+// import { generateSingle } from "reducers/recipes";
 import styled from "styled-components";
 
-export const Ingredients = ({recipeId}) => {
-  const components = useSelector((store) => store.recipes.components);
-  const portions = useSelector((store) => store.recipes.sections);
+export const Ingredients = ({components}) => {
+  // const components = useSelector((store) => store.recipes.components);
+  // const portions = useSelector((store) => store.recipes.sections);
   const userId = useSelector((store) => store.user.userId);
+
+  console.log('components', components)
 
   const buttonClickSave = () => {
 
@@ -35,11 +37,6 @@ export const Ingredients = ({recipeId}) => {
       })
       .catch((error) => console.error("error2", error));
     };
-
-    const dispatch = useDispatch();
-    useEffect(() => {
-      dispatch(generateSingle(recipeId));
-    }, []);
 
   return (
     <OuterWrapper>
