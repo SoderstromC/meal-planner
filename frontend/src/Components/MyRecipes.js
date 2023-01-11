@@ -2,16 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { Header } from "./reusable/Header";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { Link } from 'react-router-dom';
-import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons"
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const MyRecipes = () => {
   const [recipeList, setRecipeList] = useState([]);
   const userId = useSelector((store) => store.user.userId);
 
   //const [loading, setLoading] = useState(false);
+  const accessToken = useSelector((store) => store.user.accessToken);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!accessToken) {
+        navigate("/login");
+    }
+  }, []);
 
   const fetchMyRecipes = () => {
     const MY_RECIPES_URL = `http://localhost:8090/saveRecipe/${userId}`;

@@ -66,6 +66,7 @@ export const generateSingle = (recipeId) => {
     fetch(SINGLE_URL(recipeId), details)
       .then((response) => response.json())
       .then((data) => {
+        console.log('data', data)
         dispatch(
             recipes.actions.setMealComponents(data?.sections[0].components));
         dispatch(
