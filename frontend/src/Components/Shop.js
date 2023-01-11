@@ -130,7 +130,7 @@ const MyShoppingList = () => {
                       /> */}
                       {/* <li key={`${counter++}-${component.id}`}>{component.raw_text}</li> */}
                       <div className = "buttonwrapper">
-                      <RemoveItem onClick={() => buttonClickRemove(component.id)}>delete</RemoveItem>
+                      
                       <EditItem
                         onClick={() =>
                           buttonClickEditIngredient(
@@ -142,6 +142,7 @@ const MyShoppingList = () => {
                       >
                         Edit
                       </EditItem>
+                      <RemoveItem onClick={() => buttonClickRemove(component.id)}>delete</RemoveItem>
                       </div>
                 
                     </ShoppingItemWrapper>
