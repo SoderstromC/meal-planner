@@ -99,7 +99,7 @@ const MyShoppingList = () => {
 
   return (
     <>
-      <Nav />
+      <Header />
       {console.log("shoppinglistbefore deciding on what to show", shoppingList)}
       {shoppingList.length === 0 && <NoIngredients />}
       {shoppingList.length > 0 && (
@@ -108,7 +108,8 @@ const MyShoppingList = () => {
           <ListWrapper>
             {shoppingList.map((component) => {
               return (
-                <>
+                <OuterWrapper>
+                <InnerWrapper>
                   <ShoppingItemContainer>
                     <ShoppingItemWrapper>
                       <CheckBox
@@ -154,7 +155,8 @@ const MyShoppingList = () => {
                       </div>
                     </EditItemWrapper> */}
                   </ShoppingItemContainer>
-                </>
+                  </InnerWrapper>
+                  </OuterWrapper>
               );
             })}
           </ListWrapper>
