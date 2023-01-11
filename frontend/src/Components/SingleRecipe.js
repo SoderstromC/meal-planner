@@ -27,12 +27,6 @@ return(
     <GoBackButton type="button" onClick={() => navigate(-1)}>←</GoBackButton>
     <InnerWrapper>
       <Nav />
-        {/* <Placeholder>
-        <h1>This is a single recipe placeholder for</h1>
-        <p>Recipe image</p>
-        <p>Recipe title</p>
-        <p>Recipe cooking time</p>
-        </Placeholder> */}
         <SingleHeader singleRecipe = {singleRecipe}/>
         <SingleRecipeWrapper>
           <IngredientsWrapper>
@@ -85,40 +79,23 @@ const SingleRecipeWrapper = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   margin-top: 20px;
-  padding: 10px;
   font-size: 14px;
 `
-const Placeholder = styled.div`
-width: 100%;
-height: 200px;
-padding: 10px;
-background-color: linen;
-color: black;
-border-radius: 13px;
-text-align: center;
-margin-top: 15px;
-  h1{
-    font-size: 17px;
-    margin-top: 30px;
-  }
-  p{
-    font-size: 13px;
-  }
-`
+
 const IngredientsWrapper = styled.div`
 display: flex;
 flex-direction: column;
 h2{
-  font-size: 15px;
+  font-size: 17px;
   margin-left: 20px;
 }
 `
 const IngredientsCard = styled.div`
 padding: 10px 25px;
-background-color: whitesmoke;
+background-color: rgb(252, 252, 252);
 border-radius: 13px;
 text-align: left;
-border: lightgrey solid 1px;
+border: rgb(232, 232, 232) solid 1px;
 height: 550px;
 }
 `
@@ -126,16 +103,16 @@ const InstructionsWrapper = styled.div`
 display: flex;
 flex-direction: column;
 h2{
-  font-size: 15px;
+  font-size: 17px;
   margin-left: 20px;
 }
 `
 const InstructionsCard = styled.div`
 padding: 10px 25px;
-background-color: whitesmoke;
+background-color: rgb(252, 252, 252);
 border-radius: 13px;
 text-align: left;
-border: lightgrey solid 1px;
+border: rgb(232, 232, 232) solid 1px;
 height: 550px;
 }
 `

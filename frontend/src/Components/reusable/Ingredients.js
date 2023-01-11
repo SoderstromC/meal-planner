@@ -41,7 +41,7 @@ export const Ingredients = ({components}) => {
   return (
     <OuterWrapper>
       
-      <AddToShopping type='button' onClick={buttonClickSave}>Add</AddToShopping>
+      <AddToShopping type='button' onClick={buttonClickSave}>Add to shoppinglist</AddToShopping>
       <InnerWrapper>
       {components.map((component) => {
         return (
@@ -55,7 +55,7 @@ export const Ingredients = ({components}) => {
           </>
         );
       })}
-      {/* <AddToShopping type='button' onClick={buttonClickSave}>Add all ingredients to Shopping list</AddToShopping> */}
+      <AddToShopping type='button' onClick={buttonClickSave}>Add to shoppinglist</AddToShopping>
       </InnerWrapper>
     </OuterWrapper>
   );
@@ -63,7 +63,7 @@ export const Ingredients = ({components}) => {
 
 const OuterWrapper = styled.div`
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
 `;
 
 const InnerWrapper = styled.div`
@@ -76,12 +76,12 @@ const RecipeWrapper = styled.div`
   flex-direction: column;
 `;
 const AddToShopping = styled.button`
-  width: 95px;
-  height: 35px;
+  width: 200px;
+  height: 34px;
   background-color: white;
   border: solid black 2px;
   border-radius: 13px;
   font-size: 13px;
   font-weight: bold;
-  margin-top: 10px;
+  margin: 15px 0;
 `;
