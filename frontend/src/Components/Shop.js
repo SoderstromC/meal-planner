@@ -4,12 +4,12 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import NoIngredients from "./NoIngredients";
-// import Item from "./Item";
 import shopping from 'reducers/shopping';
 
 const MyShoppingList = () => {
   const [shoppingList, setShoppingList] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  // const [editItem, setEditItem] = useState(false); ///toggla?
   //const [loading, setLoading] = useState(false);
   const userId = useSelector((store) => store.user.userId);
 
@@ -17,8 +17,6 @@ const MyShoppingList = () => {
   const buttonClickToggleCheck = (id) => {
     dispatch(shopping.actions.toggleItem(id))
   };
-
-  console.log("inputValue", inputValue);
 
   const accessToken = useSelector((store) => store.user.accessToken);
   const navigate = useNavigate();
@@ -61,7 +59,6 @@ const MyShoppingList = () => {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: id, userId: userId }),
-      //we only need id and userId not name since we are removing and only need to find the id
     };
     fetch(REMOVE_INGREDIENT_URL, options)
       .then((res) => res.json())
@@ -83,15 +80,11 @@ const MyShoppingList = () => {
 
   const buttonClickSave = (id) => {
     const EDIT_INGREDIENT_URL = `http://localhost:8090/editIngredient`;
-    console.log("Testar vad text innehåller", inputValue);
-
-    // const test = value;
 
     const options = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId: userId, id: id, text: inputValue }),
-      //we only need id and userId not name since we are updating value and only need to find the id
     };
     fetch(EDIT_INGREDIENT_URL, options)
       .then((res) => res.json())
@@ -121,17 +114,11 @@ const MyShoppingList = () => {
                         checked={component.isCompleted}
                         onChange={() => buttonClickToggleCheck(component.id)}
                       />
-                      {/* <Item 
-                      key={component.id} 
-                      componentData={component} /> */}
+    
                       <Item
                         key={`${counter++}-${component.id}`}>{component.raw_text}</Item>
-                        {/* componentData={component}
-                      /> */}
-                      {/* <li key={`${counter++}-${component.id}`}>{component.raw_text}</li> */}
                       <div className = "buttonwrapper">
-                      
-                      <EditItem
+                      {/* <EditItem
                         onClick={() =>
                           buttonClickEditIngredient(
                             component.id
@@ -141,12 +128,11 @@ const MyShoppingList = () => {
                         }
                       >
                         Edit
-                      </EditItem>
+                      </EditItem> */}
                       <RemoveItem onClick={() => buttonClickRemove(component.id)}>delete</RemoveItem>
                       </div>
-                
                     </ShoppingItemWrapper>
-                    <EditItemWrapper>
+                    {/* <EditItemWrapper>
                       <EditTextInput
                         type='text'
                         name='edit item'
@@ -164,7 +150,7 @@ const MyShoppingList = () => {
                         Exit
                       </Exit>
                       </div>
-                    </EditItemWrapper>
+                    </EditItemWrapper> */}
                   </ShoppingItemContainer>
                 </>
               );
@@ -214,20 +200,20 @@ const ShoppingItemWrapper = styled.div`
 
   }
 `;
-const EditItemWrapper = styled.div`
-  display: flex;
-  flex-direction: row;  
-  border: solid;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0 15px 0 15px;
+// const EditItemWrapper = styled.div`
+//   display: flex;
+//   flex-direction: row;  
+//   border: solid;
+//   justify-content: flex-start;
+//   align-items: center;
+//   padding: 0 15px 0 15px;
   
 
-  .buttonwrapper{
-    margin-left: auto;
+//   .buttonwrapper{
+//     margin-left: auto;
 
-  }
-`;
+//   }
+// `;
 
 const Item = styled.div`
 margin: 10px 10px 10px 50px;
@@ -271,41 +257,41 @@ width: 80px;
 background-color: transparent;
 `;
 
-const EditTextInput = styled.input`
-  // font-size: 13px;
-  border: 1px;
-  align-self: center;
-  padding: 3px 0 3px 10px;
-  margin: 10px 10px 10px 50px;
-  height: 30px;
-  width: 60%;
-  font-family: "Montserrat", sans-serif;
-  // outline: none;
-`;
+// const EditTextInput = styled.input`
+//   // font-size: 13px;
+//   border: 1px;
+//   align-self: center;
+//   padding: 3px 0 3px 10px;
+//   margin: 10px 10px 10px 50px;
+//   height: 30px;
+//   width: 60%;
+//   font-family: "Montserrat", sans-serif;
+//   // outline: none;
+// `;
 
-const EditItem = styled.button`
-margin-left: auto;
-border: solid;
-height: 25px;
-width: 80px;
-background-color: transparent;
-`;
+// const EditItem = styled.button`
+// margin-left: auto;
+// border: solid;
+// height: 25px;
+// width: 80px;
+// background-color: transparent;
+// `;
 
-const SaveItem = styled.button`
-margin-left: auto;
-border: solid;
-height: 25px;
-width: 80px;
-background-color: transparent;
-`;
+// const SaveItem = styled.button`
+// margin-left: auto;
+// border: solid;
+// height: 25px;
+// width: 80px;
+// background-color: transparent;
+// `;
 
-const Exit= styled.button`
-margin-left: auto;
-border: solid;
-height: 25px;
-width: 80px;
-background-color: transparent;
-`;
+// const Exit= styled.button`
+// margin-left: auto;
+// border: solid;
+// height: 25px;
+// width: 80px;
+// background-color: transparent;
+// `;
 
 
 /* Carolines kod  
