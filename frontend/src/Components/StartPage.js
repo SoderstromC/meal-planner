@@ -7,7 +7,7 @@ import { Header } from "./reusable/Header";
 import styled from "styled-components";
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
 
-const Main = () => {
+const StartPage = () => {
     const thoughtItems = useSelector((store) => store.thoughts.items);
     const dispatch = useDispatch();
     const accessToken = useSelector((store) => store.user.accessToken);
@@ -38,7 +38,7 @@ const Main = () => {
     )
 }
 
-export default Main;
+export default StartPage;
 
 const MainContainer = styled.div`
 width: 100%;

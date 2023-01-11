@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Main from 'components/Main';
+import StartPage from 'components/StartPage';
 import Login from 'components/Login';
 import NotFound from 'components/NotFound';
 import RecipeList from 'components/RecipeList';
@@ -31,7 +31,7 @@ export const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/login' element={<Login/>} />
-          <Route path='/' element={<Main/>} />
+          <Route path='/' element={<StartPage/>} />
           <Route path='/recipes' element={<RecipeList/>} />
           <Route path='/saved' element={<MyRecipes/>} />
           <Route path='/shoppinglist' element={<ShoppingList/>}/>
