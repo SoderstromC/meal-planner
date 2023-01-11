@@ -45,14 +45,13 @@ const RecipeList = () => {
   }, [])
 
 return(
-  <>
-  {loading && <LoaderWrapper><Loading /></LoaderWrapper>}
-  {!loading && (
     <OuterWrapper>
     <InnerWrapper>
       <Header />
       <ContentWrapper>
         <h2>All recipes</h2>
+        {loading && <LoaderWrapper><Loading /></LoaderWrapper>}
+        {!loading && (
         <RecipeListWrapper>
           {arrayOfRecipes.map((recipe) => {
           return ( 
@@ -66,11 +65,10 @@ return(
           )
           })}
         </RecipeListWrapper>
+          )}
       </ContentWrapper>
-      </InnerWrapper>
+    </InnerWrapper>
   </OuterWrapper>
-  )}
-</>
 )
 } 
 
