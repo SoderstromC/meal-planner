@@ -67,9 +67,9 @@ return(
             );
           })}
         </RecipeListWrapper>
-      </Innerwrapper>
+      </InnerWrapper>
     </>
-  </Outerwrapper>
+  </OuterWrapper>
   )}
 </>
 )

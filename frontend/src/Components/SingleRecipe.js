@@ -50,12 +50,6 @@ return(
 
 export default SingleRecipe;
 
-const OuterWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
 const GoBackButton = styled.button`
   align-self: flex-start;
   margin: 10px 0px 0px 0px;
@@ -66,12 +60,6 @@ const GoBackButton = styled.button`
   border: none;
   cursor: pointer;
   // display: none;
-`
-
-const InnerWrapper = styled.div`
-  width: 90%;
-  max-width: 800px;
-  margin: 0 auto;
 `
 
 const SingleRecipeWrapper = styled.div`
