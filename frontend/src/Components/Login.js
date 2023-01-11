@@ -16,6 +16,7 @@ const Login = () => {
   const navigate = useNavigate();
   const accessToken = useSelector((store) => store.user.accessToken);
   const error = useSelector(store => store.user.error)
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     if (accessToken) {
@@ -53,6 +54,8 @@ const Login = () => {
         }
       });
   };
+
+  
   return (
       <OuterWrapper>
         <InnerWrapper>
@@ -61,7 +64,16 @@ const Login = () => {
           </LoginHeader>
           <MobileImage className="mobile-show">
             <img src={MobileImg} />
-          </MobileImage>
+          </MobileImage>  
+          {!showForm &&
+          <>
+          <ShowFormButton onClick={() => setShowForm(!showForm)}>Login/Signup</ShowFormButton>
+          <WelcomeTextWrapper>
+              <p>This meal planner tool helps you find inspiration, plan your meals and manage your shopping list.</p>
+          </WelcomeTextWrapper>
+          </>
+          }
+          {showForm &&
           <FormWrapper>
            <form onSubmit={onFormSubmit}>
             <h1> { mode === "register" && "Register" || "Log in" } </h1>
@@ -120,6 +132,7 @@ const Login = () => {
             </InputWrapper>
            </form>
           </FormWrapper>
+          }
         </InnerWrapper>
       </OuterWrapper>
   );
@@ -131,6 +144,23 @@ export default Login;
 //     ? alert(`password must be over 8 characters`)
 //     : ''}
 
+const WelcomeTextWrapper = styled.div`
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ text-align: center;
+ max-width: 100%;
+ border: 1px solid #ACACAC;
+ border-radius: 5px;
+ padding: 50px;
+ background-color: #fafafa;
+`
+const ShowFormButton = styled.button`
+ background-color: transparent;
+ border: none;
+ cursor: pointer;
+ padding: 10px;
+`
 const FormWrapper = styled.div`
  display: flex;
  align-items: center;
