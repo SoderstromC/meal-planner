@@ -47,8 +47,8 @@ const SingleImageWrapper = styled.div`
   overflow: hidden;
   color: white;
   border-radius: 13px;
+ 
 `
-
 
 const Text = styled.div`
   position: absolute;
@@ -62,7 +62,7 @@ const Text = styled.div`
     width: 350px;
     text-shadow: 1px 0px 1px #000;
     font-size: 30px;
-    border: solid;
+  
   }
   p{
     color: white;

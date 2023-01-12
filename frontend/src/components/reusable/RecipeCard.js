@@ -37,7 +37,26 @@ export const RecipeCard = ({ id, name, time, img }) => {
     // post req till /saveRecipe
     // feedback till användaren (tex disabla knappen och ge info, loader)
   };
-
+  // uses dynamic values (image url)
+  const RecipeListCard = styled.section`
+    width: 100%;
+    height: 330px;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    border-radius: 13px;
+    word-wrap: break-word;
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0, 0, 0, 0.6) 100%), url(${img}); /* FF3.6+ */
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.1)), color-stop(100%,rgba(0,0,0,0.6))), url(${img}); /* Chrome,Safari4+ */
+    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* Chrome10+,Safari5.1+ */
+    background-image: -o-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* Opera 11.10+ */
+    background-image: -ms-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* IE10+ */
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* W3C */
+    object-fit: cover;
+    // background-size: cover;
+    
+    }
+  `
   return (
     <RecipeCardWrapper>
      <Link
@@ -45,11 +64,13 @@ export const RecipeCard = ({ id, name, time, img }) => {
         id={id}
         to={`/single/${id}`}>
       <RecipeListCard>
-        <img className= "recipe-image" src={img} />
         <TextWrapper>
           <h3>{name}</h3>
-          <p><FontAwesomeIcon icon={faClock} /> {time} minutes</p>
-        </TextWrapper>  
+          {time? <p><FontAwesomeIcon icon={faClock} /> {time} minutes</p> :<p><FontAwesomeIcon icon={faClock} /> Unknown</p>}
+        
+
+
+        </TextWrapper> 
       </RecipeListCard>
      </Link>
      <SaveButton type='submit' onClick={buttonClickSave}>
@@ -63,27 +84,13 @@ export const RecipeCard = ({ id, name, time, img }) => {
 const RecipeCardWrapper = styled.div`
   position: relative;
 `
-const RecipeListCard = styled.section`
-  width: 100%;
-  word-wrap: break-word;
-  height: 330px;
-  position: relative;
-  overflow: hidden;
-  color: white;
-  border-radius: 13px;
 
-  .recipe-image {
-    position: absolute; 
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-`
+
 const TextWrapper = styled.div`
   position: absolute;
   bottom: 18px;
-  left: 18px;
-  width: 250px;
+  padding-left: 18px;
+  width: 100%;
 
   p, h3 {
     text-shadow: 1px 0px 1px #000;
