@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import { API_URL } from "utils/utils";
 import styled from "styled-components";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faList } from "@fortawesome/free-solid-svg-icons";
+
 export const Ingredients = ({components}) => {
 
   const userId = useSelector((store) => store.user.userId);
@@ -36,7 +39,7 @@ export const Ingredients = ({components}) => {
 
   return (
     <OuterWrapper>
-      <AddToShopping type='button' onClick={buttonClickSave}>Add to shoppinglist</AddToShopping>
+      <AddToShopping type='button' onClick={buttonClickSave}><FontAwesomeIcon icon={faList} /> Add to shoppinglist</AddToShopping>
       <InnerWrapper>
         {components.map((component) => {
           return (
@@ -47,7 +50,7 @@ export const Ingredients = ({components}) => {
             </>
           );
         })}
-      <AddToShopping type='button' onClick={buttonClickSave}>Add to shoppinglist</AddToShopping>
+      <AddToShopping type='button' onClick={buttonClickSave}><FontAwesomeIcon icon={faList} /> Add to shoppinglist</AddToShopping>
       </InnerWrapper>
     </OuterWrapper>
   );
