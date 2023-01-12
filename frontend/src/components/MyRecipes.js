@@ -111,16 +111,35 @@ width: 100%;
 `
 const RecipeListWrapper = styled.div`
  width: 100%;
- border: 1px solid #333;
+ border: 1px solid #ACACAC;
  border-radius: 5px;
  padding: 30px;
  margin-top: 10px;
+ background-color: #fafafa;
+
+ a {
+  text-decoration: none;
+  }
+
+  a:hover {
+    font-weight: 700;
+  }
+
 `
 const SingleRecipeWrapper = styled.div`
 display: flex;
 `
 const LinkWrapper = styled.div`
  width: 50%;
+ 
+ a {
+  color: black;
+ }
+
+ a:visited {
+  color: black;
+ }
+
 `
 const ButtonWrapper = styled.div`
  width: 50%;
