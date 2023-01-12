@@ -137,14 +137,10 @@ const authenticateUser = async (req, res, next) => {
 // SAVE RECIPE ID AND NAME
 
 app.post("/saveRecipe", async (req, res) => {
-  const { id, userId, name } = req.body;
-  console.log("name", name);
-  console.log("ididid", id);
-  console.log("userId", userId); 
-
+  const { recipeId, userId, recipeName } = req.body;
   try {
     const user = await User.findByIdAndUpdate(userId, {
-      $push: { savedRecipes: { id, name } },
+      $push: { savedRecipes: { recipeId, recipeName } },
     });
     res.status(201).json({ success: true, response: user });
   } catch (error) {
@@ -156,15 +152,11 @@ app.post("/saveRecipe", async (req, res) => {
 // REMOVE RECIPE ID FROM USER'S SAVED LIST
 
 app.put("/removeRecipe", async (req, res) => {
-  const { id, userId } = req.body;
-  console.log("RecipeIdRemove", id);
-  console.log("UserIdRemove2", userId);
-
+  const { recipeId, userId } = req.body;
   try {
-    console.log("removing...");
     const removeRecipe = await User.findByIdAndUpdate(
       userId,
-      { $pull: { savedRecipes: { id } } },
+      { $pull: { savedRecipes: { recipeId } } },
       { new: true }
     );
     console.log(removeRecipe);
@@ -181,7 +173,6 @@ app.put("/removeRecipe", async (req, res) => {
 
 app.get("/saveRecipe/:userId", async (req, res) => {
   const { userId } = req.params;
-
   try {
     const user = await User.findById(userId);
     res.status(201).json({ success: true, response: user.savedRecipes });
@@ -195,9 +186,6 @@ app.get("/saveRecipe/:userId", async (req, res) => {
 
 app.post("/saveListItem", async (req, res) => {
   const { userId, itemsToSave } = req.body;
-  console.log("ingredients", itemsToSave);
-  console.log("userIdShop", userId);
-
   try {
     const user = await User.findByIdAndUpdate(
       userId,
@@ -215,7 +203,6 @@ app.post("/saveListItem", async (req, res) => {
 
 app.get("/listItems/:userId", async (req, res) => {
   const { userId } = req.params;
-
   try {
     const user = await User.findById(userId);
     res.status(201).json({ success: true, response: user.shoppingItems });
@@ -229,11 +216,7 @@ app.get("/listItems/:userId", async (req, res) => {
 
 app.put("/removeIngredient", async (req, res) => {
   const { id, userId } = req.body;
-  console.log("IngredientRawTextid", id);
-  console.log("UserIdRemove3", userId);
-
   try {
-    console.log("removing...");
     const removeIngredient = await User.findByIdAndUpdate(
       userId,
       { $pull: { shoppingItems: { id } } },

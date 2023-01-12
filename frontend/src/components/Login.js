@@ -202,7 +202,6 @@ const RadioInput = styled.input`
   width: 0;
   height: 0;
   text-align: center;
-
   &:checked {
     visibility:hidden;
   }
@@ -212,7 +211,6 @@ const LoginHeader = styled.div`
   height: 150px;
   align-items: center;
   justify-content: center;
-
   @media (min-width: 667px) {
     justify-content: left;
     height: 200px;
@@ -233,12 +231,10 @@ const MobileImage = styled.div`
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
-
   img {
     border-radius: 5px;
     width: 90%;
   }
-
   @media screen and (min-width: 600px) {
       display: none !important;
   }

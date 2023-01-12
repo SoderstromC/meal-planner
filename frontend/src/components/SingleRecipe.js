@@ -9,9 +9,11 @@ import { Header } from "./reusable/Header";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
+import Loading from "./reusable/Loading";
 
 const SingleRecipe = () => {
   const singleRecipe = useSelector((store) => store.recipes.singleRecipe);
+  const loading = useSelector((store) => store.recipes.loading);
 
   const {recipeId} = useParams();
 
@@ -27,21 +29,23 @@ const SingleRecipe = () => {
       <GoBackButton type="button" onClick={() => navigate(-1)}>←</GoBackButton>
       <InnerWrapper>
         <Header />
-          <SingleHeader singleRecipe = {singleRecipe}/>
-          <SingleRecipeWrapper>
+        {loading && <LoaderWrapper><Loading /></LoaderWrapper>}
+        {!loading && (
+          <><SingleHeader singleRecipe={singleRecipe} /><SingleRecipeWrapper>
             <IngredientsWrapper>
               <h2>Ingredients</h2>
               <IngredientsCard>
-                <Ingredients components = {singleRecipe?.sections[0].components || []}/>
+                <Ingredients components={singleRecipe?.sections[0].components || []} />
               </IngredientsCard>
             </IngredientsWrapper>
             <InstructionsWrapper>
               <h2>Instructions</h2>
               <InstructionsCard>
-                <Instructions instructions = {singleRecipe?.instructions || []}/>
+                <Instructions instructions={singleRecipe?.instructions || []} />
               </InstructionsCard>
-          </InstructionsWrapper>
-        </SingleRecipeWrapper>
+            </InstructionsWrapper>
+          </SingleRecipeWrapper></>
+        )}
       </InnerWrapper>
     </OuterWrapper>
   );
@@ -77,6 +81,7 @@ const IngredientsWrapper = styled.div`
     margin-left: 20px;
   }
 `
+
 const IngredientsCard = styled.div`
   padding: 10px 25px;
   background-color: rgb(252, 252, 252);
@@ -86,6 +91,7 @@ const IngredientsCard = styled.div`
   height: 550px;
   }
 `
+
 const InstructionsWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -94,6 +100,7 @@ const InstructionsWrapper = styled.div`
     margin-left: 20px;
   }
 `
+
 const InstructionsCard = styled.div`
   padding: 10px 25px;
   background-color: rgb(252, 252, 252);
@@ -102,4 +109,9 @@ const InstructionsCard = styled.div`
   border: rgb(232, 232, 232) solid 1px;
   height: 550px;
   }
+`
+
+const LoaderWrapper = styled.div`
+  width: 300px;
+  height: 300px;
 `

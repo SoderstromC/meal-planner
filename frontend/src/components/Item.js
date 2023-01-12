@@ -19,7 +19,6 @@ const ItemWrapper = styled.div`
   margin: 10px 0;
   display: flex;
   flex-direction: column;
- 
   .item-row {
     padding: 25px 0 0 10px;
     display: flex;

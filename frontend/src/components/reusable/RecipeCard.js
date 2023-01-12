@@ -16,17 +16,13 @@ export const RecipeCard = ({ id, name, time, img }) => {
 
   const buttonClickSave = () => {
     setSavedRecipe (true);
-    // const SAVED_RECIPE_URL = `http://localhost:8090/saveRecipe`;
     const SAVED_RECIPE_URL = API_URL('saveRecipe');
 
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: id, userId: userId, name: name })
+      body: JSON.stringify({ recipeId: id, userId: userId, recipeName: name })
     };
-
-
-    // ADD RECIPE ID TO USER ID 
 
     fetch(SAVED_RECIPE_URL, options) 
       .then((res) => res.json())
@@ -61,6 +57,7 @@ export const RecipeCard = ({ id, name, time, img }) => {
 const RecipeCardWrapper = styled.div`
   position: relative;
 `
+
 const RecipeListCard = styled.section`
   width: 100%;
   word-wrap: break-word;
@@ -76,6 +73,7 @@ const RecipeListCard = styled.section`
     height: 100%;
   }
 `
+
 const TextWrapper = styled.div`
   position: absolute;
   bottom: 8px;
@@ -84,6 +82,7 @@ const TextWrapper = styled.div`
     text-shadow: 1px 1px 2px #333;
   }
 `
+
 const SaveButton = styled.button`
   background-color: white;
   border: none;
@@ -93,14 +92,10 @@ const SaveButton = styled.button`
   top: 8px;
   right: 10px;
   border-radius: 5px;
-
   .red-heart {
     color: red;
   }
-
   .grey-heart {
     color: grey;
   }
 `
-
-

@@ -27,6 +27,7 @@ export const SingleHeader = ({singleRecipe}) => {
 const SingleHeaderCard = styled.div`
   display: block;
 `
+
 const SingleImageWrapper = styled.div`
   width: 100%;
   word-wrap: break-word;
@@ -35,7 +36,6 @@ const SingleImageWrapper = styled.div`
   overflow: hidden;
   color: white;
   border-radius: 13px;
-
   img {
     position: absolute; 
     object-fit: cover;
@@ -44,6 +44,7 @@ const SingleImageWrapper = styled.div`
     opacity: 90%;
   }
 `
+
 const Text = styled.div`
   position: absolute;
   bottom: 8px;

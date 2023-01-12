@@ -83,11 +83,13 @@ const NavContainer = styled.div`
     font-weight: 700;
   }
 `
+
 const Line = styled.div`
   height: 1px;
   background: grey;
   margin-top: 10px;
 `
+
 const LogOutButton = styled.button`
   background: transparent;
   border: none;
@@ -95,6 +97,7 @@ const LogOutButton = styled.button`
   color: grey;
   padding: 0;
 `
+
 const MenuWrapper = styled.div`
   display: flex;
   justify-content: right;
@@ -104,6 +107,7 @@ const MenuWrapper = styled.div`
   display: none !important;
   }
 `
+
 const MobileMenuWrapper = styled.div`
   line-height: 3;
   .burger-menu {
@@ -118,4 +122,3 @@ const MobileMenuWrapper = styled.div`
     display: none !important;
   } 
 `
-

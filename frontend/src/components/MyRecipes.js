@@ -9,12 +9,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 const MyRecipes = () => {
-  const [recipeList, setRecipeList] = useState([]);
   const userId = useSelector((store) => store.user.userId);
-
-  //const [loading, setLoading] = useState(false);
   const accessToken = useSelector((store) => store.user.accessToken);
+
+  const [recipeList, setRecipeList] = useState([]);
+  //const [loading, setLoading] = useState(false);
+  
+
   const navigate = useNavigate();
+  
   useEffect(() => {
     if (!accessToken) {
         navigate("/login");
@@ -22,6 +25,11 @@ const MyRecipes = () => {
   }, []);
 
   const fetchMyRecipes = () => {
+    
+    // Don't fetch from server if userId is not defined
+    if (!userId) {
+      return;
+    }
 
     const MY_RECIPES_URL = API_URL(`saveRecipe/${userId}`);
 
@@ -46,15 +54,14 @@ const MyRecipes = () => {
 
   // REMOVE RECIPE FROM SAVED RECIPES
 
-  const buttonClickRemove = (id) => {
+  const buttonClickRemove = (recipeId) => {
     
     const REMOVE_RECIPE_URL = API_URL('removeRecipe');
 
-    console.log('idTEST', id)
     const options = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: id, userId: userId }) 
+      body: JSON.stringify({ recipeId: recipeId, userId: userId }) 
     };
 
     fetch(REMOVE_RECIPE_URL, options) 
@@ -80,14 +87,14 @@ const MyRecipes = () => {
           <LinkWrapper>
           <Link
             className="recipe-container"
-            id={recipe.id}
-            to={`/single/${recipe.id}`}
-            key={recipe.id}>
-            <p>{recipe.name}</p>
+            id={recipe.recipeId}
+            to={`/single/${recipe.recipeId}`}
+            key={recipe.recipeId}>
+            <p>{recipe.recipeName}</p>
           </Link>
           </LinkWrapper>
           <ButtonWrapper>
-          <RemoveButton onClick={() => buttonClickRemove(recipe.id)}>
+          <RemoveButton onClick={() => buttonClickRemove(recipe.recipeId)}>
           <FontAwesomeIcon className="trash-icon" icon={faTrashCan} />
           </RemoveButton> 
           </ButtonWrapper>

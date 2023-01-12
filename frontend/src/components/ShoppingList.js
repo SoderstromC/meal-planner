@@ -148,19 +148,19 @@ const ShoppingListContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;  
-`;
+`
 
 const ListWrapper = styled.div`
   text-align: left;
   border: solid;
   width: 70%;
-`;
+`
 
 const ShoppingItemContainer = styled.div`
   margin: 10px 14px 10px 43px;
   display: flex;
   flex-direction: column;
-`;
+`
 
 const ShoppingItemWrapper = styled.div`
   display: flex;
@@ -172,11 +172,12 @@ const ShoppingItemWrapper = styled.div`
   .buttonwrapper{
     margin-left: auto;
   }
-`;
+`
 
 const Item = styled.div`
   margin: 10px 10px 10px 50px;
-`;
+`
+
 const CheckBox = styled.input`
   cursor: pointer;
   appearance: none;
@@ -206,11 +207,11 @@ const CheckBox = styled.input`
     width: 1em;
     height: 1em;
   }
-`;
+`
 const RemoveItem = styled.button`
   margin-left: auto;
   border: solid;
   height: 25px;
   width: 80px;
   background-color: transparent;
-`;
+`

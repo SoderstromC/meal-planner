@@ -19,4 +19,4 @@ export const Instructions = ({instructions}) => {
 const RecipeWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
+`

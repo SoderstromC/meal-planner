@@ -15,8 +15,8 @@ export const Footer = () => {
 const FooterContainer = styled.div`
 color: "white";
 margin: 0;
-`;
+`
 const FooterWrapper = styled.div`
 color: "white";
 margin: 0;
-`;
+`
