@@ -29,19 +29,21 @@ return(
     <GoBackButton type="button" onClick={() => navigate(-1)}>←</GoBackButton>
     <InnerWrapper>
       <Header />
-        <SingleHeader singleRecipe = {singleRecipe}/>
-        <SingleRecipeWrapper>
+      {loading && <LoaderWrapper><Loading /></LoaderWrapper>}
+      {!loading && (
+        <><SingleHeader singleRecipe={singleRecipe} /><SingleRecipeWrapper>
           <IngredientsWrapper>
             <IngredientsCard>
-              <Ingredients components = {singleRecipe?.sections[0].components || []}/>
+              <Ingredients components={singleRecipe?.sections[0].components || []} />
             </IngredientsCard>
           </IngredientsWrapper>
           <InstructionsWrapper>
             <InstructionsCard>
-              <Instructions instructions = {singleRecipe?.instructions || []}/>
+              <Instructions instructions={singleRecipe?.instructions || []} />
             </InstructionsCard>
-        </InstructionsWrapper>
-      </SingleRecipeWrapper>
+          </InstructionsWrapper>
+        </SingleRecipeWrapper></>
+      )}
     </InnerWrapper>
   </OuterWrapper>
 )
@@ -51,6 +53,7 @@ export default SingleRecipe;
 
 
 const GoBackButton = styled.button`
+  display: none;
   align-self: flex-start;
   margin: 10px 0px 0px 0px;
   font-size: 25px;
@@ -59,6 +62,9 @@ const GoBackButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
+  @media (max-width: 667px) {
+    display: none;
+  }
 `
 
 const SingleRecipeWrapper = styled.div`
@@ -68,6 +74,9 @@ const SingleRecipeWrapper = styled.div`
   gap: 30px;
   margin-top: 20px;
   font-size: 14px;
+  @media (max-width: 667px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `
 
 const IngredientsWrapper = styled.div`
@@ -82,7 +91,7 @@ const IngredientsCard = styled.div`
   border-radius: 13px;
   text-align: left;
   border: rgb(232, 232, 232) solid 1px;
-  height: 550px;
+  height: min-content;
   }
 `
 
@@ -97,11 +106,10 @@ const InstructionsCard = styled.div`
   border-radius: 13px;
   text-align: left;
   border: rgb(232, 232, 232) solid 1px;
-  height: 550px;
+  height: min-content;
   }
 `
 
 const LoaderWrapper = styled.div`
-  width: 300px;
-  height: 300px;
+  margin: 0 auto;
 `

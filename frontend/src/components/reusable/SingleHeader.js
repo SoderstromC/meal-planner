@@ -68,7 +68,6 @@ const Text = styled.div`
     width: 350px;
     text-shadow: 1px 0px 1px #000;
     font-size: 30px;
-  
   }
   p{
     color: white;
@@ -76,5 +75,10 @@ const Text = styled.div`
     margin: 30px 30px 12px 0;
     font-weight: bold;
     text-shadow: 1px 1px 2px #333;
+  }
+  @media (max-width: 800px) {
+    h3{
+      font-size: 25px;
+    }
   }
 `

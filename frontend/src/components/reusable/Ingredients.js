@@ -1,17 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { API_URL } from "utils/utils";
-// import { generateSingle } from "reducers/recipes";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList } from "@fortawesome/free-solid-svg-icons";
 
 export const Ingredients = ({components}) => {
-  // const components = useSelector((store) => store.recipes.components);
-  // const portions = useSelector((store) => store.recipes.sections);
   const userId = useSelector((store) => store.user.userId);
-
-  console.log('components', components)
 
   const buttonClickSave = () => {
     const SAVED_SHOPPINGLIST_URL = API_URL('saveListItem');
@@ -32,10 +27,10 @@ export const Ingredients = ({components}) => {
     };
 
     // ADD INGREDIENTS TO SHOPPING LIST IN SERVER
+
     fetch(SAVED_SHOPPINGLIST_URL, options)
       .then((res) => res.json())
       .then((data) => {
-        //something (function?) to let the user know we have saved to shopping list
         console.log("savedShoppingListData", data);
       })
       .catch((error) => console.error("error2", error));
@@ -43,7 +38,10 @@ export const Ingredients = ({components}) => {
 
   return (
     <OuterWrapper>
-      <AddToShopping type='button' onClick={buttonClickSave}><FontAwesomeIcon icon={faList} /> Add to shoppinglist</AddToShopping>
+      <ButtonWrapper>
+        <h3>Ingredients</h3>
+        <AddToShopping type='button' onClick={buttonClickSave}><FontAwesomeIcon icon={faList} /> Add to shoppinglist</AddToShopping>
+      </ButtonWrapper>
       <InnerWrapper>
         {components.map((component) => {
           return (
@@ -54,7 +52,6 @@ export const Ingredients = ({components}) => {
             </>
           );
         })}
-      <AddToShopping type='button' onClick={buttonClickSave}><FontAwesomeIcon icon={faList} /> Add to shoppinglist</AddToShopping>
       </InnerWrapper>
     </OuterWrapper>
   );
@@ -63,50 +60,52 @@ export const Ingredients = ({components}) => {
 const OuterWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
+`
 
 const InnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
-const ButtonWrapper = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;  
+`
 
-h3{
-  margin: 10px 0 20px 0;
-`;
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;  
+  h3{
+    margin: 10px 0 15px 0;
+`
 
 const RecipeWrapper = styled.div`
   display: flex-end;
   flex-direction: column;
-  margin-top: 15px;
-  font-size: 15px;
+  margin-top: 5px;
   font-weight: 500;
-
   p {
   margin: 8px 0;
   }
-`;
+`
+
 const AddToShopping = styled.button`
   justify-content: space-between;
-  width: 150px;
+  width: 155px;
   height: 34px;
   background-color: white;
   border: 1px solid #ACACAC;
   border-radius: 13px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: bold;
   margin: 5px 0;
-
   &:hover {
-    color: green;
-    background-color: black;
+    color: lightgrey;
+    background-color: whitesmoke;
+    border: 1px solid lightgrey;
   }
-
   &:active {
-    color: red;
+    color: white;
     background-color: black;
   }
-`;
+  @media (max-width: 800px) {
+    width: 125px;
+    font-size: 10px;
+  }
+`
