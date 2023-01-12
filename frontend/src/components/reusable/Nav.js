@@ -67,8 +67,8 @@ export default Nav;
 const NavContainer = styled.div`
   display: flex;
   justify-content: right;
-  gap: 15px;
   font-size: 14px;
+  font-weight: 600;
   a {
     text-decoration: none;  
     color: black;
@@ -77,7 +77,7 @@ const NavContainer = styled.div`
     color: black;
     }
   a:hover {
-    font-weight: 700;
+    font-weight: 800;
   }
   button:hover {
     font-weight: 700;
@@ -100,10 +100,10 @@ const LogOutButton = styled.button`
 
 const MenuWrapper = styled.div`
   display: flex;
-  justify-content: right;
-  gap: 15px;
+  justify-content: center;
+  gap: 45px;
   font-size: 14px;
-@media screen and (max-width: 850px) {
+  @media screen and (max-width: 850px) {
   display: none !important;
   }
 `
@@ -117,7 +117,6 @@ const MobileMenuWrapper = styled.div`
   .bar-icon {
     font-size: 1.5rem;
   }
-
   @media screen and (min-width: 849px) {
     display: none !important;
   } 

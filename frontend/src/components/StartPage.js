@@ -4,6 +4,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { Header } from "./reusable/Header";
 import styled from "styled-components";
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
+import shoppingListImg from "../assets/images/shoppingListImg.jpg";
+import myRecipeImg from "../assets/images/myRecipeImg.jpg";
+import findRecipeImg from "../assets/images/findRecipeImg.jpg";
 
 const StartPage = () => {
   const accessToken = useSelector((store) => store.user.accessToken);
@@ -15,40 +18,45 @@ const StartPage = () => {
       }
   }, []);
 
-  return (
-    <OuterWrapper>
-      <InnerWrapper>
-        <Header />
-        <Link to="/login">GO TO LOGIN</Link> 
-          <MainContainer>
-          <>
-            <Link
-              to={`/recipes`}>
-              <MainPageNavWrapper>
-                  <h3>Find recipes</h3>
-                  <p>Lorem ipsum is simply a dummy text of the printing and typesetting industry</p>
-              </MainPageNavWrapper>
-            </Link>
-            <Link
-              to={`/saved`}>
-              <MainPageNavWrapper>
-                  <h3>My recipes</h3>
-                  <p>Lorem ipsum is simply a dummy text of the printing and typesetting industry</p>
-              </MainPageNavWrapper>
-            </Link>
-            <Link
-              to={`/shoppinglist`}>
-              <MainPageNavWrapper>
-                  <h3>Shoppinglist</h3>
-                  <p>Lorem ipsum is simply a dummy text of the printing and typesetting industry</p>
-              </MainPageNavWrapper>
-            </Link>
-          </>
-          </MainContainer>
-      </InnerWrapper>
-    </OuterWrapper>
-  );
-};
+    return (
+      <OuterWrapper>
+        <InnerWrapper>
+          <Header />
+            <MainContainer>
+            <>
+              <Link
+                to={`/recipes`}>
+                <MainPageNavWrapper>
+                <img src={findRecipeImg} alt="FindRecipe" />
+                   <h3>Find recipes</h3>
+                   <p>Lorem ipsum is simply a dummy text of the printing and typesetting industry</p>
+                </MainPageNavWrapper>
+              </Link>
+              <Link
+                to={`/saved`}>
+                <MainPageNavWrapper>
+                <img src={myRecipeImg} alt="MyRecipes" />
+
+                   <h3>My recipes</h3>
+                   <p>Lorem ipsum is simply a dummy text of the printing and typesetting industry</p>
+                </MainPageNavWrapper>
+              </Link>
+              <Link
+                to={`/shoppinglist`}>
+                <MainPageNavWrapper>
+                <img src={shoppingListImg} alt="ShoppingList" />
+
+
+                   <h3>Shoppinglist</h3>
+                   <p>Lorem ipsum is simply a dummy text of the printing and typesetting industry</p>
+                </MainPageNavWrapper>
+              </Link>
+            </>
+           </MainContainer>
+        </InnerWrapper>
+      </OuterWrapper>
+    )
+}
 
 export default StartPage;
 
@@ -66,7 +74,7 @@ const MainContainer = styled.div`
 
 const MainPageNavWrapper = styled.div`
   border: 1px solid #ACACAC;
-  border-radius: 5px;
+  border-radius: 13px;
   max-width: 250px;
   padding: 50px;
   background-color: #fafafa;

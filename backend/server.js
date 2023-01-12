@@ -26,6 +26,9 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+    minlength: 8,
+    maxlength: 12,
+    /// My_B4nK_P4$$word
   },
   accessToken: {
     type: String,
@@ -230,9 +233,6 @@ app.put("/removeIngredient", async (req, res) => {
     res.status(400).json({ success: false, response: error });
   }
 });
-
-
-//TECHNIGO PLACEHOLDERS BELOW, KEEP FOR REFERENCE
 
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");

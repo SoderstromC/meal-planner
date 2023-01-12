@@ -27,7 +27,6 @@ export const RecipeCard = ({ id, name, time, img }) => {
     fetch(SAVED_RECIPE_URL, options) 
       .then((res) => res.json())
       .then((data) => {
-        alert("Recipe saved!")
         console.log("savedRecipeData", data);
       })
       .catch((error) => console.error("error2", error));
@@ -40,11 +39,10 @@ export const RecipeCard = ({ id, name, time, img }) => {
         id={id}
         to={`/single/${id}`}>
       <RecipeListCard>
-        <img src={img} />
         <TextWrapper>
           <h3>{name}</h3>
-          <p><FontAwesomeIcon icon={faClock} /> {time} minutes</p>
-        </TextWrapper>  
+          {time? <p><FontAwesomeIcon icon={faClock} /> {time} minutes</p> :<p><FontAwesomeIcon icon={faClock} /> Unknown</p>}
+        </TextWrapper> 
       </RecipeListCard>
      </Link>
      <SaveButton type='submit' onClick={buttonClickSave}>
@@ -58,39 +56,42 @@ const RecipeCardWrapper = styled.div`
   position: relative;
 `
 
+const TextWrapper = styled.div`
+  position: absolute;
+  bottom: 18px;
+  padding-left: 18px;
+  width: 100%;
+  p, h3 {
+    text-shadow: 1px 0px 1px #000;
+  }
+`
+
 const RecipeListCard = styled.section`
   width: 100%;
-  word-wrap: break-word;
-  height: 250px;
+  height: 330px;
   position: relative;
   overflow: hidden;
   color: white;
-  border-radius: 5px;
-  img {
-    position: absolute; 
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+  border-radius: 13px;
+  word-wrap: break-word;
+  background-image: -moz-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0, 0, 0, 0.6) 100%), url(${img}); /* FF3.6+ */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.1)), color-stop(100%,rgba(0,0,0,0.6))), url(${img}); /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* Chrome10+,Safari5.1+ */
+  background-image: -o-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* Opera 11.10+ */
+  background-image: -ms-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* IE10+ */
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* W3C */
+  background-size: cover;
   }
-`
-
-const TextWrapper = styled.div`
-  position: absolute;
-  bottom: 8px;
-  left: 10px;
-  p, h3 {
-    text-shadow: 1px 1px 2px #333;
-  }
-`
-
+  `
+  
 const SaveButton = styled.button`
   background-color: white;
   border: none;
   color: #333;
   cursor: pointer;
   position: absolute;
-  top: 8px;
-  right: 10px;
+  top: 15px;
+  right: 15px;
   border-radius: 5px;
   .red-heart {
     color: red;
@@ -98,4 +99,6 @@ const SaveButton = styled.button`
   .grey-heart {
     color: grey;
   }
-`
+ `
+
+

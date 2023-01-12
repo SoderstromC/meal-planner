@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { API_URL } from "utils/utils";
 import user from "reducers/user";
 import styled from "styled-components";
-import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
+import { InnerWrapper, OuterWrapper } from "./reusable/global/Wrappers";
 import Logo from "../assets/icons/logofoodify.svg";
-import MobileImg from "../assets/icons/mobileImg.jpg";
+// import MobileImg from "../assets/icons/mobileImg.jpg";
+import IntroImg from "../assets/images/introImg.jpg";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -15,7 +16,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const accessToken = useSelector((store) => store.user.accessToken);
-  const error = useSelector(store => store.user.error)
+  const error = useSelector((store) => store.user.error);
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
@@ -56,7 +57,6 @@ const Login = () => {
       });
   };
 
-  
   return (
     <OuterWrapper>
       <InnerWrapper>
@@ -141,7 +141,6 @@ const Login = () => {
 
 export default Login;
 
-
 const WelcomeTextWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -158,7 +157,9 @@ const ShowFormButton = styled.button`
   border: none;
   cursor: pointer;
   padding: 10px;
+  font-weight: bold;
 `
+
 const FormWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -233,9 +234,25 @@ const MobileImage = styled.div`
   justify-content: center;
   img {
     border-radius: 5px;
-    width: 90%;
+    width: 100%;
   }
   @media screen and (min-width: 600px) {
-      display: none !important;
+    display: none !important;
   }
 `
+
+// const WebImage = styled.div`
+//   @media screen and (min-width: 600px) {
+//     position: relative;
+//     width: 100%;
+//     display: flex;
+//     justify-content: center;
+//     img {
+//       border-radius: 13px;
+//       width: 100%;
+//       position: absolute;
+//       right: 0%;
+//       // top: 40%;
+// //     }
+// //   }
+// `

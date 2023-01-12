@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { generateSingleRecipe } from "reducers/recipes";
 import { SingleHeader } from "./reusable/SingleHeader";
-import  { Ingredients } from "./reusable/Ingredients";
-import  { Instructions } from "./reusable/Instructions";
+import { Ingredients } from "./reusable/Ingredients";
+import { Instructions } from "./reusable/Instructions";
 import { useParams } from "react-router-dom";
 import { Header } from "./reusable/Header";
 import { useNavigate } from "react-router-dom";
@@ -24,34 +24,31 @@ const SingleRecipe = () => {
     dispatch(generateSingleRecipe(recipeId));
   }, []);
 
-  return(
-    <OuterWrapper>
-      <GoBackButton type="button" onClick={() => navigate(-1)}>←</GoBackButton>
-      <InnerWrapper>
-        <Header />
-        {loading && <LoaderWrapper><Loading /></LoaderWrapper>}
-        {!loading && (
-          <><SingleHeader singleRecipe={singleRecipe} /><SingleRecipeWrapper>
-            <IngredientsWrapper>
-              <h2>Ingredients</h2>
-              <IngredientsCard>
-                <Ingredients components={singleRecipe?.sections[0].components || []} />
-              </IngredientsCard>
-            </IngredientsWrapper>
-            <InstructionsWrapper>
-              <h2>Instructions</h2>
-              <InstructionsCard>
-                <Instructions instructions={singleRecipe?.instructions || []} />
-              </InstructionsCard>
-            </InstructionsWrapper>
-          </SingleRecipeWrapper></>
-        )}
-      </InnerWrapper>
-    </OuterWrapper>
-  );
-};
+return(
+  <OuterWrapper>
+    <GoBackButton type="button" onClick={() => navigate(-1)}>←</GoBackButton>
+    <InnerWrapper>
+      <Header />
+        <SingleHeader singleRecipe = {singleRecipe}/>
+        <SingleRecipeWrapper>
+          <IngredientsWrapper>
+            <IngredientsCard>
+              <Ingredients components = {singleRecipe?.sections[0].components || []}/>
+            </IngredientsCard>
+          </IngredientsWrapper>
+          <InstructionsWrapper>
+            <InstructionsCard>
+              <Instructions instructions = {singleRecipe?.instructions || []}/>
+            </InstructionsCard>
+        </InstructionsWrapper>
+      </SingleRecipeWrapper>
+    </InnerWrapper>
+  </OuterWrapper>
+)
+}
 
 export default SingleRecipe;
+
 
 const GoBackButton = styled.button`
   align-self: flex-start;
@@ -76,10 +73,7 @@ const SingleRecipeWrapper = styled.div`
 const IngredientsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  h2{
-    font-size: 17px;
-    margin-left: 20px;
-  }
+}
 `
 
 const IngredientsCard = styled.div`
@@ -95,10 +89,6 @@ const IngredientsCard = styled.div`
 const InstructionsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  h2{
-    font-size: 17px;
-    margin-left: 20px;
-  }
 `
 
 const InstructionsCard = styled.div`

@@ -37,25 +37,25 @@ const RecipeList = () => {
 
   return (
     <OuterWrapper>
-      <InnerWrapper>
-        <Header />
-        <ContentWrapper>
-          <h2>All recipes</h2>
-          {loading && <LoaderWrapper><Loading /></LoaderWrapper>}
-          {!loading && (
-          <RecipeListWrapper>
-            {arrayOfRecipes.map((recipe) => {
-            return ( 
-              <RecipeCard
-                key= {recipe.id}
-                id={recipe.id}
-                name={recipe.name}
-                time={recipe.total_time_minutes}
-                img={recipe.thumbnail_url}
-              />
-            )
-            })}
-          </RecipeListWrapper>
+    <InnerWrapper>
+      <Header />
+      <ContentWrapper>
+        <h3>All recipes</h3>
+        {loading && <LoaderWrapper><Loading /></LoaderWrapper>}
+        {!loading && (
+        <RecipeListWrapper>
+          {arrayOfRecipes.map((recipe) => {
+          return ( 
+            <RecipeCard
+              key= {recipe.id}
+              id={recipe.id}
+              name={recipe.name}
+              time={recipe.total_time_minutes}
+              img={recipe.thumbnail_url}
+            />
+          )
+          })}
+        </RecipeListWrapper>
           )}
         </ContentWrapper>
       </InnerWrapper>
@@ -67,24 +67,27 @@ export default RecipeList;
 
 const ContentWrapper = styled.div`
   width: 100%;
-`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  h3{
+    margin-bottom: 10px;
+  }
+  `
 
 const RecipeListWrapper = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: 10px;
+  gap: 20px;
   @media (min-width: 400px) {
     grid-template-columns: repeat(2, 1fr);
   }
   @media (min-width: 667px) {
     grid-template-columns: repeat(3, 1fr);
   }
-  @media (min-width: 1020px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
 `
+
 const LoaderWrapper = styled.div`
-  width: 300px;
-  height: 300px;
+  margin: 0 auto; 
 `

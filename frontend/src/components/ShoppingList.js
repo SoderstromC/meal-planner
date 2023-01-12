@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Header } from "./reusable/Header";
 import { API_URL } from "utils/utils";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
+import { InnerWrapper, OuterWrapper } from "./reusable/global/Wrappers";
 import NoIngredients from "./NoIngredients";
-import shopping from 'reducers/shopping';
+import shopping from "reducers/shopping";
 
 const MyShoppingList = () => {
   const [shoppingList, setShoppingList] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  //const [loading, setLoading] = useState(false);
   const userId = useSelector((store) => store.user.userId);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const buttonClickToggleCheck = (id) => {
-    dispatch(shopping.actions.toggleItem(id))
+    dispatch(shopping.actions.toggleItem(id));
   };
 
   const accessToken = useSelector((store) => store.user.accessToken);
@@ -37,7 +36,6 @@ const MyShoppingList = () => {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       };
-      //setLoading(true);
       fetch(MY_SHOPPINGLIST_URL, options)
         .then((res) => res.json())
         .then((data) => {
@@ -45,7 +43,6 @@ const MyShoppingList = () => {
           console.log("shoppinglist1loading", data.response);
         })
         .catch((error) => console.error("error3", error));
-      //.finally(() => setLoading(false))
     };
 
   useEffect(() => {
@@ -73,34 +70,6 @@ const MyShoppingList = () => {
       .catch((error) => console.error("error3", error));
   };
 
-
-  // UPDATE INGREDIENT FROM USERS SAVED SHOPPINGLIST
-
-  const buttonClickEditIngredient = (id) => {
-    alert("visar inputfield");
-  };
-
-  const buttonClickExit = (id) => {
-    alert("visar rad med item");
-  };
-
-  const buttonClickSave = (id) => {
-    const EDIT_INGREDIENT_URL = API_URL('editIngredient');
-
-    const options = {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: userId, id: id, text: inputValue }),
-    };
-    fetch(EDIT_INGREDIENT_URL, options)
-      .then((res) => res.json())
-      .then((data) => {
-        setShoppingList(data.response);
-        console.log("shoppinglistupdated", data.response);
-      })
-      .catch((error) => console.error("error3", error));
-  };
-
   return (
     <>
       <Header />
@@ -108,7 +77,7 @@ const MyShoppingList = () => {
       {shoppingList.length === 0 && <NoIngredients />}
       {shoppingList.length > 0 && (
         <ShoppingListContainer>
-          <h1>My Shopping List</h1>
+          <h3>My Shopping List</h3>
           <ListWrapper>
             {shoppingList.map((component) => {
               return (
@@ -121,10 +90,15 @@ const MyShoppingList = () => {
                           checked={component.isCompleted}
                           onChange={() => buttonClickToggleCheck(component.id)}
                         />
-                        <Item
-                          key={`${counter++}-${component.id}`}>{component.raw_text}</Item>
-                        <div className = "buttonwrapper">
-                        <RemoveItem onClick={() => buttonClickRemove(component.id)}>delete</RemoveItem>
+                        <Item key={`${counter++}-${component.id}`}>
+                          {component.raw_text}
+                        </Item>
+                        <div className='buttonwrapper'>
+                          <RemoveItem
+                            onClick={() => buttonClickRemove(component.id)}
+                          >
+                            delete
+                          </RemoveItem>
                         </div>
                       </ShoppingItemWrapper>
                     </ShoppingItemContainer>
