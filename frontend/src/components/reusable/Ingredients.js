@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { API_URL } from "utils/utils";
 // import { generateSingle } from "reducers/recipes";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faList } from "@fortawesome/free-solid-svg-icons";
 
 export const Ingredients = ({components}) => {
   // const components = useSelector((store) => store.recipes.components);
@@ -41,24 +43,18 @@ export const Ingredients = ({components}) => {
 
   return (
     <OuterWrapper>
-      <ButtonWrapper>
-      <h3>Ingredients</h3>
-      <AddToShopping type='button' onClick={buttonClickSave}>Add to shoppinglist</AddToShopping>
-      </ButtonWrapper>
+      <AddToShopping type='button' onClick={buttonClickSave}><FontAwesomeIcon icon={faList} /> Add to shoppinglist</AddToShopping>
       <InnerWrapper>
-      {components.map((component) => {
-        return (
-          <>
-            <RecipeWrapper key={component.id}>
-              <p>{component.raw_text}</p>
-              {/* <p>{component.ingredient.name}</p>
-              <p>{component.measurements[0].unit.name}</p>
-              <p>{component.measurements[0].quantity}</p> */}
-            </RecipeWrapper>
-          </>
-        );
-      })}
-      {/* <AddToShopping type='button' onClick={buttonClickSave}>Add to shoppinglist</AddToShopping> */}
+        {components.map((component) => {
+          return (
+            <>
+              <RecipeWrapper key={component.id}>
+                <p>{component.raw_text}</p>
+              </RecipeWrapper>
+            </>
+          );
+        })}
+      <AddToShopping type='button' onClick={buttonClickSave}><FontAwesomeIcon icon={faList} /> Add to shoppinglist</AddToShopping>
       </InnerWrapper>
     </OuterWrapper>
   );
