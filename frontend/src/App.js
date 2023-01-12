@@ -5,7 +5,7 @@ import Login from 'components/Login';
 import NotFound from 'components/NotFound';
 import RecipeList from 'components/RecipeList';
 import MyRecipes from 'components/MyRecipes';
-import ShoppingList from 'components/Shop';
+import ShoppingList from 'components/ShoppingList';
 import SingleRecipe from 'components/SingleRecipe';
 import { Provider } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
