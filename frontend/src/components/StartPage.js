@@ -26,21 +26,21 @@ const StartPage = () => {
               to={`/recipes`}>
               <MainPageNavWrapper>
                   <h3>Find recipes</h3>
-                  <p>Lorem ipsum is simply a dummy text of the printing and typesetting industry</p>
+                  <p>Get inspired by a list of delicious recipes and plan your meals accordingly</p>
               </MainPageNavWrapper>
             </Link>
             <Link
               to={`/saved`}>
               <MainPageNavWrapper>
                   <h3>My recipes</h3>
-                  <p>Lorem ipsum is simply a dummy text of the printing and typesetting industry</p>
+                  <p>Save your favorite recipes for easy access and future reference</p>
               </MainPageNavWrapper>
             </Link>
             <Link
               to={`/shoppinglist`}>
               <MainPageNavWrapper>
                   <h3>Shoppinglist</h3>
-                  <p>Lorem ipsum is simply a dummy text of the printing and typesetting industry</p>
+                  <p>Create your personalized shoppinglist based on selected recipes</p>
               </MainPageNavWrapper>
             </Link>
           </>
