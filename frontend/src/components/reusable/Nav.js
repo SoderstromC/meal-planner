@@ -71,6 +71,7 @@ export default Nav;
 
   a {
     text-decoration: none;
+    color: black;
     }
 
   a:visited {
