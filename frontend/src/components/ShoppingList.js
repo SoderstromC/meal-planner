@@ -116,7 +116,7 @@ const ShoppingListContainer = styled.div`
 const ListWrapper = styled.div`
   width: 100%;
   border: 1px solid #ACACAC;
-  border-radius: 5px;
+  border-radius: 13px;
   padding: 30px;
   margin-top: 10px;
   background-color: #fafafa;
@@ -133,7 +133,6 @@ const ShoppingItemContainer = styled.div`
 const ShoppingItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  border: 1px solid #ACACAC;
   justify-content: flex-start;
   align-items: center;
   padding: 0 15px 0 15px;
