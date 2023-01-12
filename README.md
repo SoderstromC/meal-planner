@@ -22,7 +22,7 @@ Caroline Söderström
 Petra Eriksson
 
 ## Tech
-Node.js, React, Redux, Javascript, React Router, Mongo DB, Mongoose
+Node.js, React, Redux, Javascript, React Router, MongoDB, Mongoose
 
 ## View it live
 https://foodify-meal-planner.netlify.app/
