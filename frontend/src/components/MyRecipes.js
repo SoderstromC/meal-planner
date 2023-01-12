@@ -25,7 +25,6 @@ const MyRecipes = () => {
   }, []);
 
   const fetchMyRecipes = () => {
-    
     // Don't fetch from server if userId is not defined
     if (!userId) {
       return;
