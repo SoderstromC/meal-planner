@@ -4,7 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClock } from "@fortawesome/free-solid-svg-icons"
 
 
+
+
 export const SingleHeader = ({singleRecipe}) => {
+
+  const img = singleRecipe ? singleRecipe.thumbnail_url : '';
 
   const SingleImage = styled.div`
     position: absolute; 
@@ -12,7 +16,14 @@ export const SingleHeader = ({singleRecipe}) => {
     width: 100%;
     height: 100%;
     opacity: 90%;
-    background-image: url(${ singleRecipe ? singleRecipe.thumbnail_url : ''});
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0, 0, 0, 0.6) 100%), url(${img}); /* FF3.6+ */
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.1)), color-stop(100%,rgba(0,0,0,0.6))), url(${img}); /* Chrome,Safari4+ */
+    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* Chrome10+,Safari5.1+ */
+    background-image: -o-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* Opera 11.10+ */
+    background-image: -ms-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* IE10+ */
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* W3C */
+    background-size: cover;
+    background-position: center;
     `
   if (!singleRecipe) {
     return (null)
@@ -22,7 +33,7 @@ export const SingleHeader = ({singleRecipe}) => {
         <SingleHeaderCard>
       
                 <SingleImageWrapper key={singleRecipe.id}>
-                <SingleImage src={singleRecipe.thumbnail_url}/>
+                <SingleImage />
                   <Text>
                     <h3>{singleRecipe.name}</h3>
                     <p><FontAwesomeIcon icon={faClock} /> {singleRecipe.total_time_minutes} minutes</p>
@@ -42,12 +53,11 @@ const SingleHeaderCard = styled.div`
 const SingleImageWrapper = styled.div`
   width: 100%;
   word-wrap: break-word;
-  height: 250px;
+  height: 270px;
   position: relative;
   overflow: hidden;
   color: white;
   border-radius: 13px;
-
 `
 
 const Text = styled.div`
