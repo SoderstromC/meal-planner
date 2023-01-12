@@ -47,7 +47,7 @@ const SingleImageWrapper = styled.div`
   overflow: hidden;
   color: white;
   border-radius: 13px;
- 
+
 `
 
 const Text = styled.div`
