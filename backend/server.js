@@ -8,15 +8,12 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/meal-planner";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
 const port = process.env.PORT || 8090;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+
 
 // USER SCHEMA
 
@@ -29,11 +26,7 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    // minlength: 8,
-    // maxlength: 12,
-    /// My_B4nK_P4$$word
   },
-  // npm install crypto
   accessToken: {
     type: String,
     default: () => crypto.randomBytes(128).toString("hex"),
@@ -42,7 +35,7 @@ const UserSchema = new mongoose.Schema({
     type: [],
     default: [],
   },
-  recipeComponents: {
+  shoppingItems: {
     type: [],
     default: [],
   },
@@ -50,17 +43,12 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", UserSchema);
 
+
 // REGISTER AS A USER
 
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
-  // npm install bcrypt
-  // const code = [1, 2, 4, 4];
-  // const makeCodeSecret = (codeArr) => {
-  // const secretMessage = codeArr.map(singleNumber => singleNumber + 1);
-  // return secretMessage
-  //}
-  // transformedCode = makeCodeSecret(code)
+
   try {
     const salt = bcrypt.genSaltSync();
     if (password.length < 8) {
@@ -89,6 +77,7 @@ app.post("/register", async (req, res) => {
     });
   }
 });
+
 
 //LOGIN
 
@@ -120,10 +109,12 @@ app.post("/login", async (req, res) => {
   }
 });
 
+
 //AUTHENTICATE USER
 
 const authenticateUser = async (req, res, next) => {
   const accessToken = req.header("Authorization");
+
   try {
     const user = await User.findOne({ accessToken: accessToken });
     if (user) {
@@ -142,19 +133,15 @@ const authenticateUser = async (req, res, next) => {
   }
 };
 
+
 // SAVE RECIPE ID AND NAME
 
 app.post("/saveRecipe", async (req, res) => {
   const { id, userId, name } = req.body;
   console.log("name", name);
   console.log("ididid", id);
-  console.log("userId", userId); //jag förstår inte varför det är id här.. consolog ovan visas inte.
+  console.log("userId", userId); 
 
-  // 1. Get recipe id from req
-  // 2. Get uesr id
-  // 3. Check if recipe id is already in list
-  // 4: Add recipe Id to list and save in db  (i mongo finns det kommando för att lägga till i listan, add item ro array)
-  // 5: return resultat
   try {
     const user = await User.findByIdAndUpdate(userId, {
       $push: { savedRecipes: { id, name } },
@@ -165,7 +152,9 @@ app.post("/saveRecipe", async (req, res) => {
   }
 });
 
+
 // REMOVE RECIPE ID FROM USER'S SAVED LIST
+
 app.put("/removeRecipe", async (req, res) => {
   const { id, userId } = req.body;
   console.log("RecipeIdRemove", id);
@@ -185,14 +174,14 @@ app.put("/removeRecipe", async (req, res) => {
   } catch (error) {
     res.status(400).json({ success: false, response: error });
   }
-
-  /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
 });
+
 
 // SHOW SAVED RECIPES
 
 app.get("/saveRecipe/:userId", async (req, res) => {
   const { userId } = req.params;
+
   try {
     const user = await User.findById(userId);
     res.status(201).json({ success: true, response: user.savedRecipes });
@@ -200,6 +189,7 @@ app.get("/saveRecipe/:userId", async (req, res) => {
     res.status(400).json({ success: false, response: error });
   }
 });
+
 
 //SAVE INGREDIENTS TO SHOPPING LIST
 
@@ -211,26 +201,29 @@ app.post("/saveListItem", async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(
       userId,
-      { $push: { recipeComponents: { $each: itemsToSave } } },
+      { $push: { shoppingItems: { $each: itemsToSave } } },
       { new: true }
     );
-    res.status(201).json({ success: true, response: user.recipeComponents });
+    res.status(201).json({ success: true, response: user.shoppingItems });
   } catch (error) {
     res.status(400).json({ success: false, response: error });
   }
 });
+
 
 // SHOW SHOPPING LIST
 
 app.get("/listItems/:userId", async (req, res) => {
   const { userId } = req.params;
+
   try {
     const user = await User.findById(userId);
-    res.status(201).json({ success: true, response: user.recipeComponents });
+    res.status(201).json({ success: true, response: user.shoppingItems });
   } catch (error) {
     res.status(400).json({ success: false, response: error });
   }
 });
+
 
 //REMOVE INGREDIENT FROM SHOPPING LIST
 
@@ -243,79 +236,25 @@ app.put("/removeIngredient", async (req, res) => {
     console.log("removing...");
     const removeIngredient = await User.findByIdAndUpdate(
       userId,
-      { $pull: { recipeComponents: { id } } },
+      { $pull: { shoppingItems: { id } } },
       { new: true }
     );
     console.log("removeIngredient", removeIngredient);
     res
       .status(201)
-      .json({ success: true, response: removeIngredient.recipeComponents });
+      .json({ success: true, response: removeIngredient.shoppingItems });
   } catch (error) {
     res.status(400).json({ success: false, response: error });
   }
-
-  /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
 });
 
-// //EDIT INGREDIENT FROM SHOPPING LIST
-// app.put("/editIngredient", async (req, res) => {
-//   const { userId, id, text } = req.body;
 
-//   try {
-//     console.log("update...");
-//     const editResult = await User.findOneAndUpdate(
-//       { _id: userId, "recipeComponents.id": id },
-//       { $set: { "recipeComponents.$.raw_text": text } },
-//       { new: true }
-//     );
-//     //https://www.mongodb.com/docs/drivers/node/current/fundamentals/crud/write-operations/embedded-arrays/
-//     //const updateIngredient = await User.findByIdAndUpdate(userId, {new: true}, { $ : {recipeComponents: { id }}},)
+//TECHNIGO PLACEHOLDERS BELOW, KEEP FOR REFERENCE
 
-//     console.log("resultEditIngredient", editResult);
-//     res
-//       .status(201)
-//       .json({ success: true, response: editResult.recipeComponents });
-//   } catch (error) {
-//     res.status(400).json({ success: false, response: error });
-//   }
-
-//   /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
-// });
-
-// //CHECK/UNCHECK INGREDIENT IN SHOPPINGLIST
-
-// app.put("/checkIngredient", async (req, res) => {
-//   const {  id, userId } = req.body;
-//   console.log('id', id);
-//   console.log('UserIdRemove3', userId);
-//   console.log('recipeComponents', recipeComponents);
-
-//   try {
-//     console.log('checking/unchecking...');
-
-//     const checkIngredient = await User.findOneAndUpdate(
-//       { _id: userId, "recipeComponents.id": id },
-//       { $set: { "recipeComponents.$.check": true } },
-//       { new: true }
-//     );
-
-
-//     console.log('checkIngredient', checkIngredient);
-//     res.status(201).json({success: true, response: checkIngredient.recipeComponents});
-//   } catch (error) {
-//     res.status(400).json({success: false, response: error});
-//   }
-
-//   /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
-// });
-
-
-// Start defining your routes here
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });

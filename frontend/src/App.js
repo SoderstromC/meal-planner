@@ -1,22 +1,20 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import StartPage from 'components/StartPage';
 import Login from 'components/Login';
 import NotFound from 'components/NotFound';
 import RecipeList from 'components/RecipeList';
 import MyRecipes from 'components/MyRecipes';
-import ShoppingList from 'components/Shop';
+import ShoppingList from 'components/ShoppingList';
 import SingleRecipe from 'components/SingleRecipe';
 import { Provider } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import thoughts from 'reducers/thoughts';
 import user from 'reducers/user';
 import recipes from 'reducers/recipes';
 import shopping from 'reducers/shopping';
 
 const reducer = combineReducers({
   user: user.reducer,
-  thoughts: thoughts.reducer,
   recipes: recipes.reducer,
   shopping: shopping.reducer
 });
@@ -35,11 +33,8 @@ export const App = () => {
           <Route path='/recipes' element={<RecipeList/>} />
           <Route path='/saved' element={<MyRecipes/>} />
           <Route path='/shoppinglist' element={<ShoppingList/>}/>
-          {/* <Route path='/single/:id' element={<SingleRecipe/>} /> */}
           <Route path='/single/:recipeId' element={<SingleRecipe/>} />
           <Route path='/404' element={<NotFound/>}/>
-          {/* <Route path="*" element={<Navigate to="/404" />} /> */}
-
         </Routes>
       </BrowserRouter>
     </Provider>

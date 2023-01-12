@@ -11,7 +11,7 @@ const recipes = createSlice({
     loading: false,
   },
   reducers: {
-    setRecipe: (store, action) => {
+    setRecipes: (store, action) => {
       store.results = action.payload;
     },
     setMealName: (store, action) => {
@@ -34,13 +34,14 @@ const recipes = createSlice({
 
 export default recipes;
 
-export const generateRecipe = () => {
-  return (dispatch, getState) => {
+
+export const generateRecipeList = () => {
+  return (dispatch) => {
     dispatch(recipes.actions.isLoading(true))
     const generate = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "05ce32baddmsh1dbc226d22c6d58p17606ejsn8489212bcecc",
+        "X-RapidAPI-Key": "1c3a31e00bmshd0ef42a6ee6e451p1faf4fjsn14e8d5e10b65",
         "X-RapidAPI-Host": "tasty.p.rapidapi.com",
       },
     };
@@ -48,8 +49,8 @@ export const generateRecipe = () => {
     fetch(RECIPE_URL, generate)
       .then((response) => response.json())
       .then((data) => {
-        console.log("dataAllreducer", data);
-        dispatch(recipes.actions.setRecipe(data?.results));
+        console.log("RecipeListData", data);
+        dispatch(recipes.actions.setRecipes(data?.results));
       })
       .finally(() => {
         dispatch(recipes.actions.isLoading(false))
@@ -57,12 +58,13 @@ export const generateRecipe = () => {
   };
 };
 
+
 export const generateSingleRecipe = (recipeId) => {
   return (dispatch) => {
     const details = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "05ce32baddmsh1dbc226d22c6d58p17606ejsn8489212bcecc",
+        "X-RapidAPI-Key": "1c3a31e00bmshd0ef42a6ee6e451p1faf4fjsn14e8d5e10b65",
         "X-RapidAPI-Host": "tasty.p.rapidapi.com",
       },
     };
@@ -72,11 +74,10 @@ export const generateSingleRecipe = (recipeId) => {
     fetch(SINGLE_URL(recipeId), details)
       .then((response) => response.json())
       .then((data) => {
-        console.log('data', data)
+        console.log('SingleRecipeData', data)
         dispatch(
             recipes.actions.setSingleRecipe(data));
       })
       .catch((err) => console.error(err));
   };
 };
-

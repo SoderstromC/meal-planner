@@ -1,6 +1,6 @@
-// const BASE_URL = "https://project-auth-ww2g7bm2ra-lz.a.run.app";
-// const BASE_URL = "http://localhost:8090";
+// const BASE_URL = "http://localhost:8090"; //TOGGLE TO THIS WHEN WORKING LOCALLY
 const BASE_URL = "https://meal-planner-aqo5p3ykrq-lz.a.run.app";
+
 const RECIPE_BASE_URL = "https://tasty.p.rapidapi.com/recipes/get-more-info?";
 
 export const API_URL = (slug) => `${BASE_URL}/${slug}`;

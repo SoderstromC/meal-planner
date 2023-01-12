@@ -19,23 +19,15 @@ const shopping = createSlice({
       })
     },
     deleteItem: (store, action) => {
-      // Mutable
-      // store.items.splice(action.payload, 1)
-
-      // Immutable
       const updatedItems = store.items.filter((item) => {
         return store.items.indexOf(item) !== action.payload
-      })
-      store.items = updatedItems
-    },
-    addItem: (store, action) => {
-      // Mutable
-      // store.items.push(action.payload)
-
-      // Immutable
-      store.items = [...store.items, action.payload]
-    }
-  }
+        })
+          store.items = updatedItems
+        },
+        addItem: (store, action) => {
+          store.items = [...store.items, action.payload]
+        }
+      }
 })
 
 export default shopping

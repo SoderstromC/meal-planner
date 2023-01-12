@@ -1,127 +1,196 @@
-import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import shopping from 'reducers/shopping'
+import React, { useState, useEffect } from 'react';
 import { Header } from "./reusable/Header";
-import uniqid from 'uniqid'
-import styled from 'styled-components/macro'
+import { API_URL } from "utils/utils";
+import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
+import NoIngredients from "./NoIngredients";
+import shopping from 'reducers/shopping';
 
+const MyShoppingList = () => {
+  const [shoppingList, setShoppingList] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  //const [loading, setLoading] = useState(false);
+  const userId = useSelector((store) => store.user.userId);
 
-const ShoppingList = () => {
   const dispatch = useDispatch()
-  const shoppingList = useSelector((store) => store.shopping.items)
-
-  const onIsCompletedToggle = (id) => {
+  const buttonClickToggleCheck = (id) => {
     dispatch(shopping.actions.toggleItem(id))
-  }
+  };
 
-  const onDeleteButtonClick =
-  (shoppingIndex) => {
-    dispatch(shopping.actions.deleteItem(shoppingIndex))
-  }
+  const accessToken = useSelector((store) => store.user.accessToken);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!accessToken) {
+      navigate("/login");
+    }
+  }, []);
+
+  let counter = 0;
+
+  const fetchMyShoppingList = () => {
+
+    const MY_SHOPPINGLIST_URL = API_URL(`listItems/${userId}`)
+
+    const options = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      };
+      //setLoading(true);
+      fetch(MY_SHOPPINGLIST_URL, options)
+        .then((res) => res.json())
+        .then((data) => {
+          setShoppingList(data.response);
+          console.log("shoppinglist1loading", data.response);
+        })
+        .catch((error) => console.error("error3", error));
+      //.finally(() => setLoading(false))
+    };
+
+  useEffect(() => {
+    fetchMyShoppingList();
+  }, []);
+
+
+  // REMOVE INGREDIENT FROM USERS SAVED SHOPPINGLIST
+
+  const buttonClickRemove = (id) => {
+
+    const REMOVE_INGREDIENT_URL = API_URL('removeIngredient')
+
+    const options = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: id, userId: userId }),
+    };
+    fetch(REMOVE_INGREDIENT_URL, options)
+      .then((res) => res.json())
+      .then((data) => {
+        setShoppingList(data.response);
+        console.log("Updatedshoppinglist", data.response);
+      })
+      .catch((error) => console.error("error3", error));
+  };
+
+
+  // UPDATE INGREDIENT FROM USERS SAVED SHOPPINGLIST
+
+  const buttonClickEditIngredient = (id) => {
+    alert("visar inputfield");
+  };
+
+  const buttonClickExit = (id) => {
+    alert("visar rad med item");
+  };
+
+  const buttonClickSave = (id) => {
+    const EDIT_INGREDIENT_URL = API_URL('editIngredient');
+
+    const options = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: userId, id: id, text: inputValue }),
+    };
+    fetch(EDIT_INGREDIENT_URL, options)
+      .then((res) => res.json())
+      .then((data) => {
+        setShoppingList(data.response);
+        console.log("shoppinglistupdated", data.response);
+      })
+      .catch((error) => console.error("error3", error));
+  };
 
   return (
-    <OuterWrapper>
-      <InnerWrapper>
-       <Header />
-        <Wrapper>
+    <>
+      <Header />
+      {console.log("shoppinglistbefore deciding on what to show", shoppingList)}
+      {shoppingList.length === 0 && <NoIngredients />}
+      {shoppingList.length > 0 && (
+        <ShoppingListContainer>
+          <h1>My Shopping List</h1>
           <ListWrapper>
-            <ComponentTitle>This is my shopping list</ComponentTitle>
-              {shoppingList.map((shoppingItem, index) => {
-                return (
-                  <ArticleWrapper key={shoppingItem.id}>
-                      <h2>{shoppingItem.name}</h2>
-                    <TodoWrapper>
-                      <label>
+            {shoppingList.map((component) => {
+              return (
+                <OuterWrapper>
+                  <InnerWrapper>
+                    <ShoppingItemContainer>
+                      <ShoppingItemWrapper>
                         <CheckBox
-                          type="checkbox"
-                          checked={shoppingItem.isCompleted}
-                          onChange={() => onIsCompletedToggle(shoppingItem.id)} />
-                      </label>
-                      <DeleteButton
-                        onClick={() => onDeleteButtonClick(index)}
-                        type="button">&#128465;&#65039;
-                      </DeleteButton>
-                    </TodoWrapper>
-                  </ArticleWrapper>
-                )
-              })}
-              <NewListItem />
+                          type='checkbox'
+                          checked={component.isCompleted}
+                          onChange={() => buttonClickToggleCheck(component.id)}
+                        />
+                        <Item
+                          key={`${counter++}-${component.id}`}>{component.raw_text}</Item>
+                        <div className = "buttonwrapper">
+                        <RemoveItem onClick={() => buttonClickRemove(component.id)}>delete</RemoveItem>
+                        </div>
+                      </ShoppingItemWrapper>
+                    </ShoppingItemContainer>
+                  </InnerWrapper>
+                </OuterWrapper>
+              );
+            })}
           </ListWrapper>
-        </Wrapper>
-      </InnerWrapper>
-    </OuterWrapper>
-  )
-}
+        </ShoppingListContainer>
+      )}
+    </>
+  );
+};
 
-const Wrapper = styled.section`
-display: flex;
-width: 100%;
-justify-content: center;
-`
+export default MyShoppingList;
+
+const ShoppingListContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;  
+`;
 
 const ListWrapper = styled.div`
-width: 70%;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-`
+  text-align: left;
+  border: solid;
+  width: 70%;
+`;
 
-const ComponentTitle = styled.h2`
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: 30px;
-`
-
-const ArticleWrapper = styled.article`
-display: flex;
-justify-content: space-between;
-width: 50%;
-// padding: 10px;
-`
-const TodoWrapper = styled.div`
+const ShoppingItemContainer = styled.div`
+  margin: 10px 14px 10px 43px;
   display: flex;
-  width: 100px;
-  justify-content: space-between;
-  h2{
-  font-size: 20px;
+  flex-direction: column;
+`;
+
+const ShoppingItemWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  border: solid;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 15px 0 15px; 
+  .buttonwrapper{
+    margin-left: auto;
   }
-  @media (max-width: 668px){
-    padding-left: 5px;
-    h2{
-      font-size: 15px;
-    }
-  }
-`
-const DeleteButton = styled.button`
-  width: 50px;
-  height: 50px;
-  background-color: whitesmoke;
-  border: none;
-  border-radius: 50%;
-  margin-top: 5px;
-  @media (max-width: 668px){
-    width: 35px;
-    height: 35px;
-  }
-`
+`;
+
+const Item = styled.div`
+  margin: 10px 10px 10px 50px;
+`;
 const CheckBox = styled.input`
   cursor: pointer;
   appearance: none;
   margin: 5px;
-  margin-right: -42px;
   font: inherit;
   color: white;
   width: 2em;
   height: 2em;
   border: 0.15em solid black;
-  margin-top: 15px;
   transform: translateY(-0.075em);
   display: grid;
   place-content: center;
   &::before {
-    content: '';
+    content: "";
     width: 1em;
     height: 1em;
     transform: scale(0);
@@ -132,88 +201,16 @@ const CheckBox = styled.input`
   &:checked::before {
     transform: scale(1);
   }
-  @media (max-width: 668px){
+  @media (max-width: 668px) {
     margin-right: 10px;
     width: 1em;
     height: 1em;
   }
-`
-const NewListItem = () => {
-  const dispatch = useDispatch()
-  const [newListItem, setNewListItem] = useState('')
-
-  const onFormSubmit = (event) => {
-    event.preventDefault()
-    const postNewListItem = {
-      id: uniqid(),
-      name: newListItem,
-      isCompleted: false
-    }
-    dispatch(shopping.actions.addItem(postNewListItem))
-    setNewListItem('')
-  }
-
-  return (
-    <div>
-      <form onSubmit={onFormSubmit}>
-        <LabelWrapper>
-          <p>New Item</p>
-          <InputField type="text" value={newListItem} onChange={(event) => setNewListItem(event.target.value)} />
-          <AddButton type="submit">Add Shopping Item</AddButton>
-        </LabelWrapper>
-      </form>
-    </div>
-  )
-}
-
-const LabelWrapper = styled.label`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-  margin: 40px 0px;
-  padding: 5px;
-  border: none;
-  p{
-    font-weight: 700;
-    font-size: 20px;
-    margin-right: 5px;
-  }
-  @media (max-width: 668px){
-    flex-direction: column;
-    margin: 10px;
-    padding: 0px;
-    p{
-      font-size: 17px;
-      margin-right: 0px;
-    }
-  }
-`
-const AddButton = styled.button`
-  width: 125px;
-  height: fit-content;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-family: unset;
-  margin: 10px;
-  padding: 5px;
-  text-transform: lowercase;
-  font-weight: 700;
-  @media (max-width: 668px){
-    width: 100px;
-  }
-`
-const InputField = styled.input`
-  width: 225px;
+`;
+const RemoveItem = styled.button`
+  margin-left: auto;
+  border: solid;
   height: 25px;
-  border: solid 1px black;
-  margin: 5px;
-  @media (max-width: 668px){
-    width: 150px;
-  }
-`
-
-export default ShoppingList
+  width: 80px;
+  background-color: transparent;
+`;

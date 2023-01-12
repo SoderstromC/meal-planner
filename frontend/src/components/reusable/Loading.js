@@ -1,7 +1,7 @@
-import React from 'react'
-import Lottie from 'lottie-react'
-import loading from 'lotties/loadingpan'
+import React from 'react';
+import Lottie from 'lottie-react';
+import loading from 'lotties/loadingpan';
 
-const Loading = () => <Lottie animationData={loading} loop />
+const Loading = () => <Lottie animationData={loading} loop />;
 
-export default Loading
+export default Loading;

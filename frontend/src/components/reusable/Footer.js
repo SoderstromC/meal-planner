@@ -2,14 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export const Footer = () => {
-  const FooterContainer = styled.div`
-    color: "white";
-    margin: 0;
-  `;
-  const FooterWrapper = styled.div`
-    color: "white";
-    margin: 0;
-  `;
+  
   return (
     <FooterContainer as='footer' backgroundColor='white'>
       <FooterWrapper>
@@ -18,3 +11,12 @@ export const Footer = () => {
     </FooterContainer>
   );
 };
+
+const FooterContainer = styled.div`
+color: "white";
+margin: 0;
+`;
+const FooterWrapper = styled.div`
+color: "white";
+margin: 0;
+`;

@@ -1,11 +1,9 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faClock } from "@fortawesome/free-solid-svg-icons"
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
 
 export const SingleHeader = ({singleRecipe}) => {
-
 
   if (!singleRecipe) {
     return (null)
@@ -13,21 +11,18 @@ export const SingleHeader = ({singleRecipe}) => {
     return(
       <>
         <SingleHeaderCard>
-      
                 <SingleImageWrapper key={singleRecipe.id}>
-                <img src={singleRecipe.thumbnail_url}/>
+                  <img src={singleRecipe.thumbnail_url}/>
                   <Text>
                     <h3>{singleRecipe.name}</h3>
                     <p><FontAwesomeIcon icon={faClock} /> {singleRecipe.total_time_minutes} minutes</p>
                   </Text>
-                </SingleImageWrapper>
-          
+                </SingleImageWrapper>         
         </SingleHeaderCard> 
       </>
-    )
-  } 
-}
-
+    );
+  };
+};
 
 const SingleHeaderCard = styled.div`
   display: block;

@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { generateRecipe } from "reducers/recipes";
+import { generateRecipeList } from "reducers/recipes";
 import { RecipeCard } from "./reusable/RecipeCard";
 import { Header } from "./reusable/Header";
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
 import Loading from "./reusable/Loading";
-
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
 
@@ -15,14 +14,7 @@ const RecipeList = () => {
   console.log("arrayOfRecipes", arrayOfRecipes);
   const loading = useSelector((store) => store.recipes.loading);
 
-  // const description = useSelector((store) => store.recipes.results[].description)
-  // console.log('description', description)
-
-  // const handleOnClick = (id) => {
-  //   dispatch(generateSingle(id));
-  // }
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const accessToken = useSelector((store) => store.user.accessToken);
   const navigate = useNavigate();
@@ -31,7 +23,7 @@ const RecipeList = () => {
     if (!accessToken) {
         navigate("/login");
     }
-}, []);
+  }, []);
 
   useEffect(() => {
     const options = {
@@ -39,38 +31,38 @@ const RecipeList = () => {
       headers: {
           "Content-Type": "application/json",
           "Authorization": accessToken
-      }
-  }
-    dispatch(generateRecipe(), options);
-  }, [])
+      };
+  };
+    dispatch(generateRecipeList(), options);
+  }, []);
 
-return(
+  return (
     <OuterWrapper>
-    <InnerWrapper>
-      <Header />
-      <ContentWrapper>
-        <h2>All recipes</h2>
-        {loading && <LoaderWrapper><Loading /></LoaderWrapper>}
-        {!loading && (
-        <RecipeListWrapper>
-          {arrayOfRecipes.map((recipe) => {
-          return ( 
-            <RecipeCard
-              key= {recipe.id}
-              id={recipe.id}
-              name={recipe.name}
-              time={recipe.total_time_minutes}
-              img={recipe.thumbnail_url}
-            />
-          )
-          })}
-        </RecipeListWrapper>
-          )}
-      </ContentWrapper>
-    </InnerWrapper>
-  </OuterWrapper>
-)
-} 
+      <InnerWrapper>
+        <Header />
+        <ContentWrapper>
+          <h2>All recipes</h2>
+          {loading && <LoaderWrapper><Loading /></LoaderWrapper>}
+          {!loading && (
+          <RecipeListWrapper>
+            {arrayOfRecipes.map((recipe) => {
+            return ( 
+              <RecipeCard
+                key= {recipe.id}
+                id={recipe.id}
+                name={recipe.name}
+                time={recipe.total_time_minutes}
+                img={recipe.thumbnail_url}
+              />
+            )
+            })}
+          </RecipeListWrapper>
+            )}
+        </ContentWrapper>
+      </InnerWrapper>
+    </OuterWrapper>
+  );
+};
 
 export default RecipeList;
 
@@ -94,6 +86,6 @@ const RecipeListWrapper = styled.div`
   }
 `
 const LoaderWrapper = styled.div`
- width: 300px;
- height: 300px;
+  width: 300px;
+  height: 300px;
 `
