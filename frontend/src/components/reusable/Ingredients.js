@@ -56,17 +56,17 @@ export const Ingredients = ({components}) => {
 const OuterWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
+`
 
 const InnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
+`
 
 const RecipeWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
+`
 const AddToShopping = styled.button`
   width: 200px;
   height: 34px;
@@ -76,4 +76,4 @@ const AddToShopping = styled.button`
   font-size: 13px;
   font-weight: bold;
   margin: 15px 0;
-`;
+`

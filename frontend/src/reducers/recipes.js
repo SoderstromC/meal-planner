@@ -50,7 +50,7 @@ export const generateRecipeList = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log("RecipeListData", data);
-        dispatch(recipes.actions.setRecipes(data?.results));
+        dispatch(recipes.actions.setRecipes(data?.results))
       })
       .finally(() => {
         dispatch(recipes.actions.isLoading(false))
@@ -61,6 +61,7 @@ export const generateRecipeList = () => {
 
 export const generateSingleRecipe = (recipeId) => {
   return (dispatch) => {
+    dispatch(recipes.actions.isLoading(true))
     const details = {
       method: "GET",
       headers: {
@@ -69,15 +70,15 @@ export const generateSingleRecipe = (recipeId) => {
       },
     };
 
-    console.log('recipeId dispatch', recipeId)
-    console.log('SINGLE_URL', SINGLE_URL(recipeId))
     fetch(SINGLE_URL(recipeId), details)
       .then((response) => response.json())
       .then((data) => {
         console.log('SingleRecipeData', data)
         dispatch(
-            recipes.actions.setSingleRecipe(data));
+            recipes.actions.setSingleRecipe(data))
       })
-      .catch((err) => console.error(err));
+      .finally(() => {
+        dispatch(recipes.actions.isLoading(false))
+      })
   };
 };

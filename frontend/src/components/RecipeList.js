@@ -11,7 +11,6 @@ import styled from "styled-components/macro";
 
 const RecipeList = () => {
   const arrayOfRecipes = useSelector((store) => store.recipes.results);
-  console.log("arrayOfRecipes", arrayOfRecipes);
   const loading = useSelector((store) => store.recipes.loading);
 
   const dispatch = useDispatch();
@@ -31,7 +30,7 @@ const RecipeList = () => {
       headers: {
           "Content-Type": "application/json",
           "Authorization": accessToken
-      };
+      }
   };
     dispatch(generateRecipeList(), options);
   }, []);
@@ -57,7 +56,7 @@ const RecipeList = () => {
             )
             })}
           </RecipeListWrapper>
-            )}
+          )}
         </ContentWrapper>
       </InnerWrapper>
     </OuterWrapper>
