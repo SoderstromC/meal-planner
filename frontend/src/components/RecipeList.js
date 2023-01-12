@@ -31,7 +31,7 @@ const RecipeList = () => {
       headers: {
           "Content-Type": "application/json",
           "Authorization": accessToken
-      };
+      },
   };
     dispatch(generateRecipeList(), options);
   }, []);
