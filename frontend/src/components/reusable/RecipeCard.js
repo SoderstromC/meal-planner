@@ -7,11 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 export const RecipeCard = ({ id, name, time, img }) => {
+  console.log('img', img)
 
   const [savedRecipe, setSavedRecipe] = useState(false);
   const userId = useSelector((store) => store.user.userId);
 
-
+  
   // SAVING A RECIPE ID TO SPECIFIC USER IN SERVER 
 
   const buttonClickSave = () => {
@@ -31,7 +32,23 @@ export const RecipeCard = ({ id, name, time, img }) => {
       })
       .catch((error) => console.error("error2", error));
   };
-
+  const RecipeListCard = styled.section`
+  width: 100%;
+  height: 330px;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  border-radius: 13px;
+  word-wrap: break-word;
+  background-image: -moz-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0, 0, 0, 0.6) 100%), url(${img}); /* FF3.6+ */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.1)), color-stop(100%,rgba(0,0,0,0.6))), url(${img}); /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* Chrome10+,Safari5.1+ */
+  background-image: -o-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* Opera 11.10+ */
+  background-image: -ms-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* IE10+ */
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* W3C */
+  background-size: cover;
+  }
+  `
   return (
     <RecipeCardWrapper>
      <Link
@@ -66,23 +83,7 @@ const TextWrapper = styled.div`
   }
 `
 
-const RecipeListCard = styled.section`
-  width: 100%;
-  height: 330px;
-  position: relative;
-  overflow: hidden;
-  color: white;
-  border-radius: 13px;
-  word-wrap: break-word;
-  background-image: -moz-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0, 0, 0, 0.6) 100%), url(${img}); /* FF3.6+ */
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.1)), color-stop(100%,rgba(0,0,0,0.6))), url(${img}); /* Chrome,Safari4+ */
-  background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* Chrome10+,Safari5.1+ */
-  background-image: -o-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* Opera 11.10+ */
-  background-image: -ms-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* IE10+ */
-  background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* W3C */
-  background-size: cover;
-  }
-  `
+
   
 const SaveButton = styled.button`
   background-color: white;

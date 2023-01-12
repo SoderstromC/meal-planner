@@ -6,8 +6,8 @@ import user from "reducers/user";
 import styled from "styled-components";
 import { InnerWrapper, OuterWrapper } from "./reusable/global/Wrappers";
 import Logo from "../assets/icons/logofoodify.svg";
-// import MobileImg from "../assets/icons/mobileImg.jpg";
-import IntroImg from "../assets/images/introImg.jpg";
+import MobileImg from "../assets/icons/mobileImg.jpg";
+// import IntroImg from "../assets/images/introImg.jpg";
 
 const Login = () => {
   const [username, setUsername] = useState("");

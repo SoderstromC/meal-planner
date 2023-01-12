@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-// import Nav from "./Nav"; /utkommenterad pga inte korrekt npm install, avvaktar Annikas svae, rensa ej i clean up!
+import Nav from "./Nav";
 import Logo from "../../assets/icons/logofoodify.svg";
 
 export const Header = () => {
@@ -11,7 +11,7 @@ export const Header = () => {
         <img src={Logo} alt="Logo" />
       </LogoWrapper>
       <NavWrapper>
-        {/* <Nav/> */} 
+        <Nav/> 
       </NavWrapper>
     </HeaderWrapper>
     </HeaderContainer>

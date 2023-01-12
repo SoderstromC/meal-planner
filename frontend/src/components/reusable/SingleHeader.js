@@ -6,10 +6,26 @@ import { faClock } from "@fortawesome/free-solid-svg-icons";
 export const SingleHeader = ({singleRecipe}) => {
 
   const img = singleRecipe ? singleRecipe.thumbnail_url : '';
+  const SingleImage = styled.div`
+    position: absolute; 
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    opacity: 90%;
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0, 0, 0, 0.6) 100%), url(${img}); /* FF3.6+ */
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.1)), color-stop(100%,rgba(0,0,0,0.6))), url(${img}); /* Chrome,Safari4+ */
+    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* Chrome10+,Safari5.1+ */
+    background-image: -o-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* Opera 11.10+ */
+    background-image: -ms-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* IE10+ */
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* W3C */
+    background-size: cover;
+    background-position: center;
+    `
 
   if (!singleRecipe) {
     return (null)
   } else {
+  
     return(
       <>
         <SingleHeaderCard>
@@ -62,18 +78,3 @@ const Text = styled.div`
     text-shadow: 1px 1px 2px #333;
   }
 `
-const SingleImage = styled.div`
-  position: absolute; 
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  opacity: 90%;
-  background-image: -moz-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0, 0, 0, 0.6) 100%), url(${img}); /* FF3.6+ */
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.1)), color-stop(100%,rgba(0,0,0,0.6))), url(${img}); /* Chrome,Safari4+ */
-  background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* Chrome10+,Safari5.1+ */
-  background-image: -o-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* Opera 11.10+ */
-  background-image: -ms-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* IE10+ */
-  background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${img}); /* W3C */
-  background-size: cover;
-  background-position: center;
-    `
