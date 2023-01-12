@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import user from "reducers/user";
 import { Link } from 'react-router-dom';
-// import { Menu, SubMenu, Item } from "burger-menu";
-// import 'burger-menu/lib/index.css';
+import { Menu, SubMenu, Item } from "burger-menu";
+import 'burger-menu/lib/index.css';
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars } from "@fortawesome/free-solid-svg-icons"
@@ -40,7 +40,7 @@ const logOutOnClick = () => {
         <>
       <MobileMenuWrapper>
       <div onClick={() => setIsOpen(!isOpen)}><FontAwesomeIcon className="bar-icon" icon={faBars} /></div>
-      {/* <Menu className="burger-menu" isOpen={isOpen} selectedKey={'entry'} onClose={() => setIsOpen(false)}>
+      <Menu className="burger-menu" isOpen={isOpen} selectedKey={'entry'} onClose={() => setIsOpen(false)}>
         <Link to={`/`}>
             <p>Main</p>
         </Link>
@@ -55,7 +55,7 @@ const logOutOnClick = () => {
         </Link>
         <Line></Line>
           <LogOutButton type="button" onClick={logOutOnClick}>Logout</LogOutButton>
-      </Menu> */}
+      </Menu>
       </MobileMenuWrapper>
     </>
       </NavContainer>
@@ -123,4 +123,3 @@ line-height: 3;
   display: none !important;
 }
 `
-
