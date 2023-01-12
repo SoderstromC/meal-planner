@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faClock } from "@fortawesome/free-solid-svg-icons"
 
 
 export const SingleHeader = ({singleRecipe}) => {
@@ -16,7 +18,7 @@ export const SingleHeader = ({singleRecipe}) => {
                 <img src={singleRecipe.thumbnail_url}/>
                   <Text>
                     <h3>{singleRecipe.name}</h3>
-                    <p>{singleRecipe.total_time_minutes}</p>
+                    <p><FontAwesomeIcon icon={faClock} /> {singleRecipe.total_time_minutes} minutes</p>
                   </Text>
                 </SingleImageWrapper>
           
@@ -57,10 +59,12 @@ const Text = styled.div`
     color: white;
     margin: 0 0 30px 25px;
     width: 250px;
+    text-shadow: 1px 1px 2px #333;
   }
   p{
     color: white;
     margin: 30px 70px 0 0;
     font-weight: bold;
+    text-shadow: 1px 1px 2px #333;
   }
 `
