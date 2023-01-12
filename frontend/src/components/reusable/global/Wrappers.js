@@ -8,6 +8,7 @@ export const OuterWrapper = styled.div`
 `
 export const InnerWrapper = styled.div`
     width: 90%;
-    max-width: 800px;
+    max-width: 950px;
     margin: 0 auto;
+    // border: solid;
 `

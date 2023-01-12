@@ -108,11 +108,15 @@ export default MyRecipes;
 
 const SavedRecipesContainer = styled.div`
 width: 100%;
+
+h3{
+  margin-bottom: 10px;
+}
 `
 const RecipeListWrapper = styled.div`
  width: 100%;
  border: 1px solid #ACACAC;
- border-radius: 5px;
+ border-radius: 13px;
  padding: 30px;
  margin-top: 10px;
  background-color: #fafafa;
@@ -128,9 +132,10 @@ const RecipeListWrapper = styled.div`
 `
 const SingleRecipeWrapper = styled.div`
 display: flex;
+padding: 20px 70px;
 `
 const LinkWrapper = styled.div`
- width: 50%;
+width: 90%; 
  
  a {
   color: black;
@@ -140,9 +145,13 @@ const LinkWrapper = styled.div`
   color: black;
  }
 
+ a:hover {
+  fontwight: 200;
+  color: black;
+}
 `
 const ButtonWrapper = styled.div`
- width: 50%;
+ width: 10%;
  display: flex;
  justify-content: flex-end;
 `

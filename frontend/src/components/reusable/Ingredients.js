@@ -41,8 +41,10 @@ export const Ingredients = ({components}) => {
 
   return (
     <OuterWrapper>
-      
+      <ButtonWrapper>
+      <h3>Ingredients</h3>
       <AddToShopping type='button' onClick={buttonClickSave}>Add to shoppinglist</AddToShopping>
+      </ButtonWrapper>
       <InnerWrapper>
       {components.map((component) => {
         return (
@@ -56,7 +58,7 @@ export const Ingredients = ({components}) => {
           </>
         );
       })}
-      <AddToShopping type='button' onClick={buttonClickSave}>Add to shoppinglist</AddToShopping>
+      {/* <AddToShopping type='button' onClick={buttonClickSave}>Add to shoppinglist</AddToShopping> */}
       </InnerWrapper>
     </OuterWrapper>
   );
@@ -71,18 +73,44 @@ const InnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+const ButtonWrapper = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;  
+
+h3{
+  margin: 10px 0 20px 0;
+`;
 
 const RecipeWrapper = styled.div`
-  display: flex;
+  display: flex-end;
   flex-direction: column;
+  margin-top: 15px;
+  font-size: 15px;
+  font-weight: 500;
+
+  p {
+  margin: 8px 0;
+  }
 `;
 const AddToShopping = styled.button`
-  width: 200px;
+  justify-content: space-between;
+  width: 150px;
   height: 34px;
   background-color: white;
-  border: solid black 2px;
+  border: 1px solid #ACACAC;
   border-radius: 13px;
   font-size: 13px;
   font-weight: bold;
-  margin: 15px 0;
+  margin: 5px 0;
+
+  &:hover {
+    color: green;
+    background-color: black;
+  }
+
+  &:active {
+    color: red;
+    background-color: black;
+  }
 `;

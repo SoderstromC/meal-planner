@@ -23,7 +23,7 @@ const StartPage = () => {
       <OuterWrapper>
         <InnerWrapper>
           <Header />
-          <Link to="/login">GO TO LOGIN</Link> 
+          {/* <Link to="/login">GO TO LOGIN</Link>  */}
             <MainContainer>
             <>
               <Link
@@ -71,7 +71,7 @@ const MainContainer = styled.div`
 
 const MainPageNavWrapper = styled.div`
   border: 1px solid #ACACAC;
-  border-radius: 5px;
+  border-radius: 13px;
   max-width: 250px;
   padding: 50px;
   background-color: #fafafa;

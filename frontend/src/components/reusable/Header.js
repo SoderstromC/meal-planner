@@ -28,8 +28,8 @@ const HeaderWrapper = styled.div`
   align-items: center; 
 `
 const LogoWrapper = styled.div`
-  width: 50%;
+  width: 30%;
 `
 const NavWrapper = styled.div`
-  width: 50%;
+  width: 70%;
 `

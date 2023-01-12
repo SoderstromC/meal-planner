@@ -31,13 +31,11 @@ return(
         <SingleHeader singleRecipe = {singleRecipe}/>
         <SingleRecipeWrapper>
           <IngredientsWrapper>
-            <h2>Ingredients</h2>
             <IngredientsCard>
               <Ingredients components = {singleRecipe?.sections[0].components || []}/>
             </IngredientsCard>
           </IngredientsWrapper>
           <InstructionsWrapper>
-            <h2>Instructions</h2>
             <InstructionsCard>
               <Instructions instructions = {singleRecipe?.instructions || []}/>
             </InstructionsCard>
@@ -74,9 +72,6 @@ const SingleRecipeWrapper = styled.div`
 const IngredientsWrapper = styled.div`
 display: flex;
 flex-direction: column;
-h2{
-  font-size: 17px;
-  margin-left: 20px;
 }
 `
 const IngredientsCard = styled.div`
@@ -91,10 +86,6 @@ height: 550px;
 const InstructionsWrapper = styled.div`
 display: flex;
 flex-direction: column;
-h2{
-  font-size: 17px;
-  margin-left: 20px;
-}
 `
 const InstructionsCard = styled.div`
 padding: 10px 25px;

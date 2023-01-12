@@ -109,7 +109,7 @@ const MyShoppingList = () => {
       {shoppingList.length === 0 && <NoIngredients />}
       {shoppingList.length > 0 && (
         <ShoppingListContainer>
-          <h1>My Shopping List</h1>
+          <h3>My Shopping List</h3>
           <ListWrapper>
             {shoppingList.map((component) => {
               return (
@@ -126,39 +126,11 @@ const MyShoppingList = () => {
                       <Item
                         key={`${counter++}-${component.id}`}>{component.raw_text}</Item>
                       <div className = "buttonwrapper">
-                      {/* <EditItem
-                        onClick={() =>
-                          buttonClickEditIngredient(
-                            component.id
-                            // component.raw_text
-                            //Show input field
-                          )
-                        }
-                      >
-                        Edit
-                      </EditItem> */}
+                     
                       <RemoveItem onClick={() => buttonClickRemove(component.id)}>delete</RemoveItem>
                       </div>
                     </ShoppingItemWrapper>
-                    {/* <EditItemWrapper>
-                      <EditTextInput
-                        type='text'
-                        name='edit item'
-                        value={inputValue}
-                        onChange={(event) => setInputValue(event.target.value)}
-                        placeholder='edit item'
-                        aria-label='Type and click save to create edit item.'
-                      />
-                      <div className = "buttonwrapper">
-                      <SaveItem onClick={() => buttonClickSave(component.id)}>
-                        Save
-                      </SaveItem>
-                      
-                      <Exit onClick={() => buttonClickExit(component.id)}>
-                        Exit
-                      </Exit>
-                      </div>
-                    </EditItemWrapper> */}
+      
                   </ShoppingItemContainer>
                   </InnerWrapper>
                   </OuterWrapper>
@@ -209,20 +181,7 @@ const ShoppingItemWrapper = styled.div`
 
   }
 `;
-// const EditItemWrapper = styled.div`
-//   display: flex;
-//   flex-direction: row;  
-//   border: solid;
-//   justify-content: flex-start;
-//   align-items: center;
-//   padding: 0 15px 0 15px;
-  
 
-//   .buttonwrapper{
-//     margin-left: auto;
-
-//   }
-// `;
 
 const Item = styled.div`
 margin: 10px 10px 10px 50px;

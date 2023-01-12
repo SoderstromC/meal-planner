@@ -6,7 +6,8 @@ import user from "reducers/user";
 import styled from "styled-components";
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
 import Logo from "../assets/icons/logofoodify.svg";
-import MobileImg from "../assets/icons/mobileImg.jpg";
+// import MobileImg from "../assets/icons/mobileImg.jpg";
+import IntroImg from "../assets/images/introImg.jpg";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -63,11 +64,13 @@ const Login = () => {
             <img src={Logo} alt="Logo" />
           </LoginHeader>
           <MobileImage className="mobile-show">
-            <img src={MobileImg} />
+            <img src={IntroImg} />
           </MobileImage>  
           {!showForm &&
           <>
+          <ButtonWrapper>
           <ShowFormButton onClick={() => setShowForm(!showForm)}>Login/Signup</ShowFormButton>
+          </ButtonWrapper>
           <WelcomeTextWrapper>
               <p>This meal planner tool helps you find inspiration, plan your meals and manage your shopping list.</p>
           </WelcomeTextWrapper>
@@ -86,7 +89,7 @@ const Login = () => {
               onChange={() => setMode("register")}
               />
              </label>
-             <label htmlFor='login'>{mode === "login" ? "" : "Already got an account? Log in" }
+             <label htmlFor='login'>{mode === "login" ? "" : "Already got an account? Log in"}
               <RadioInput
                type='radio'
                id='login'
@@ -155,12 +158,19 @@ const WelcomeTextWrapper = styled.div`
  padding: 50px;
  background-color: #fafafa;
 `
+const ButtonWrapper = styled.div`
+display: flex;
+justify-content: end;
+`
+
 const ShowFormButton = styled.button`
  background-color: transparent;
  border: none;
  cursor: pointer;
  padding: 10px;
+ font-weight: bold;
 `
+
 const FormWrapper = styled.div`
  display: flex;
  align-items: center;
@@ -168,6 +178,7 @@ const FormWrapper = styled.div`
  text-align: center;
  max-width: 100%;
  margin-bottom: 20px;
+
 `
 const InputWrapper = styled.div`
  display: flex;
@@ -184,7 +195,8 @@ const InputLabelWrapper = styled.div`
  text-align: left;
 `
 const Input = styled.input`
- padding: 10px; 
+ padding: 8px;
+ margin-top: 3px;
  display: flex;
  flex-direction: column;
  border: 1px solid #ACACAC;

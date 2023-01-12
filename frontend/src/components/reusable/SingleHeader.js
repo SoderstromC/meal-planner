@@ -6,7 +6,14 @@ import { faClock } from "@fortawesome/free-solid-svg-icons"
 
 export const SingleHeader = ({singleRecipe}) => {
 
-
+  const SingleImage = styled.div`
+    position: absolute; 
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    opacity: 90%;
+    background-image: url(${ singleRecipe ? singleRecipe.thumbnail_url : ''});
+    `
   if (!singleRecipe) {
     return (null)
   } else {
@@ -15,7 +22,7 @@ export const SingleHeader = ({singleRecipe}) => {
         <SingleHeaderCard>
       
                 <SingleImageWrapper key={singleRecipe.id}>
-                <img src={singleRecipe.thumbnail_url}/>
+                <SingleImage src={singleRecipe.thumbnail_url}/>
                   <Text>
                     <h3>{singleRecipe.name}</h3>
                     <p><FontAwesomeIcon icon={faClock} /> {singleRecipe.total_time_minutes} minutes</p>
@@ -40,15 +47,9 @@ const SingleImageWrapper = styled.div`
   overflow: hidden;
   color: white;
   border-radius: 13px;
-
-  img {
-    position: absolute; 
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    opacity: 90%;
-  }
 `
+
+
 const Text = styled.div`
   position: absolute;
   bottom: 8px;
@@ -57,13 +58,16 @@ const Text = styled.div`
   width: 100%;
   h3{
     color: white;
-    margin: 0 0 30px 25px;
-    width: 250px;
-    text-shadow: 1px 1px 2px #333;
+    margin: 30px 0 12px 30px;
+    width: 350px;
+    text-shadow: 1px 0px 1px #000;
+    font-size: 30px;
+    border: solid;
   }
   p{
     color: white;
-    margin: 30px 70px 0 0;
+    align-self: flex-end;
+    margin: 30px 30px 12px 0;
     font-weight: bold;
     text-shadow: 1px 1px 2px #333;
   }

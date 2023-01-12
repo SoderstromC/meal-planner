@@ -29,8 +29,6 @@ export const RecipeCard = ({ id, name, time, img }) => {
     fetch(SAVED_RECIPE_URL, options) // Catch the data and update with uniqe object (option)./Shouldn't we add userId in URL?
       .then((res) => res.json())
       .then((data) => {
-        alert("Recipe saved!")
-        //functionGivingFeedbackThatWeHaveSavedTheDATA(data)
         console.log("savedData", data); // Gets/request all data again
       })
       .catch((error) => console.error("error2", error));
@@ -47,7 +45,7 @@ export const RecipeCard = ({ id, name, time, img }) => {
         id={id}
         to={`/single/${id}`}>
       <RecipeListCard>
-        <img src={img} />
+        <img className= "recipe-image" src={img} />
         <TextWrapper>
           <h3>{name}</h3>
           <p><FontAwesomeIcon icon={faClock} /> {time} minutes</p>
@@ -68,13 +66,13 @@ const RecipeCardWrapper = styled.div`
 const RecipeListCard = styled.section`
   width: 100%;
   word-wrap: break-word;
-  height: 250px;
+  height: 330px;
   position: relative;
   overflow: hidden;
   color: white;
-  border-radius: 5px;
+  border-radius: 13px;
 
-  img {
+  .recipe-image {
     position: absolute; 
     object-fit: cover;
     width: 100%;
@@ -83,11 +81,12 @@ const RecipeListCard = styled.section`
 `
 const TextWrapper = styled.div`
   position: absolute;
-  bottom: 8px;
-  left: 10px;
+  bottom: 18px;
+  left: 18px;
+  width: 250px;
 
   p, h3 {
-    text-shadow: 1px 1px 2px #333;
+    text-shadow: 1px 0px 1px #000;
   }
 `
 const SaveButton = styled.button`
@@ -96,8 +95,8 @@ const SaveButton = styled.button`
  color: #333;
  cursor: pointer;
  position: absolute;
- top: 8px;
- right: 10px;
+ top: 15px;
+ right: 15px;
  border-radius: 5px;
 
  .red-heart {
