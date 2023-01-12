@@ -40,7 +40,7 @@ const RecipeList = () => {
     <InnerWrapper>
       <Header />
       <ContentWrapper>
-        <h3>All recipes</h3>
+        <h2>All recipes</h2>
         {loading && <LoaderWrapper><Loading /></LoaderWrapper>}
         {!loading && (
         <RecipeListWrapper>
@@ -72,6 +72,9 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   h3{
     margin-bottom: 10px;
+  }
+  h2{
+    display: none;
   }
   `
 
