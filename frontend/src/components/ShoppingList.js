@@ -134,9 +134,13 @@ const ListWrapper = styled.div`
   background-color: #fafafa;
 `
 const ShoppingItemContainer = styled.div`
+margin: 10px 0;
+display: flex;
+flex-direction: column;
+
+@media (min-width: 667px) {
   margin: 10px 14px 10px 43px;
-  display: flex;
-  flex-direction: column;
+}
 `
 const ShoppingItemWrapper = styled.div`
   display: flex;
@@ -151,7 +155,11 @@ const ShoppingItemWrapper = styled.div`
   }
 `
 const Item = styled.div`
-  margin: 10px 10px 10px 50px;
+  margin: 10px 0 10px 10px;
+  
+  @media (min-width: 667px) {
+    margin: 10px 10px 10px 50px;
+  }
 `
 
 const CheckBox = styled.input`
