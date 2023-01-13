@@ -70,17 +70,17 @@ const NavContainer = styled.div`
   font-size: 14px;
   font-weight: 600;
   a {
-    text-decoration: none;  
-    color: black;
+    text-decoration: none;
     }
   a:visited {
     color: black;
     }
+  
   a:hover {
-    font-weight: 800;
+    color: red;
   }
   button:hover {
-    font-weight: 700;
+    color: red;
   }
 `
 
@@ -104,7 +104,7 @@ const MenuWrapper = styled.div`
   gap: 45px;
   font-size: 14px;
   @media screen and (max-width: 850px) {
-  display: none !important;
+    display: none !important;
   }
 `
 
@@ -113,7 +113,6 @@ const MobileMenuWrapper = styled.div`
   .burger-menu {
     padding: 30px;
   }
-
   .bar-icon {
     font-size: 1.5rem;
   }
