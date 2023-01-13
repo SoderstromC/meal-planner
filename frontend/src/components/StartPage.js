@@ -78,7 +78,7 @@ const MainContainer = styled.div`
 const MainPageNavWrapper = styled.div`
   width: 250px;
   height: 300px;
-  border: 2px solid #ACACAC;
+  border: 2px solid white;
   border-radius: 13px;
   position: relative;
   overflow: hidden;
