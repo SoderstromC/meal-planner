@@ -25,7 +25,6 @@ export const SingleHeader = ({singleRecipe}) => {
   if (!singleRecipe) {
     return (null)
   } else {
-  
     return(
       <>
         <SingleHeaderCard>

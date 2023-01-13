@@ -13,8 +13,6 @@ const MyRecipes = () => {
   const accessToken = useSelector((store) => store.user.accessToken);
 
   const [recipeList, setRecipeList] = useState([]);
-  //const [loading, setLoading] = useState(false);
-  
 
   const navigate = useNavigate();
   
@@ -36,22 +34,18 @@ const MyRecipes = () => {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
-    //setLoading(true);
+
     fetch(MY_RECIPES_URL, options)
       .then((res) => res.json())
       .then((data) => {
         setRecipeList(data.response)
-        console.log('data.response', data.response)})
+      })
       .catch((error) => console.error('error1', error));
-      //.finally(() => setLoading(false))
   };
 
   useEffect(() => {
     fetchMyRecipes();
   }, []);
-
-
-  // REMOVE RECIPE FROM SAVED RECIPES
 
   const buttonClickRemove = (recipeId) => {
     
@@ -110,12 +104,14 @@ const MyRecipes = () => {
 
 export default MyRecipes;
 
+
 const SavedRecipesContainer = styled.div`
 width: 100%;
 h3{
   margin-bottom: 10px;
 }
 `
+
 const RecipeListWrapper = styled.div`
  width: 100%;
  border: 1px solid #ACACAC;
@@ -147,7 +143,7 @@ const LinkWrapper = styled.div`
   a:hover {
   fontwight: 200;
   color: black;
-}
+  }
 `
 
 const ButtonWrapper = styled.div`

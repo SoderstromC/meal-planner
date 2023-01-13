@@ -7,13 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 export const RecipeCard = ({ id, name, time, img }) => {
-  console.log('img', img)
 
   const [savedRecipe, setSavedRecipe] = useState(false);
   const userId = useSelector((store) => store.user.userId);
-
-  
-  // SAVING A RECIPE ID TO SPECIFIC USER IN SERVER 
 
   const buttonClickSave = () => {
     setSavedRecipe (true);
@@ -32,6 +28,7 @@ export const RecipeCard = ({ id, name, time, img }) => {
       })
       .catch((error) => console.error("error2", error));
   };
+
   const RecipeListCard = styled.section`
   width: 100%;
   height: 330px;
@@ -82,8 +79,6 @@ const TextWrapper = styled.div`
     text-shadow: 1px 0px 1px #000;
   }
 `
-
-
   
 const SaveButton = styled.button`
   background-color: white;
@@ -101,5 +96,3 @@ const SaveButton = styled.button`
     color: grey;
   }
  `
-
-

@@ -12,21 +12,19 @@ export const Ingredients = ({components}) => {
     const SAVED_SHOPPINGLIST_URL = API_URL('saveListItem');
 
     let itemsToSave = [];
-    console.log('components2', components)
+
     components.map((component) => {
       itemsToSave.push({
         "raw_text": component.raw_text,
         "id": component.id
-      })
-    })
+      });
+    });
 
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId: userId, itemsToSave: itemsToSave })
     };
-
-    // ADD INGREDIENTS TO SHOPPING LIST IN SERVER
 
     fetch(SAVED_SHOPPINGLIST_URL, options)
       .then((res) => res.json())

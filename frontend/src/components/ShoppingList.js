@@ -49,10 +49,8 @@ const MyShoppingList = () => {
     fetchMyShoppingList();
   }, []);
 
-  /****  REMOVE INGREDIENT FROM USERS SAVED SHOPPINGLIST ****/
 
   const buttonClickRemove = (id) => {
-    // const REMOVE_INGREDIENT_URL = `http://localhost:8090/removeIngredient`;
     const REMOVE_INGREDIENT_URL = API_URL("removeIngredient");
 
     const options = {
@@ -106,9 +104,10 @@ const MyShoppingList = () => {
       </InnerWrapper>
     </OuterWrapper>
   );
-  };   
+};   
 
 export default MyShoppingList;
+
 
 const ShoppingListContainer = styled.div`
   width: 100%;
@@ -125,10 +124,9 @@ const ShoppingItemContainer = styled.div`
   margin: 10px 0;
   display: flex;
   flex-direction: column;
-
-@media (min-width: 667px) {
-  margin: 10px 14px 10px 43px;
-}
+  @media (min-width: 667px) {
+    margin: 10px 14px 10px 43px;
+  }
 `
 const ShoppingItemWrapper = styled.div`
   display: flex;
@@ -136,14 +134,12 @@ const ShoppingItemWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding: 0 15px 0 15px;
-
   .buttonwrapper {
     margin-left: auto;
   }
 `
 const Item = styled.div`
   margin: 10px 0 10px 10px;
-  
   @media (min-width: 667px) {
     margin: 10px 10px 10px 50px;
   }
