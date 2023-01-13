@@ -28,27 +28,30 @@ const StartPage = () => {
                 to={`/recipes`}>
                 <MainPageNavWrapper>
                 <img src={findRecipeImg} alt="FindRecipe" />
-                   <h3>Find recipes</h3>
-                   <p>Get inspired by a list of delicious recipes and plan your meals accordingly</p>
+                <TextWrapper>
+                  <h3>Find recipes</h3>
+                  <p>Get inspired by a list of delicious recipes and plan your meals accordingly</p>
+                </TextWrapper>
                 </MainPageNavWrapper>
               </Link>
               <Link
                 to={`/saved`}>
                 <MainPageNavWrapper>
                 <img src={myRecipeImg} alt="MyRecipes" />
-
-                   <h3>My recipes</h3>
-                   <p>Save your favorite recipes for easy access and future reference</p>
+                <TextWrapper>
+                  <h3>My recipes</h3>
+                  <p>Save your favorite recipes for easy access and future reference</p>
+                </TextWrapper>
                 </MainPageNavWrapper>
               </Link>
               <Link
                 to={`/shoppinglist`}>
                 <MainPageNavWrapper>
                 <img src={shoppingListImg} alt="ShoppingList" />
-
-
-                   <h3>Shoppinglist</h3>
-                   <p>Create your personalized shoppinglist based on selected recipes</p>
+                <TextWrapper>
+                  <h3>Shoppinglist</h3>
+                  <p>Create your personalized shoppinglist based on selected recipes</p>
+                </TextWrapper>
                 </MainPageNavWrapper>
               </Link>
             </>
@@ -73,18 +76,28 @@ const MainContainer = styled.div`
 `
 
 const MainPageNavWrapper = styled.div`
-  border: 1px solid #ACACAC;
+  width: 250px;
+  height: 300px;
+  border: 2px solid #ACACAC;
   border-radius: 13px;
-  max-width: 250px;
-  padding: 50px;
-  background-color: #fafafa;
-  p, h3 {
-    color: black;
+  position: relative;
+  overflow: hidden;
+  img {
+    position: absolute; 
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
   &:hover {
-    background-color: #e1d1d1;
+    border: 2px solid #333;
+  }
+`
+const TextWrapper = styled.div`
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
   p, h3 {
     color: white;
-    }
+    text-shadow: 1px 1px 2px grey;
   }
 `
