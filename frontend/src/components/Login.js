@@ -6,8 +6,7 @@ import user from "reducers/user";
 import styled from "styled-components";
 import { InnerWrapper, OuterWrapper } from "./reusable/global/Wrappers";
 import Logo from "../assets/icons/logofoodify.svg";
-import MobileImg from "../assets/icons/mobileImg.jpg";
-// import IntroImg from "../assets/images/introImg.jpg";
+import introImg from "../assets/images/introImg.jpg";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -63,16 +62,21 @@ const Login = () => {
         <LoginHeader>
           <img src={Logo} alt="Logo" />
         </LoginHeader>
-        <MobileImage className="mobile-show">
-          <img src={MobileImg} />
-        </MobileImage>  
         {!showForm &&
         <>
-        <ShowFormButton onClick={() => setShowForm(!showForm)}>Login/Signup</ShowFormButton>
+        <ButtonWrapper>
+          <ShowFormButton onClick={() => setShowForm(!showForm)}><span className="login">Login</span> | <span className="signup">Signup</span></ShowFormButton>
+        </ButtonWrapper>
+        <WebImage className="mobile-show">
+          <img src={introImg} />
+          <div className= "web-img-text">
+            <p>This meal planner tool helps you find inspiration, plan your meals and manage your shopping list.</p>
+          </div>
+        </WebImage>
         <WelcomeTextWrapper>
             <p>This meal planner tool helps you find inspiration, plan your meals and manage your shopping list.</p>
         </WelcomeTextWrapper>
-        </>
+        </> 
         }
         {showForm &&
         <FormWrapper>
@@ -148,9 +152,13 @@ const WelcomeTextWrapper = styled.div`
   text-align: center;
   max-width: 100%;
   border: 1px solid #ACACAC;
-  border-radius: 5px;
-  padding: 50px;
+  border-radius: 13px;
+  padding: 30px;
   background-color: #fafafa;
+  font-size: 13px;
+  @media screen and (min-width: 600px) {
+    display: none !important;
+  }
 `
 const ShowFormButton = styled.button`
   background-color: transparent;
@@ -158,8 +166,15 @@ const ShowFormButton = styled.button`
   cursor: pointer;
   padding: 10px;
   font-weight: bold;
+  .login:hover {
+    transform: scale(1.01);
+    color: red;
+  }
+  .signup:hover {
+    transform: scale(1.01);
+    color: red;
+  }
 `
-
 const FormWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -190,13 +205,11 @@ const Input = styled.input`
   border-radius: 5px;
   background-color: #fafafa;
 `
-
 const Radiobuttons = styled.div`
   display: flex;
   flex-direction: row;
   margin: 15px;
 `
-
 const RadioInput = styled.input`
   -webkit-appearance: none;
   font-size: 60px;
@@ -209,12 +222,13 @@ const RadioInput = styled.input`
 `
 const LoginHeader = styled.div`
   display: flex;
-  height: 150px;
+  height: 100px;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
   @media (min-width: 667px) {
     justify-content: left;
-    height: 200px;
+    height: 150px;
   }
 `
 const SubmitButton = styled.button`
@@ -233,26 +247,38 @@ const MobileImage = styled.div`
   display: flex;
   justify-content: center;
   img {
-    border-radius: 5px;
+    border-radius: 13px;
     width: 100%;
   }
-  @media screen and (min-width: 600px) {
+  @media screen and (max-width: 600px) {
     display: none !important;
   }
 `
+const WebImage = styled.div`
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  position: relative;
 
-// const WebImage = styled.div`
-//   @media screen and (min-width: 600px) {
-//     position: relative;
-//     width: 100%;
-//     display: flex;
-//     justify-content: center;
-//     img {
-//       border-radius: 13px;
-//       width: 100%;
-//       position: absolute;
-//       right: 0%;
-//       // top: 40%;
-// //     }
-// //   }
-// `
+  img {
+    border-radius: 13px;
+    width: 100%;
+  }
+  .web-img-text {
+    position: absolute;
+    left: 7%;
+    top: 10%;
+    color: white;
+    font-size: 17px;
+    padding: 10px;
+
+    @media screen and (max-width: 600px) {
+      display: none !important;
+    } 
+`
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: end;
+  margin-bottom: 20px;
+`
