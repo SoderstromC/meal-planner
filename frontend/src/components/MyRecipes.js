@@ -116,7 +116,6 @@ const RecipeListWrapper = styled.div`
  width: 100%;
  border: 1px solid #ACACAC;
  border-radius: 13px;
- padding: 30px;
  margin-top: 10px;
  background-color: #fafafa;
   a {
@@ -125,11 +124,20 @@ const RecipeListWrapper = styled.div`
   a:hover {
     font-weight: 700;
   }
+  @media (min-width: 667px) {
+    padding: 30px;
+  }
 `
 
 const SingleRecipeWrapper = styled.div`
   display: flex;
-  padding: 20px 70px;
+  padding: 10px;
+  @media (min-width: 400px) {
+    padding: 10px 40px;
+  }
+  @media (min-width: 667px) {
+    padding: 20px 70px;
+  }
 `
 
 const LinkWrapper = styled.div`
