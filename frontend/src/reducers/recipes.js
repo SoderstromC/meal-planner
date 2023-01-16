@@ -40,7 +40,7 @@ export const generateRecipe = () => {
     const generate = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "05ce32baddmsh1dbc226d22c6d58p17606ejsn8489212bcecc",
+        "X-RapidAPI-Key": "3ecb94565cmshdcb2aa095eb280cp106d0djsn59e08e6ce037",
         "X-RapidAPI-Host": "tasty.p.rapidapi.com",
       },
     };
@@ -62,7 +62,7 @@ export const generateSingleRecipe = (recipeId) => {
     const details = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "05ce32baddmsh1dbc226d22c6d58p17606ejsn8489212bcecc",
+        "X-RapidAPI-Key": "3ecb94565cmshdcb2aa095eb280cp106d0djsn59e08e6ce037",
         "X-RapidAPI-Host": "tasty.p.rapidapi.com",
       },
     };
