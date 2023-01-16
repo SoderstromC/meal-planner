@@ -13,8 +13,9 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 const MyShoppingList = () => {
   const [shoppingList, setShoppingList] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [editItem, setEditItem] = useState(false); ///toggla?
   const userId = useSelector((store) => store.user.userId);
-
+  
   const dispatch = useDispatch();
   const buttonClickToggleCheck = (id) => {
     dispatch(shopping.actions.toggleItem(id));
@@ -31,6 +32,7 @@ const MyShoppingList = () => {
   let counter = 0;
 
   const fetchMyShoppingList = () => {
+    //const MY_SHOPPINGLIST_URL = `http://localhost:8090/listItems/${userId}`;
     const MY_SHOPPINGLIST_URL = API_URL(`listItems/${userId}`);
 
     const options = {
@@ -40,6 +42,7 @@ const MyShoppingList = () => {
       fetch(MY_SHOPPINGLIST_URL, options)
         .then((res) => res.json())
         .then((data) => {
+          console.log('data.response', data.response)
           setShoppingList(data.response);
         })
         .catch((error) => console.error("error3", error));
@@ -67,6 +70,38 @@ const MyShoppingList = () => {
       .catch((error) => console.error("error3", error));
     };
 
+    /**** UPDATE INGREDIENT FROM USERS SAVED SHOPPINGLIST ****/
+  
+    const buttonClickEditIngredient = (id) => {
+      setEditItem(true)};
+
+  const buttonClickExit = (id) => {
+    setEditItem(false)
+  };
+
+//   const changeEvent = (id) => {
+//   buttonClickEditIngredient(id) 
+// };
+ 
+  
+  const buttonClickSave = (id) => {
+    console.log('inputValue', inputValue)
+    const EDIT_INGREDIENT_URL = `http://localhost:8090/editIngredient`;
+    const options = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: userId, id: id, text: inputValue }),
+    };
+    fetch(EDIT_INGREDIENT_URL, options)
+      .then((res) => res.json())
+      .then((data) => {
+        setShoppingList(data.response);
+        setEditItem(false);
+        console.log("shoppinglistupdated", data.response);
+      })
+      .catch((error) => console.error("error3", error));
+};
+
   return (
     <OuterWrapper>
       <InnerWrapper>
@@ -80,6 +115,24 @@ const MyShoppingList = () => {
             {shoppingList.map((component) => {
               return (
                 <ShoppingItemContainer>
+                 {editItem? <EditItemWrapper>
+                      <EditTextInput
+                        type='text'
+                        name='edit item'
+                        value={inputValue}
+                        onChange={(event) => setInputValue(event.target.value)}
+                        placeholder='edit item'
+                        aria-label='Type and click save to create edit item.'
+                      />
+                      <div className = "buttonwrapper">
+                      <SaveItem onClick={() => buttonClickSave(component.id)}>
+                        Save
+                      </SaveItem>
+                      <Exit onClick={() => buttonClickExit(component.id)}>
+                        Exit
+                      </Exit>
+                      </div>
+                    </EditItemWrapper> :
                   <ShoppingItemWrapper>
                     <CheckBox
                       type='checkbox'
@@ -90,11 +143,16 @@ const MyShoppingList = () => {
                       {component.raw_text}
                     </Item>
                     <div className='buttonwrapper'>
+                      <EditItem
+                        onClick={() => buttonClickEditIngredient(component.id)}>
+                        Edit
+                      </EditItem>
                       <RemoveItem onClick={() => buttonClickRemove(component.id)}>
                         <FontAwesomeIcon className="trash-icon" icon={faTrashCan} />
                       </RemoveItem>
                     </div>
-                  </ShoppingItemWrapper>
+                  </ShoppingItemWrapper>}
+                  
                 </ShoppingItemContainer>   
               );
             })}
@@ -131,6 +189,8 @@ const ShoppingItemContainer = styled.div`
 const ShoppingItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  border: solid;
+
   justify-content: flex-start;
   align-items: center;
   padding: 0 15px 0 15px;
@@ -138,6 +198,19 @@ const ShoppingItemWrapper = styled.div`
     margin-left: auto;
   }
 `
+const EditItemWrapper = styled.div`
+  display: flex;
+  flex-direction: row;  
+  border: solid;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 15px 0 15px;
+  
+  .buttonwrapper{
+    margin-left: auto;
+  }
+`;
+
 const Item = styled.div`
   margin: 10px 0 10px 10px;
   @media (min-width: 667px) {
@@ -188,3 +261,38 @@ const RemoveItem = styled.button`
     transform: scale(1.2);
   }
 `
+
+const EditTextInput = styled.input`
+    transform: scale(1.2);
+   font-size: 13px;
+  border: 1px;
+  align-self: center;
+  padding: 3px 0 3px 10px;
+  margin: 10px 10px 10px 50px;
+  height: 30px;
+  width: 60%;
+  font-family: "Montserrat", sans-serif;
+  // outline: none;
+`;
+
+const EditItem = styled.button`
+margin-left: auto;
+border: solid;
+height: 25px;
+width: 80px;
+background-color: transparent;
+`;
+const SaveItem = styled.button`
+margin-left: auto;
+border: solid;
+height: 25px;
+width: 80px;
+background-color: transparent;
+`;
+const Exit= styled.button`
+margin-left: auto;
+border: solid;
+height: 25px;
+width: 80px;
+background-color: transparent;
+`;
