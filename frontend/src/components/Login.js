@@ -65,7 +65,7 @@ const Login = () => {
         {!showForm &&
         <>
         <ButtonWrapper>
-          <ShowFormButton onClick={() => setShowForm(!showForm)}><span className="login">Login</span> | <span className="signup">Signup</span></ShowFormButton>
+          <ShowFormButton onClick={() => setShowForm(!showForm)}><span className="login">Login</span> | <span className="signup" onClick={() => setMode("register")}>Signup</span></ShowFormButton>
         </ButtonWrapper>
         <WebImage className="mobile-show">
           <img src={introImg} />
