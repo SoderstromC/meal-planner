@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
+import EmptyList from "./reusable/EmptyList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
@@ -71,31 +72,39 @@ const MyRecipes = () => {
         <Header />
         <SavedRecipesContainer>
           <h3>My recipes</h3>
-        <RecipeListWrapper>
-        { console.log('new recipe list', recipeList) }
-        {recipeList.map((recipe) => {
-          return (
-          <>
-          <SingleRecipeWrapper>
-          <LinkWrapper>
-          <Link
-            className="recipe-container"
-            id={recipe.recipeId}
-            to={`/single/${recipe.recipeId}`}
-            key={recipe.recipeId}>
-            <p>{recipe.recipeName}</p>
-          </Link>
-          </LinkWrapper>
-          <ButtonWrapper>
-          <RemoveButton onClick={() => buttonClickRemove(recipe.recipeId)}>
-          <FontAwesomeIcon className="trash-icon" icon={faTrashCan} />
-          </RemoveButton> 
-          </ButtonWrapper>
-          </SingleRecipeWrapper>
-          </>
-          )
+          {recipeList.length === 0 && (
+            <>
+              <p>Go to <Link to={`/recipes`}>Find recipes</Link> and att your favorite recipes....</p>
+              <EmptyList />
+            </>
+          )}
+          {recipeList.length > 0 && (
+          <RecipeListWrapper>
+          {console.log('new recipe list', recipeList) }
+          {recipeList.map((recipe) => {
+            return (
+            <>
+            <SingleRecipeWrapper>
+            <LinkWrapper>
+            <Link
+              className="recipe-container"
+              id={recipe.recipeId}
+              to={`/single/${recipe.recipeId}`}
+              key={recipe.recipeId}>
+              <p>{recipe.recipeName}</p>
+            </Link>
+            </LinkWrapper>
+            <ButtonWrapper>
+            <RemoveButton onClick={() => buttonClickRemove(recipe.recipeId)}>
+            <FontAwesomeIcon className="trash-icon" icon={faTrashCan} />
+            </RemoveButton> 
+            </ButtonWrapper>
+            </SingleRecipeWrapper>
+            </>
+            )
           })}
         </RecipeListWrapper>
+        )}
         </SavedRecipesContainer>
       </InnerWrapper>
     </OuterWrapper>
@@ -109,6 +118,17 @@ const SavedRecipesContainer = styled.div`
 width: 100%;
 h3{
   margin-bottom: 10px;
+}
+a {
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+a:visited {
+  color: black;
+  }
+a:hover {
+  color: red;
 }
 `
 
