@@ -74,7 +74,7 @@ const MyRecipes = () => {
           <h3>My recipes</h3>
           {recipeList.length === 0 && (
             <>
-              <p>Go to <Link to={`/recipes`}>Find recipes</Link> and att your favorite recipes....</p>
+              <p>Go to <Link to={`/recipes`}>Find recipes</Link> and add your favorite recipes....</p>
               <EmptyList />
             </>
           )}
