@@ -26,8 +26,8 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: 8,
-    maxlength: 12,
+    // minlength: 8,
+    // maxlength: 12,
     /// My_B4nK_P4$$word
   },
   accessToken: {

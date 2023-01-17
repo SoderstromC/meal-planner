@@ -17,7 +17,7 @@ const Nav = () => {
 
   const logOutOnClick = () => {
     dispatch(user.actions.setAccessToken(null));
-    navigate("/login");
+    navigate("/login"); 
   };
 
   return (
@@ -42,20 +42,24 @@ const Nav = () => {
         <div onClick={() => setIsOpen(!isOpen)}><FontAwesomeIcon className="bar-icon" icon={faBars} /></div>
         <Menu className="burger-menu" isOpen={isOpen} selectedKey={'entry'} onClose={() => setIsOpen(false)}>
           <Link to={`/`}>
-              <p>Main</p>
+            <Item itemKey={'main'} text={'Main'} />
           </Link>
           <Link to={`/recipes`}>
-              <p>Find recipes</p>
+            <Item itemKey={'recipes'} text={'Find recipes'} />
           </Link>
           <Link to={`/saved`}>
-              <p>My recipes</p>
+            <Item itemKey={'saved'} text={'My recipes'} />
           </Link>
           <Link to={`/shoppinglist`}>
-              <p>Shoppinglist</p>
+            <Item itemKey={'shoppinglist'} text={'Shoppinglist'} />
           </Link>
           <Line></Line>
-          <LogOutButton type="button" onClick={logOutOnClick}>Logout</LogOutButton>
-        </Menu>
+          <div>
+            <LogOutButton type="button" onClick={logOutOnClick}>
+              <Item itemKey={'logout'} text={'Logout'} />
+            </LogOutButton>
+          </div>    
+        </Menu>  
       </MobileMenuWrapper>
       </>
     </NavContainer>
@@ -109,12 +113,11 @@ const MenuWrapper = styled.div`
 `
 
 const MobileMenuWrapper = styled.div`
-  line-height: 3;
   .burger-menu {
-    padding: 30px;
+    padding: 10px;
   }
   .bar-icon {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
   @media screen and (min-width: 849px) {
     display: none !important;
