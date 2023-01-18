@@ -141,15 +141,28 @@ const authenticateUser = async (req, res, next) => {
 
 app.post("/saveRecipe", async (req, res) => {
   const { recipeId, userId, recipeName } = req.body;
+  
   try {
-    const user = await User.findByIdAndUpdate(userId, {
-      $push: { savedRecipes: { recipeId, recipeName } },
-    });
-    res.status(201).json({ success: true, response: user });
+    const updatedUser = await User.findOneAndUpdate({
+        "_id": mongoose.Types.ObjectId(userId),
+        savedRecipes: {$not: {$elemMatch: { recipeId, recipeName }}},
+      },
+      { $push: { savedRecipes: { recipeId, recipeName } }},
+      { new: true }
+    )
+
+    // If it found the user without the recipe already saved
+    if (updatedUser) {
+      res.status(201).json({ success: true, response: updatedUser.savedRecipes });
+    } else {
+      // Return error message if recipe is already saved for this user
+      res.status(400).json({ success: false, response: {error: "'You have already saved this recipe"} });
+    }
   } catch (error) {
-    res.status(400).json({ success: false, response: error });
+    res.status(500).json({ success: false, response: {error: "Server error"} });
   }
 });
+
 
 
 // REMOVE RECIPE ID FROM USER'S SAVED LIST

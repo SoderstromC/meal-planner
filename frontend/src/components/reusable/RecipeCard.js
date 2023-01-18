@@ -12,7 +12,8 @@ export const RecipeCard = ({ id, name, time, img }) => {
   const userId = useSelector((store) => store.user.userId);
 
   const buttonClickSave = () => {
-    setSavedRecipe (true);
+    
+    
     const SAVED_RECIPE_URL = API_URL('saveRecipe');
 
     const options = {
@@ -24,7 +25,12 @@ export const RecipeCard = ({ id, name, time, img }) => {
     fetch(SAVED_RECIPE_URL, options) 
       .then((res) => res.json())
       .then((data) => {
-        console.log("savedRecipeData", data);
+        console.log("savedRecipeData", data.response);
+        if(data.success === true) {
+          setSavedRecipe(true);
+        } else {
+          alert('You have already saved this recipe');
+        }
       })
       .catch((error) => console.error("error2", error));
   };
