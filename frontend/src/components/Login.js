@@ -155,7 +155,8 @@ const WelcomeTextWrapper = styled.div`
   border-radius: 13px;
   padding: 30px;
   background-color: #fafafa;
-  font-size: 13px;
+  font-size: 16px;
+  font-weight: 800;
   @media screen and (min-width: 600px) {
     display: none !important;
   }
@@ -189,26 +190,35 @@ const InputWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   border: 1px solid #ACACAC;
-  border-radius: 5px;
-  gap: 20px; 
+  border-radius: 13px;
+  gap: 30px; 
   padding: 50px;
   background-color: #fafafa;
 `
 const InputLabelWrapper = styled.div`
   text-align: left;
-`
+  label{
+    font-weight: bold;
+  }
+  `
 const Input = styled.input`
-  padding: 10px; 
+  padding: 7px; 
   display: flex;
   flex-direction: column;
   border: 1px solid #ACACAC;
   border-radius: 5px;
   background-color: #fafafa;
+  margin-top: 7px;
+  font-size: 14px;
+
 `
 const Radiobuttons = styled.div`
   display: flex;
   flex-direction: row;
   margin: 15px;
+  label{
+   margin-bottom: 30px;
+  }
 `
 const RadioInput = styled.input`
   -webkit-appearance: none;
@@ -225,7 +235,7 @@ const LoginHeader = styled.div`
   height: 100px;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 25px;
   @media (min-width: 667px) {
     justify-content: left;
     height: 150px;
@@ -234,8 +244,18 @@ const LoginHeader = styled.div`
 const SubmitButton = styled.button`
   border: 1px solid #ACACAC;
   background-color: #F5F0F0;
-  border-radius: 5px;
-  padding: 2px 20px;
+  border-radius: 6px;
+  padding: 4px 20px;
+  &:hover {
+    color: lightgrey;
+    background-color: whitesmoke;
+    border: 1px solid lightgrey;
+  }
+  &:active {
+    color: white;
+    background-color: black;
+  }
+  }
 `
 const UserInputText = styled.div`
   color: red;
@@ -266,12 +286,14 @@ const WebImage = styled.div`
     width: 100%;
   }
   .web-img-text {
+    margin-right: 230px;
     position: absolute;
     left: 7%;
     top: 10%;
     color: white;
     font-size: 17px;
     padding: 10px;
+    font-weight: 400;
 
     @media screen and (max-width: 600px) {
       display: none !important;

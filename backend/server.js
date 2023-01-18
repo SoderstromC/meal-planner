@@ -156,6 +156,7 @@ app.post("/saveRecipe", async (req, res) => {
 
 app.put("/removeRecipe", async (req, res) => {
   const { recipeId, userId } = req.body;
+  console.log(userId)
   try {
     const removeRecipe = await User.findByIdAndUpdate(
       userId,
@@ -260,24 +261,25 @@ app.put("/removeIngredient", async (req, res) => {
   });
 
 
-// //REMOVE ALL SHOPPINGITEMS FROM SHOPPING LIST
+//REMOVE ALL SHOPPINGITEMS FROM SHOPPING LIST
 
-// app.update("/removeallitems", async (req, res) => {
-//   const { userId } = req.body;
-//   try {
-//     const removeAllItems = await User.findByIdAndUpdate(
-//       userId,
-//       {"$pullAll": {"shoppingItems": []}},
-//       { new: true }
-//     );
-//     console.log("removeAllItems", removeAllItems);
-//     res
-//       .status(201)
-//       .json({ success: true, response: removeAllItems.shoppingItems });
-//   } catch (error) {
-//     res.status(400).json({ success: false, response: error });
-//   }
-// });
+app.put("/removeallitems", async (req, res) => {
+  const { userId } = req.body;
+  try {
+    const removeAllItems = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { shoppingItems: {} }},
+      { new: true }
+    );
+
+    console.log("removeAllItems", removeAllItems);
+    res
+      .status(201)
+      .json({ success: true, response: removeAllItems.shoppingItems });
+  } catch (error) {
+    res.status(400).json({ success: false, response: error });
+  }
+});
 
 
 app.get("/", (req, res) => {

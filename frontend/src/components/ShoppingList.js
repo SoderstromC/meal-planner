@@ -93,22 +93,22 @@ const MyShoppingList = () => {
       .catch((error) => console.error("Error saving ingredient:", error));
   };
   
-  // const buttonClickRemoveAll = () => {
-  //   const EDIT_INGREDIENT_URL = `http://localhost:8090/removeallitems`;
-  //   const options = {
-  //     method: "PUT",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ userId: userId }),
-  //   };
-  //   fetch(EDIT_INGREDIENT_URL, options)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setShoppingList(data.response);
-  //       console.log("shoppinglistremoved", data.response);
-  //       console.log("shoppingList.length", shoppingList.length);
-  //     })
-  //     .catch((error) => console.error("Error removing all items:", error));
-  // };
+  const buttonClickRemoveAll = () => {
+    const EDIT_INGREDIENT_URL = `http://localhost:8090/removeallitems`;
+    const options = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: userId }),
+    };
+    fetch(EDIT_INGREDIENT_URL, options)
+      .then((res) => res.json())
+      .then((data) => {
+        setShoppingList(data.response);
+        console.log("shoppinglistremoved", data.response);
+        console.log("shoppingList.length", shoppingList.length);
+      })
+      .catch((error) => console.error("Error removing all items:", error));
+  };
   
   return (
     <OuterWrapper>
@@ -116,9 +116,9 @@ const MyShoppingList = () => {
         <Header />
         <ShoppingListContainer>
           <h3>My Shopping List</h3>
-          {/* <RemoveAllButton onClick={() => buttonClickRemoveAll(userId)}>
+          <RemoveAllButton onClick={() => buttonClickRemoveAll(userId)}>
             Remove all
-          </RemoveAllButton> */}
+          </RemoveAllButton>
           {shoppingList.length === 0 && <NoIngredients />}
           {shoppingList.length > 0 && (
             <>
