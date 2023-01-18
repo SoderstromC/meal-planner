@@ -26,8 +26,8 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: 8,
-    maxlength: 12,
+    // minlength: 8,
+    // maxlength: 12,
     /// My_B4nK_P4$$word
   },
   accessToken: {
@@ -260,8 +260,24 @@ app.put("/removeIngredient", async (req, res) => {
   });
 
 
-//REMOVE ALL SHOPPINGITEMS FROM SHOPPING LIST
+// //REMOVE ALL SHOPPINGITEMS FROM SHOPPING LIST
 
+// app.update("/removeallitems", async (req, res) => {
+//   const { userId } = req.body;
+//   try {
+//     const removeAllItems = await User.findByIdAndUpdate(
+//       userId,
+//       {"$pullAll": {"shoppingItems": []}},
+//       { new: true }
+//     );
+//     console.log("removeAllItems", removeAllItems);
+//     res
+//       .status(201)
+//       .json({ success: true, response: removeAllItems.shoppingItems });
+//   } catch (error) {
+//     res.status(400).json({ success: false, response: error });
+//   }
+// });
 
 
 app.get("/", (req, res) => {

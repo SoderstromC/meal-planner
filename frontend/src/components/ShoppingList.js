@@ -12,13 +12,9 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 const MyShoppingList = () => {
   const [shoppingList, setShoppingList] = useState([]);
-  
-const [inputValue, setInputValue] = useState("");
-  
-//  const [inputValue, setInputValue] = useState(value);
+  const [inputValue, setInputValue] = useState("");
   const [editItem, setEditItem] = useState(null);
   const userId = useSelector((store) => store.user.userId);
-
   const dispatch = useDispatch();
   const buttonClickToggleCheck = (id) => {
     dispatch(shopping.actions.toggleItem(id));
@@ -45,7 +41,6 @@ const [inputValue, setInputValue] = useState("");
     fetch(MY_SHOPPINGLIST_URL, options)
       .then((res) => res.json())
       .then((data) => {
-        console.log("data.response", data.response);
         setShoppingList(data.response);
       })
       .catch((error) => console.error("Error fetching shopping list:", error));
@@ -78,12 +73,11 @@ const [inputValue, setInputValue] = useState("");
     setEditItem(id);
   };
 
-  const buttonClickExit = (id) => {
+  const buttonClickCancel = (id) => {
     setEditItem(null);
   };
 
   const buttonClickSave = (id) => {
-    console.log("inputValue", inputValue);
     const EDIT_INGREDIENT_URL = `http://localhost:8090/editIngredient`;
     const options = {
       method: "PUT",
@@ -95,31 +89,26 @@ const [inputValue, setInputValue] = useState("");
       .then((data) => {
         setShoppingList(data.response);
         setEditItem(false);
-        console.log("shoppinglistupdated", data.response);
       })
       .catch((error) => console.error("Error saving ingredient:", error));
   };
   
-  const buttonClickRemoveAll = () => {
-  //   const EDIT_INGREDIENT_URL = `http://localhost:8090/editIngredient`;
+  // const buttonClickRemoveAll = () => {
+  //   const EDIT_INGREDIENT_URL = `http://localhost:8090/removeallitems`;
   //   const options = {
   //     method: "PUT",
   //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ userId: userId, id: id, text: inputValue }),
+  //     body: JSON.stringify({ userId: userId }),
   //   };
   //   fetch(EDIT_INGREDIENT_URL, options)
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setShoppingList(data.response);
-  //       setEditItem(false);
-  //       console.log("shoppinglistupdated", data.response);
+  //       console.log("shoppinglistremoved", data.response);
+  //       console.log("shoppingList.length", shoppingList.length);
   //     })
-  //     .catch((error) => console.error("error3", error));
+  //     .catch((error) => console.error("Error removing all items:", error));
   // };
-
-  }
-
-  
   
   return (
     <OuterWrapper>
@@ -127,13 +116,9 @@ const [inputValue, setInputValue] = useState("");
         <Header />
         <ShoppingListContainer>
           <h3>My Shopping List</h3>
-          <RemoveAllButton onClick={() => buttonClickRemoveAll(userId)}>
+          {/* <RemoveAllButton onClick={() => buttonClickRemoveAll(userId)}>
             Remove all
-          </RemoveAllButton>
-          {console.log(
-            "shoppinglistbefore deciding on what to show",
-            shoppingList
-          )}
+          </RemoveAllButton> */}
           {shoppingList.length === 0 && <NoIngredients />}
           {shoppingList.length > 0 && (
             <>
@@ -151,7 +136,8 @@ const [inputValue, setInputValue] = useState("");
                             onChange={(event) =>
                               setInputValue(event.target.value)
                             }
-                            placeholder='edit item'
+                            placeholder='Edit item' 
+                            //${component.raw_text}
                             aria-label='Type and click save to create edit item.'
                           />
                           <div className='buttonwrapper'>
@@ -160,7 +146,7 @@ const [inputValue, setInputValue] = useState("");
                             >
                               Save
                             </SaveItem>
-                            <CancelButton onClick={() => buttonClickExit(component.id)}>
+                            <CancelButton onClick={() => buttonClickCancel(component.id)}>
                               Cancel
                             </CancelButton>
                           </div>
@@ -215,6 +201,8 @@ export default MyShoppingList;
 const ShoppingListContainer = styled.div`
   width: 100%;
 `;
+
+
 const ListWrapper = styled.div`
   width: 100%;
   border: 1px solid #acacac;
@@ -223,6 +211,8 @@ const ListWrapper = styled.div`
   margin-top: 10px;
   background-color: #fafafa;
 `;
+
+
 const ShoppingItemContainer = styled.div`
   margin: 10px 0;
   display: flex;
@@ -231,22 +221,23 @@ const ShoppingItemContainer = styled.div`
     margin: 10px 14px 10px 43px;
   }
 `;
+
+
 const ShoppingItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  border: solid;
-
   justify-content: flex-start;
   align-items: center;
-  padding: 0 15px 0 15px;
+  padding: 0 15px;
   .buttonwrapper {
     margin-left: auto;
   }
 `;
+
+
 const EditItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  border: solid;
   justify-content: flex-start;
   align-items: center;
   padding: 0 15px 0 15px;
@@ -255,6 +246,7 @@ const EditItemWrapper = styled.div`
     margin-left: auto;
   }
 `;
+
 
 const Item = styled.div`
   margin: 10px 0 10px 10px;
@@ -264,14 +256,15 @@ const Item = styled.div`
   }
 `;
 
+
 const CheckBox = styled.input`
   cursor: pointer;
   appearance: none;
   margin: 5px;
   font: inherit;
   color: white;
-  width: 1.5em;
-  height: 1.5em;
+  width: 1.3em;
+  height: 1.3em;
   border: 0.12em solid black;
   border-radius: 3px;
   transform: translateY(-0.075em);
@@ -279,8 +272,8 @@ const CheckBox = styled.input`
   place-content: center;
   &::before {
     content: "";
-    width: 1em;
-    height: 1em;
+    width: 0.85em;
+    height: 0.85em;
     transform: scale(0);
     border-radius: 50%;
     transition: 120ms transform ease-in-out;
@@ -295,6 +288,8 @@ const CheckBox = styled.input`
     height: 1em;
   }
 `;
+
+
 const RemoveItem = styled.button`
   margin-left: auto;
   border: none;
@@ -308,40 +303,98 @@ const RemoveItem = styled.button`
   }
 `;
 
+
 const EditTextInput = styled.input`
   transform: scale(1.2);
   font-size: 13px;
   border: 1px;
   align-self: center;
   padding: 3px 0 3px 10px;
-  margin: 10px 10px 10px 50px;
+  margin: 10px 10px 10px 46px;
   height: 30px;
   width: 60%;
   font-family: "Montserrat", sans-serif;
   // outline: none;
 `;
 
+
 const EditItem = styled.button`
-  margin-left: auto;
-  border: solid;
-  height: 25px;
-  width: 80px;
-  background-color: transparent;
+justify-content: space-between;
+width: 65px;
+height: 34px;
+background-color: white;
+border: 1px solid #ACACAC;
+border-radius: 8px;
+font-size: 12px;
+font-weight: bold;
+margin: 5px 0;
+&:hover {
+  color: lightgrey;
+  background-color: whitesmoke;
+  border: 1px solid lightgrey;
+}
+&:active {
+  color: white;
+  background-color: black;
+}
+@media (max-width: 800px) {
+  width: 125px;
+  font-size: 10px;
+}
 `;
+
+
 const SaveItem = styled.button`
-  margin-left: auto;
-  border: solid;
-  height: 25px;
-  width: 80px;
-  background-color: transparent;
+justify-content: space-between;
+width: 65px;
+height: 34px;
+background-color: white;
+border: 1px solid #ACACAC;
+border-radius: 8px;
+font-size: 12px;
+font-weight: bold;
+margin: 5px 10px 5px 0;
+&:hover {
+  color: lightgrey;
+  background-color: whitesmoke;
+  border: 1px solid lightgrey;
+}
+&:active {
+  color: white;
+  background-color: black;
+}
+@media (max-width: 800px) {
+  width: 125px;
+  font-size: 10px;
+}
 `;
+
+
 const CancelButton = styled.button`
-  margin-left: auto;
-  border: solid;
-  height: 25px;
-  width: 80px;
-  background-color: transparent;
+justify-content: space-between;
+width: 65px;
+height: 34px;
+background-color: white;
+border: 1px solid #ACACAC;
+border-radius: 8px;
+font-size: 12px;
+font-weight: bold;
+margin: 5px 5px 0 0;
+&:hover {
+  color: lightgrey;
+  background-color: whitesmoke;
+  border: 1px solid lightgrey;
+}
+&:active {
+  color: white;
+  background-color: black;
+}
+@media (max-width: 800px) {
+  width: 125px;
+  font-size: 10px;
+}
 `;
+
 
 const RemoveAllButton = styled.button`
   border: solid;
