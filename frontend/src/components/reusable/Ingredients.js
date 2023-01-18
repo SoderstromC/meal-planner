@@ -4,6 +4,7 @@ import { API_URL } from "utils/utils";
 import styled from "styled-components/macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList } from "@fortawesome/free-solid-svg-icons";
+import uniqid from 'uniqid';
 
 export const Ingredients = ({components}) => {
   const userId = useSelector((store) => store.user.userId);
@@ -16,7 +17,7 @@ export const Ingredients = ({components}) => {
     components.map((component) => {
       itemsToSave.push({
         "raw_text": component.raw_text,
-        "id": component.id
+        "id": uniqid()
       });
     });
 
@@ -89,7 +90,7 @@ const AddToShopping = styled.button`
   height: 34px;
   background-color: white;
   border: 1px solid #ACACAC;
-  border-radius: 13px;
+  border-radius: 8px;
   font-size: 12px;
   font-weight: bold;
   margin: 5px 0;
