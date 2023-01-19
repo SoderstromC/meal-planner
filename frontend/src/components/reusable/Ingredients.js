@@ -39,7 +39,7 @@ export const Ingredients = ({components}) => {
     <OuterWrapper>
       <ButtonWrapper>
         <h3>Ingredients</h3>
-        <AddToShopping type='button' onClick={buttonClickSave}><FontAwesomeIcon icon={faList} /> Add to shoppinglist</AddToShopping>
+        <AddToShopping type='button' onClick={buttonClickSave}><FontAwesomeIcon icon={faList} /> &nbsp; Add to shoppinglist</AddToShopping>
       </ButtonWrapper>
       <InnerWrapper>
         {components.map((component) => {
@@ -94,17 +94,19 @@ const AddToShopping = styled.button`
   font-size: 12px;
   font-weight: bold;
   margin: 5px 0;
+  cursor: pointer;
   &:hover {
-    color: lightgrey;
-    background-color: whitesmoke;
-    border: 1px solid lightgrey;
+    color: white;
+    background-color: black;
+    border: 1px solid white;
   }
   &:active {
     color: white;
     background-color: black;
+    transform: scale(1.02);
   }
   @media (max-width: 800px) {
-    width: 125px;
+    width: 135px;
     font-size: 10px;
   }
 `

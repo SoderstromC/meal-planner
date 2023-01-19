@@ -70,11 +70,11 @@ const Login = () => {
         <WebImage className="mobile-show">
           <img src={introImg} />
           <div className= "web-img-text">
-            <p>This meal planner tool helps you find inspiration, plan your meals and manage your shopping list.</p>
+            <p>This meal planner tool helps you find inspiration, plan your meals and manage your shopping list</p>
           </div>
         </WebImage>
         <WelcomeTextWrapper>
-            <p>This meal planner tool helps you find inspiration, plan your meals and manage your shopping list.</p>
+            <p>This meal planner tool helps you find inspiration, plan your meals and manage your shopping list</p>
         </WelcomeTextWrapper>
         </> 
         }
@@ -155,7 +155,8 @@ const WelcomeTextWrapper = styled.div`
   border-radius: 13px;
   padding: 30px;
   background-color: #fafafa;
-  font-size: 13px;
+  font-size: 16px;
+  font-weight: 800;
   @media screen and (min-width: 600px) {
     display: none !important;
   }
@@ -189,26 +190,33 @@ const InputWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   border: 1px solid #ACACAC;
-  border-radius: 5px;
-  gap: 20px; 
-  padding: 50px;
+  border-radius: 13px;
+  gap: 25px; 
+  padding: 70px 50px 50px 50px;
   background-color: #fafafa;
 `
+
 const InputLabelWrapper = styled.div`
   text-align: left;
 `
+
 const Input = styled.input`
-  padding: 10px; 
+  padding: 7px; 
   display: flex;
   flex-direction: column;
   border: 1px solid #ACACAC;
   border-radius: 5px;
   background-color: #fafafa;
+  margin-top: 7px;
+  font-size: 14px;
 `
 const Radiobuttons = styled.div`
   display: flex;
   flex-direction: row;
   margin: 15px;
+  label{
+   margin-bottom: 30px;
+  }
 `
 const RadioInput = styled.input`
   -webkit-appearance: none;
@@ -225,35 +233,48 @@ const LoginHeader = styled.div`
   height: 100px;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 25px;
   @media (min-width: 667px) {
     justify-content: left;
     height: 150px;
   }
 `
+
 const SubmitButton = styled.button`
   border: 1px solid #ACACAC;
   background-color: #F5F0F0;
-  border-radius: 5px;
-  padding: 2px 20px;
+  border-radius: 6px;
+  padding: 4px 20px;
+  &:hover {
+    color: lightgrey;
+    background-color: whitesmoke;
+    border: 1px solid lightgrey;
+  }
+  &:active {
+    color: white;
+    background-color: black;
+  }
+  }
 `
 const UserInputText = styled.div`
   color: red;
   font-size: 12px;
 `
-const MobileImage = styled.div`
-  width: 100%;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-  img {
-    border-radius: 13px;
-    width: 100%;
-  }
-  @media screen and (max-width: 600px) {
-    display: none !important;
-  }
-`
+
+// const MobileImage = styled.div`
+//   width: 100%;
+//   margin-bottom: 20px;
+//   display: flex;
+//   justify-content: center;
+//   img {
+//     border-radius: 13px;
+//     width: 100%;
+//   }
+//   @media screen and (max-width: 600px) {
+//     display: none !important;
+//   }
+// `
+
 const WebImage = styled.div`
   width: 100%;
   margin-bottom: 20px;
@@ -266,17 +287,20 @@ const WebImage = styled.div`
     width: 100%;
   }
   .web-img-text {
+    margin-right: 200px;
     position: absolute;
-    left: 7%;
-    top: 10%;
+    left: 5%;
+    top: 7%;
     color: white;
-    font-size: 17px;
+    font-size: 22px;
     padding: 10px;
+    font-weight: 600;
 
     @media screen and (max-width: 600px) {
       display: none !important;
     } 
 `
+
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: end;

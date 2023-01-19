@@ -14,6 +14,7 @@ const MyRecipes = () => {
   const accessToken = useSelector((store) => store.user.accessToken);
 
   const [recipeList, setRecipeList] = useState([]);
+  console.log('recipeList', recipeList)
 
   const navigate = useNavigate();
   
@@ -71,16 +72,21 @@ const MyRecipes = () => {
       <InnerWrapper>
         <Header />
         <SavedRecipesContainer>
-          <h3>My recipes</h3>
+          <h3>My Recipes</h3>
+          <RecipeListWrapper>
           {recipeList.length === 0 && (
-            <>
-              <p>Go to <Link to={`/recipes`}>Find recipes</Link> and add your favorite recipes....</p>
-              <EmptyList />
-            </>
+            <EmptyListContainer>
+              <EmptyListWrapper>
+                <EmptyList />
+              </EmptyListWrapper>
+                <EmptyTextWrapper>
+                  <h2>You haven't added any recipes yet</h2>
+                  <p>Go to <Link to={`/recipes`}>Find recipes</Link> to add your favorite recipes.</p>
+                </EmptyTextWrapper>
+              </EmptyListContainer>
           )}
           {recipeList.length > 0 && (
-          <RecipeListWrapper>
-          {console.log('new recipe list', recipeList) }
+          <>
           {recipeList.map((recipe) => {
             return (
             <>
@@ -102,9 +108,9 @@ const MyRecipes = () => {
             </SingleRecipeWrapper>
             </>
             )
-          })}
-        </RecipeListWrapper>
-        )}
+          })}</>
+        
+        )}</RecipeListWrapper>
         </SavedRecipesContainer>
       </InnerWrapper>
     </OuterWrapper>
@@ -115,37 +121,38 @@ export default MyRecipes;
 
 
 const SavedRecipesContainer = styled.div`
-width: 100%;
-h3{
-  margin-bottom: 10px;
-}
-a {
-  text-decoration: none;
-  font-weight: 600;
-  cursor: pointer;
-}
-a:visited {
-  color: black;
+  width: 100%;
+  h3{
+    margin-bottom: 10px;
   }
-a:hover {
-  color: red;
-}
+  a {
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  a:visited {
+    color: black;
+    }
+  a:hover {
+    color: red;
+  }
 `
 
 const RecipeListWrapper = styled.div`
- width: 100%;
- border: 1px solid #ACACAC;
- border-radius: 13px;
- margin-top: 10px;
- background-color: #fafafa;
-  a {
-    text-decoration: none;
+  width: 100%;
+  border: 1px solid #ACACAC;
+  border-radius: 13px;
+  margin-top: 10px;
+  padding: 24px 0 40px 0;
+  background-color: #fafafa;
+    a {
+      text-decoration: none;
+      }
+    a:hover {
+      font-weight: 700;
     }
-  a:hover {
-    font-weight: 700;
-  }
   @media (min-width: 667px) {
-    padding: 30px;
+  padding: 30px 0 70px 0;
   }
 `
 
@@ -164,12 +171,12 @@ const LinkWrapper = styled.div`
   width: 90%; 
   a {
   color: black;
+  font-weight: 400;
   }
   a:visited {
   color: black;
   }
   a:hover {
-  fontwight: 200;
   color: black;
   }
 `
@@ -190,4 +197,50 @@ const RemoveButton = styled.button`
   &:hover {
     transform: scale(1.2);
   }
+`
+
+const EmptyListContainer = styled.div`
+  margin: 0 auto; 
+  width: 300px;
+  padding: 0 0 30px 0;
+  font-size:  0.6em;
+  @media (min-width: 400px) {
+    width: 380px;
+    font-size: 0.6em;
+  }
+  @media (min-width: 667px) {
+    width: 460px;
+    font-size: 1em;
+  }
+`
+
+
+const EmptyListWrapper = styled.div`
+  width: 300px;
+  margin: 0 auto;
+  height: 240px;
+  @media (min-width: 667px) {
+    width: 450px;
+    height: 380px;
+  }
+`
+
+
+const EmptyTextWrapper = styled.div`
+  margin: 0 auto;
+  width: 500px;
+  text-align: center;
+  z-index: 100;
+  position: relative;
+    @media (max-width: 800px) {
+      width: 300px;
+    }
+      h2, p, a{
+      color: #A7A7A7;
+      a:visited {
+      color: #A7A7A7;
+      }
+      a:hover {
+      color: red;
+      }
 `
