@@ -94,16 +94,16 @@ const MainPageNavWrapper = styled.div`
 `
 const TextWrapper = styled.div`
   position: absolute;
-  top: 40px;
+  top: 35px;
   left: 35px;
   width: 199px;
   p {
     color: white;
-    font-size: 13px;
+    font-size: 14px;
   }
   h3{
     margin-bottom: 5px;
     color: white;
-    font-size: 19px;
+    font-size: 21px;
   }
 `

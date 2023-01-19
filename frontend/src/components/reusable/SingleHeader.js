@@ -77,7 +77,10 @@ const Text = styled.div`
   }
   @media (max-width: 800px) {
     h3{
-      font-size: 25px;
+      font-size: 20px;
+    }
+    p{
+      font-size: 14px;
     }
   }
 `

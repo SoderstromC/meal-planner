@@ -82,7 +82,6 @@ const SingleRecipeWrapper = styled.div`
 const IngredientsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-}
 `
 
 const IngredientsCard = styled.div`
@@ -92,6 +91,9 @@ const IngredientsCard = styled.div`
   text-align: left;
   border: rgb(232, 232, 232) solid 1px;
   height: min-content;
+  
+  @media (max-width: 667px) {
+    grid-template-columns: repeat(1, 1fr);
   }
 `
 
@@ -111,7 +113,11 @@ const InstructionsCard = styled.div`
 `
 
 const LoaderWrapper = styled.div`
-margin: 0 auto; 
-width: 500px;
+margin: 0 auto;
+width: 300px;
 padding-top: 70px;
+@media (min-width: 667px) {
+width: 400px;
+padding-top: 50px;
+}
 `
