@@ -11,6 +11,7 @@ export const RecipeCard = ({ id, name, time, img }) => {
   const dispatch = useDispatch(); // reduxButtonTest
   const [savedRecipe, setSavedRecipe] = useState(false);
   const userId = useSelector((store) => store.user.userId);
+  const recipeSaved = useSelector((store) => store.recipes.items) // reduxButtonTest
 
   const buttonClickSave = () => {
     
@@ -37,6 +38,7 @@ export const RecipeCard = ({ id, name, time, img }) => {
       // Below dispatch for reduxButtonTest
       const addNewSavedRecipe = {
         recipeId: id,
+        saved: true,
       };
       console.log(addNewSavedRecipe)
       dispatch(recipes.actions.addSavedRecipe(addNewSavedRecipe))
@@ -56,7 +58,7 @@ export const RecipeCard = ({ id, name, time, img }) => {
       </RecipeListCard>
      </Link>
      <SaveButton type='submit' onClick={buttonClickSave}>
-      { savedRecipe? <FontAwesomeIcon className="red-heart" icon={faHeart} /> : <FontAwesomeIcon className="grey-heart" icon={faHeart} />}
+      { savedRecipe  ? <FontAwesomeIcon className="red-heart" icon={faHeart} /> : <FontAwesomeIcon className="grey-heart" icon={faHeart} />}
      </SaveButton>
     </RecipeCardWrapper>
   );
