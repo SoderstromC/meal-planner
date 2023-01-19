@@ -4,7 +4,6 @@ import { useNavigate, Link } from "react-router-dom";
 import { Header } from "./reusable/Header";
 import styled from "styled-components";
 import { InnerWrapper, OuterWrapper } from './reusable/global/Wrappers';
-import findRecipeImg from "../assets/images/findRecipeImg.jpg";
 import inspirationFindImg from "../assets/images/inspirationFindImg.jpg";
 import inspirationSaveImg from "../assets/images/inspirationSaveImg.jpg";
 import inspirationShoppingImg from "../assets/images/inspirationShoppingImg.jpg";
@@ -78,7 +77,7 @@ const MainContainer = styled.div`
 
 const MainPageNavWrapper = styled.div`
   width: 250px;
-  height: 300px;
+  height: 360px;
   border: 2px solid white;
   border-radius: 13px;
   position: relative;
@@ -95,11 +94,16 @@ const MainPageNavWrapper = styled.div`
 `
 const TextWrapper = styled.div`
   position: absolute;
-  top: 8px;
-  left: 10px;
-  p, h3 {
+  top: 40px;
+  left: 35px;
+  width: 199px;
+  p {
     color: white;
-    text-shadow: 1px 1px 2px black;
-    font-size: 16px;
+    font-size: 13px;
+  }
+  h3{
+    margin-bottom: 5px;
+    color: white;
+    font-size: 19px;
   }
 `

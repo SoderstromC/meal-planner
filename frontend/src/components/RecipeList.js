@@ -93,4 +93,6 @@ const RecipeListWrapper = styled.div`
 
 const LoaderWrapper = styled.div`
   margin: 0 auto; 
+  width: 500px;
+  padding-top: 70px;
 `

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "./reusable/Header";
+import EmptyShoppingList from "./reusable/EmptyShoppingList";
 import { API_URL } from "utils/utils";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { InnerWrapper, OuterWrapper } from "./reusable/global/Wrappers";
-import NoIngredients from "./NoIngredients";
 import shopping from "reducers/shopping";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
@@ -116,13 +116,23 @@ const MyShoppingList = () => {
         <Header />
         <ShoppingListContainer>
           <h3>My Shopping List</h3>
-          <RemoveAllButton onClick={() => buttonClickRemoveAll(userId)}>
-            Remove all
-          </RemoveAllButton>
-          {shoppingList.length === 0 && <NoIngredients />}
+          <ShoppingListWrapper>
+          {shoppingList.length === 0 && (
+            <EmptyListWrapper>
+          <EmptyShoppingList />
+          <EmptyTextWrapper>
+          <h2>You haven't added any ingredients yet</h2>
+          <p>Go to <Link to={`/saved`}>My recipes</Link> to add ingredients to your shoppinglist.</p>
+          </EmptyTextWrapper>
+          </EmptyListWrapper>
+          )}
           {shoppingList.length > 0 && (
             <>
-              <ListWrapper>
+              <RemoveAllWrapper>
+              <RemoveAllButton onClick={() => buttonClickRemoveAll(userId)}>
+            Remove all
+              </RemoveAllButton>
+              </RemoveAllWrapper>
                 {shoppingList.map((component) => {
                   return (
                     <ShoppingItemContainer>
@@ -185,11 +195,10 @@ const MyShoppingList = () => {
                         </ShoppingItemWrapper>
                       )}
                     </ShoppingItemContainer>
-                  );
-                })}
-              </ListWrapper>
-            </>
-          )}
+                  )
+                })}</>
+            
+          )}</ShoppingListWrapper>
         </ShoppingListContainer>
       </InnerWrapper>
     </OuterWrapper>
@@ -203,7 +212,7 @@ const ShoppingListContainer = styled.div`
 `;
 
 
-const ListWrapper = styled.div`
+const ShoppingListWrapper = styled.div`
   width: 100%;
   border: 1px solid #acacac;
   border-radius: 13px;
@@ -395,6 +404,10 @@ margin: 5px 5px 0 0;
 }
 `;
 
+// const ButtonWrapper =styled.button`
+// display: flex;
+// justify-content: end;
+// `
 
 const RemoveAllButton = styled.button`
   border: solid;
@@ -402,3 +415,38 @@ const RemoveAllButton = styled.button`
   width: 100px;
   background-color: transparent;
 `;
+
+const RemoveAllWrapper = styled.div`
+  border: solid;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const EmptyListWrapper = styled.div`
+  margin: 0 auto; 
+  position: relative;
+  padding: 0 0 30px 0;
+  font-size:  0.6em;
+  @media (min-width: 400px) {
+    width: 380px;
+    font-size: 0.6em;
+  }
+  @media (min-width: 667px) {
+    width: 460px;
+    font-size: 1em;
+  }
+`
+
+const EmptyTextWrapper = styled.div`
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  h2, p, a{
+    color: #A7A7A7;
+    a:visited {
+    color: #A7A7A7;
+    }
+    a:hover {
+    color: red;
+    }
+`

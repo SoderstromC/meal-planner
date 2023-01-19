@@ -14,6 +14,7 @@ const MyRecipes = () => {
   const accessToken = useSelector((store) => store.user.accessToken);
 
   const [recipeList, setRecipeList] = useState([]);
+  console.log('recipeList', recipeList)
 
   const navigate = useNavigate();
   
@@ -72,15 +73,18 @@ const MyRecipes = () => {
         <Header />
         <SavedRecipesContainer>
           <h3>My recipes</h3>
+          <RecipeListWrapper>
           {recipeList.length === 0 && (
-            <>
-              <p>Go to <Link to={`/recipes`}>Find recipes</Link> and add your favorite recipes....</p>
+            <EmptyListWrapper>
               <EmptyList />
-            </>
+              <EmptyTextWrapper>
+              <h2>You haven't added any recipes yet</h2>
+              <p>Go to <Link to={`/recipes`}>Find recipes</Link> to add your favorite recipes.</p>
+              </EmptyTextWrapper>
+              </EmptyListWrapper>
           )}
           {recipeList.length > 0 && (
-          <RecipeListWrapper>
-          {console.log('new recipe list', recipeList) }
+          <>
           {recipeList.map((recipe) => {
             return (
             <>
@@ -102,9 +106,9 @@ const MyRecipes = () => {
             </SingleRecipeWrapper>
             </>
             )
-          })}
-        </RecipeListWrapper>
-        )}
+          })}</>
+        
+        )}</RecipeListWrapper>
         </SavedRecipesContainer>
       </InnerWrapper>
     </OuterWrapper>
@@ -137,6 +141,7 @@ const RecipeListWrapper = styled.div`
  border: 1px solid #ACACAC;
  border-radius: 13px;
  margin-top: 10px;
+ padding: 24px 0 40px 0;
  background-color: #fafafa;
   a {
     text-decoration: none;
@@ -144,9 +149,9 @@ const RecipeListWrapper = styled.div`
   a:hover {
     font-weight: 700;
   }
-  @media (min-width: 667px) {
-    padding: 30px;
-  }
+ @media (min-width: 667px) {
+ padding: 30px 0 70px 0;
+}
 `
 
 const SingleRecipeWrapper = styled.div`
@@ -164,12 +169,12 @@ const LinkWrapper = styled.div`
   width: 90%; 
   a {
   color: black;
+  font-weight: 400;
   }
   a:visited {
   color: black;
   }
   a:hover {
-  fontwight: 200;
   color: black;
   }
 `
@@ -190,4 +195,34 @@ const RemoveButton = styled.button`
   &:hover {
     transform: scale(1.2);
   }
+`
+
+const EmptyListWrapper = styled.div`
+  margin: 0 auto; 
+  width: 300px;
+  position: relative;
+  padding: 0 0 30px 0;
+  font-size:  0.6em;
+  @media (min-width: 400px) {
+    width: 380px;
+    font-size: 0.6em;
+  }
+  @media (min-width: 667px) {
+    width: 460px;
+    font-size: 1em;
+  }
+`
+
+const EmptyTextWrapper = styled.div`
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  h2, p, a{
+    color: #A7A7A7;
+    a:visited {
+    color: #A7A7A7;
+    }
+    a:hover {
+    color: red;
+    }
 `

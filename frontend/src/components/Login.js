@@ -70,11 +70,11 @@ const Login = () => {
         <WebImage className="mobile-show">
           <img src={introImg} />
           <div className= "web-img-text">
-            <p>This meal planner tool helps you find inspiration, plan your meals and manage your shopping list.</p>
+            <p>This meal planner tool helps you find inspiration, plan your meals and manage your shopping list</p>
           </div>
         </WebImage>
         <WelcomeTextWrapper>
-            <p>This meal planner tool helps you find inspiration, plan your meals and manage your shopping list.</p>
+            <p>This meal planner tool helps you find inspiration, plan your meals and manage your shopping list</p>
         </WelcomeTextWrapper>
         </> 
         }
@@ -191,16 +191,15 @@ const InputWrapper = styled.div`
   flex-direction: column;
   border: 1px solid #ACACAC;
   border-radius: 13px;
-  gap: 30px; 
-  padding: 50px;
+  gap: 25px; 
+  padding: 70px 50px 50px 50px;
   background-color: #fafafa;
 `
+
 const InputLabelWrapper = styled.div`
   text-align: left;
-  label{
-    font-weight: bold;
-  }
-  `
+`
+
 const Input = styled.input`
   padding: 7px; 
   display: flex;
@@ -210,7 +209,6 @@ const Input = styled.input`
   background-color: #fafafa;
   margin-top: 7px;
   font-size: 14px;
-
 `
 const Radiobuttons = styled.div`
   display: flex;
@@ -241,6 +239,7 @@ const LoginHeader = styled.div`
     height: 150px;
   }
 `
+
 const SubmitButton = styled.button`
   border: 1px solid #ACACAC;
   background-color: #F5F0F0;
@@ -261,6 +260,7 @@ const UserInputText = styled.div`
   color: red;
   font-size: 12px;
 `
+
 const MobileImage = styled.div`
   width: 100%;
   margin-bottom: 20px;
@@ -274,6 +274,7 @@ const MobileImage = styled.div`
     display: none !important;
   }
 `
+
 const WebImage = styled.div`
   width: 100%;
   margin-bottom: 20px;
@@ -286,19 +287,20 @@ const WebImage = styled.div`
     width: 100%;
   }
   .web-img-text {
-    margin-right: 230px;
+    margin-right: 200px;
     position: absolute;
-    left: 7%;
-    top: 10%;
+    left: 5%;
+    top: 7%;
     color: white;
-    font-size: 17px;
+    font-size: 22px;
     padding: 10px;
-    font-weight: 400;
+    font-weight: 600;
 
     @media screen and (max-width: 600px) {
       display: none !important;
     } 
 `
+
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: end;
