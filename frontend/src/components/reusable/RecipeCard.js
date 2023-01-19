@@ -9,7 +9,9 @@ import { faClock, faHeart } from "@fortawesome/free-solid-svg-icons";
 export const RecipeCard = ({ id, name, time, img }) => {
 
   const [savedRecipe, setSavedRecipe] = useState(false);
+  const [savedHeart, setSavedHeart] = useState();
   const userId = useSelector((store) => store.user.userId);
+  const recipes = useSelector((store) => store.recipes.results);
 
   const buttonClickSave = () => {
     
@@ -27,12 +29,27 @@ export const RecipeCard = ({ id, name, time, img }) => {
         console.log("savedRecipeData", data.response);
         if(data.success === true) {
           setSavedRecipe(true);
+          console.log('savedRecipe', savedRecipe)
         } else {
           alert('You have already saved this recipe');
         }
       })
-      .catch((error) => console.error("error2", error));
-  };
+      //change heart colour to red when a recipe is saved
+        .then((res) => res.json())
+        .finally((data) => {
+        const redHeart = recipes.map((recipe) => {
+          if (recipe.id === data.id) {
+            recipe.hearts += 1;
+          }
+          return recipe;
+        });
+
+        // updates recipe with heart count/saved
+        setSavedHeart(redHeart);
+        console.log('savedHeart', savedHeart)
+      });
+    }
+  
 
   return (
     <RecipeCardWrapper>
@@ -47,9 +64,15 @@ export const RecipeCard = ({ id, name, time, img }) => {
         </TextWrapper> 
       </RecipeListCard>
      </Link>
-     <SaveButton type='submit' onClick={buttonClickSave}>
-      { savedRecipe? <FontAwesomeIcon className="red-heart" icon={faHeart} /> : <FontAwesomeIcon className="grey-heart" icon={faHeart} />}
-     </SaveButton>
+     <>
+      {recipes.map((recipe) => {
+        return (
+          <SaveButton type='button' className={recipe.hearts === 0 ? 'red-heart' : 'grey-heart'} onClick={() => { buttonClickSave(recipe._id) }}>
+            <span> ❤️ </span>
+          </SaveButton>
+          )
+        })}
+     </> 
     </RecipeCardWrapper>
   );
 };
@@ -69,7 +92,7 @@ const RecipeListCard = styled.section`
   background-image: -ms-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${(props) => props.img}); /* IE10+ */
   background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${(props) => props.img}); /* W3C */
   background-size: cover;
-  }
+  
   `
 
 const RecipeCardWrapper = styled.div`
