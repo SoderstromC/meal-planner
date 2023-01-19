@@ -9,6 +9,7 @@ const recipes = createSlice({
     singleRecipe: null,
     instructions: [],
     loading: false,
+    items: [], // reduxButtonTest
   },
   reducers: {
     setRecipes: (store, action) => {
@@ -28,6 +29,10 @@ const recipes = createSlice({
     },
     isLoading: (store, action) => {
       store.loading = action.payload;
+    },
+    //addSavedRecipe => reduxButtonTest
+    addSavedRecipe: (store, action) => {
+      store.items.push(action.payload)
     },
   },
 });

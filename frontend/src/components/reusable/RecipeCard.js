@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { API_URL } from "utils/utils";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux"; //added useDispatch for reduxButtonTest
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 export const RecipeCard = ({ id, name, time, img }) => {
-
+  const dispatch = useDispatch(); // reduxButtonTest
   const [savedRecipe, setSavedRecipe] = useState(false);
   const userId = useSelector((store) => store.user.userId);
 
@@ -32,6 +32,13 @@ export const RecipeCard = ({ id, name, time, img }) => {
         }
       })
       .catch((error) => console.error("error2", error));
+
+      // Below dispatch for reduxButtonTest
+      const addNewSavedRecipe = {
+        recipeId: id,
+      };
+      dispatch(recipes.actions.addSavedRecipe(addNewSavedRecipe))
+      setSavedRecipe('');
   };
 
   return (
