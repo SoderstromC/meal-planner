@@ -261,19 +261,19 @@ const UserInputText = styled.div`
   font-size: 12px;
 `
 
-const MobileImage = styled.div`
-  width: 100%;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-  img {
-    border-radius: 13px;
-    width: 100%;
-  }
-  @media screen and (max-width: 600px) {
-    display: none !important;
-  }
-`
+// const MobileImage = styled.div`
+//   width: 100%;
+//   margin-bottom: 20px;
+//   display: flex;
+//   justify-content: center;
+//   img {
+//     border-radius: 13px;
+//     width: 100%;
+//   }
+//   @media screen and (max-width: 600px) {
+//     display: none !important;
+//   }
+// `
 
 const WebImage = styled.div`
   width: 100%;

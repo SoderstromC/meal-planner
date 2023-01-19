@@ -92,6 +92,7 @@ const MainPageNavWrapper = styled.div`
     border: 2px solid #333;
   }
 `
+
 const TextWrapper = styled.div`
   position: absolute;
   top: 35px;
@@ -99,7 +100,7 @@ const TextWrapper = styled.div`
   width: 199px;
   p {
     color: white;
-    font-size: 14px;
+    font-size: 10px;
   }
   h3{
     margin-bottom: 5px;
