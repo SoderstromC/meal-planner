@@ -76,8 +76,8 @@ const MainContainer = styled.div`
 `
 
 const MainPageNavWrapper = styled.div`
-  width: 250px;
-  height: 360px;
+  width: 337.5px;
+  height: 330px;
   border: 2px solid white;
   border-radius: 13px;
   position: relative;
@@ -90,6 +90,10 @@ const MainPageNavWrapper = styled.div`
   }
   &:hover {
     border: 2px solid #333;
+  }
+  @media (min-width: 667px) {
+    width: 250px;
+    height: 360px;
   }
 `
 

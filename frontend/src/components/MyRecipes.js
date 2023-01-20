@@ -136,6 +136,10 @@ const SavedRecipesContainer = styled.div`
   a:hover {
     color: red;
   }
+  @media (max-width: 800px) {
+    h3{
+      padding-left: 10px;
+    }
 `
 
 const RecipeListWrapper = styled.div`
@@ -143,17 +147,18 @@ const RecipeListWrapper = styled.div`
   border: 1px solid #ACACAC;
   border-radius: 13px;
   margin-top: 10px;
-  padding: 24px 0 40px 0;
   background-color: #fafafa;
+  padding: 0;
+  margin-top: 10px;
     a {
       text-decoration: none;
       }
     a:hover {
       font-weight: 700;
     }
-  @media (min-width: 667px) {
-  padding: 30px 0 70px 0;
-  }
+    @media (min-width: 667px) {
+      padding: 30px;
+    }
 `
 
 const SingleRecipeWrapper = styled.div`
