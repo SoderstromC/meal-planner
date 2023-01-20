@@ -26,4 +26,4 @@ const ItemWrapper = styled.div`
     flex-direction: row;
     align-items: center;
   }
-  `
+`

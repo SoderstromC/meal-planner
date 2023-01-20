@@ -75,11 +75,10 @@ const NavContainer = styled.div`
   font-weight: 600;
   a {
     text-decoration: none;
-    }
+  }
   a:visited {
     color: black;
-    }
-  
+  }
   a:hover {
     color: red;
   }
@@ -98,7 +97,7 @@ const LogOutButton = styled.button`
   background: transparent;
   border: none;
   cursor: pointer;
-  color: grey;
+  color: #5A5959;
   padding: 0;
 `
 

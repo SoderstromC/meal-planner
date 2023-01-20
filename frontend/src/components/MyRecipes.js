@@ -14,7 +14,6 @@ const MyRecipes = () => {
   const accessToken = useSelector((store) => store.user.accessToken);
 
   const [recipeList, setRecipeList] = useState([]);
-  console.log('recipeList', recipeList)
 
   const navigate = useNavigate();
   
@@ -42,7 +41,7 @@ const MyRecipes = () => {
       .then((data) => {
         setRecipeList(data.response)
       })
-      .catch((error) => console.error('error1', error));
+      .catch((error) => console.error("Error fetching users recipes:", error));
   };
 
   useEffect(() => {
@@ -64,7 +63,7 @@ const MyRecipes = () => {
       .then((data) => {
         setRecipeList(data.response)
       })
-      .catch((error) => console.error("error2", error));
+      .catch((error) => console.error("Error removing a recipe:", error));
   };
 
   return (
@@ -148,22 +147,22 @@ const RecipeListWrapper = styled.div`
   border-radius: 13px;
   margin-top: 10px;
   background-color: #fafafa;
-  padding: 0;
+  padding: 12px;
   margin-top: 10px;
-    a {
-      text-decoration: none;
-      }
-    a:hover {
-      font-weight: 700;
+  a {
+    text-decoration: none;
     }
-    @media (min-width: 667px) {
-      padding: 30px;
-    }
+  a:hover {
+    font-weight: 700;
+  }
+  @media (min-width: 667px) {
+    padding: 30px;
+  }
 `
 
 const SingleRecipeWrapper = styled.div`
   display: flex;
-  padding: 10px;
+  padding: 6px;
   @media (min-width: 400px) {
     padding: 10px 40px;
   }
@@ -183,6 +182,14 @@ const LinkWrapper = styled.div`
   }
   a:hover {
   color: black;
+  }
+  p{
+    font-size: 12px; 
+  }
+  @media (min-width: 400px) {
+    p{
+      font-size: 15px; 
+    }
   }
 `
 
@@ -219,7 +226,6 @@ const EmptyListContainer = styled.div`
   }
 `
 
-
 const EmptyListWrapper = styled.div`
   width: 300px;
   margin: 0 auto;
@@ -230,22 +236,22 @@ const EmptyListWrapper = styled.div`
   }
 `
 
-
 const EmptyTextWrapper = styled.div`
   margin: 0 auto;
   width: 500px;
   text-align: center;
   z-index: 100;
   position: relative;
-    @media (max-width: 800px) {
-      width: 300px;
-    }
-      h2, p, a{
-      color: #A7A7A7;
-      a:visited {
-      color: #A7A7A7;
-      }
-      a:hover {
-      color: red;
-      }
+  @media (max-width: 800px) {
+    width: 300px;
+  }
+  h2, p, a {
+    color: #A7A7A7;
+  a:visited {
+    color: #A7A7A7;
+  }
+  a:hover {
+    color: red;
+  }
+  }
 `

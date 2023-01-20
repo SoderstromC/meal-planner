@@ -72,7 +72,7 @@ const MainContainer = styled.div`
   gap: 20px;
   a {
     text-decoration: none;
-    }
+  }
 `
 
 const MainPageNavWrapper = styled.div`
@@ -104,7 +104,7 @@ const TextWrapper = styled.div`
   width: 199px;
   p {
     color: white;
-    font-size: 10px;
+    font-size: 15px;
   }
   h3{
     margin-bottom: 5px;

@@ -28,10 +28,10 @@ export const RecipeCard = ({ id, name, time, img }) => {
         if(data.success === true) {
           setSavedRecipe(true);
         } else {
-          alert('You have already saved this recipe');
+          alert("You have already saved this recipe");
         }
       })
-      .catch((error) => console.error("error2", error));
+      .catch((error) => console.error("Error saving a recipe:", error));
   };
 
   return (

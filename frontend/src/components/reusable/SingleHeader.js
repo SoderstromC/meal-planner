@@ -41,20 +41,20 @@ const SingleImageWrapper = styled.div`
 `
 
 const SingleImage = styled.div`
-    position: absolute; 
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    opacity: 90%;
-    background-image: -moz-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0, 0, 0, 0.6) 100%),  url(${(props) => props.img}); /* FF3.6+ */
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.1)), color-stop(100%,rgba(0,0,0,0.6))),  url(${(props) => props.img}); /* Chrome,Safari4+ */
-    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%),  url(${(props) => props.img}); /* Chrome10+,Safari5.1+ */
-    background-image: -o-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%),  url(${(props) => props.img}); /* Opera 11.10+ */
-    background-image: -ms-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%),  url(${(props) => props.img}); /* IE10+ */
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%),  url(${(props) => props.img}); /* W3C */
-    background-size: cover;
-    background-position: center;
-    `
+  position: absolute; 
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  opacity: 90%;
+  background-image: -moz-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0, 0, 0, 0.6) 100%),  url(${(props) => props.img}); /* FF3.6+ */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.1)), color-stop(100%,rgba(0,0,0,0.6))),  url(${(props) => props.img}); /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%),  url(${(props) => props.img}); /* Chrome10+,Safari5.1+ */
+  background-image: -o-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%),  url(${(props) => props.img}); /* Opera 11.10+ */
+  background-image: -ms-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%),  url(${(props) => props.img}); /* IE10+ */
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%),  url(${(props) => props.img}); /* W3C */
+  background-size: cover;
+  background-position: center;
+`
 
 const Text = styled.div`
   position: absolute;
@@ -62,14 +62,14 @@ const Text = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  h3{
+  h3 {
     color: white;
     margin: 30px 0 12px 30px;
     width: 350px;
     text-shadow: 1px 0px 1px #000;
     font-size: 30px;
   }
-  p{
+  p {
     color: white;
     align-self: flex-end;
     margin: 30px 30px 12px 0;
@@ -77,10 +77,10 @@ const Text = styled.div`
     text-shadow: 1px 1px 2px #333;
   }
   @media (max-width: 800px) {
-    h3{
+    h3 {
       font-size: 20px;
     }
-    p{
+    p {
       font-size: 14px;
     }
   }

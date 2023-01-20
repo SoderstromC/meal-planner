@@ -60,84 +60,99 @@ const Login = () => {
     <OuterWrapper>
       <InnerWrapper>
         <LoginHeader>
-          <img src={Logo} alt="Logo" />
+          <img src={Logo} alt='Logo' />
         </LoginHeader>
-        {!showForm &&
-        <>
-        <ButtonWrapper>
-          <ShowFormButton onClick={() => setShowForm(!showForm)}><span className="login">Login</span> | <span className="signup" onClick={() => setMode("register")}>Signup</span></ShowFormButton>
-        </ButtonWrapper>
-        <WebImage className="mobile-show">
-          <img src={introImg} />
-          <div className= "web-img-text">
-            <p>This meal planner tool helps you find inspiration, plan your meals and manage your shopping list</p>
-          </div>
-        </WebImage>
-        <WelcomeTextWrapper>
-            <p>This meal planner tool helps you find inspiration, plan your meals and manage your shopping list</p>
-        </WelcomeTextWrapper>
-        </> 
-        }
-        {showForm &&
-        <FormWrapper>
-          <form onSubmit={onFormSubmit}>
-          <h1> { mode === "register" && "Register" || "Log in" } </h1>
-          <Radiobuttons>
-            <label htmlFor='register'>{mode === "register" ? "" : "Not having an account yet? Sign up" }
-            <RadioInput
-            type='radio'
-            id='register'
-            checked={mode === "register"}
-            onChange={() => setMode("register")}
-            />
-            </label>
-            <label htmlFor='login'>{mode === "login" ? "" : "Already got an account? Log in" }
-            <RadioInput
-              type='radio'
-              id='login'
-              checked={mode === "login"}
-              onChange={() => setMode("login")}
-              />
-            </label>
-          </Radiobuttons>
-          <InputWrapper>
-            <InputLabelWrapper>
-            <label htmlFor='username'>Username</label>
-            <Input
-              type='text'
-              id='username'
-              value={username}
-              placeholder='Username'
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-            </InputLabelWrapper>
-            <InputLabelWrapper>
-            <label htmlFor='password'>Password</label>
-            <Input
-              type='password'
-              id='password'
-              placeholder='Password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              /> 
-            </InputLabelWrapper>
-            <UserInputText>
-            {password && password.length < 8
-              ? 'Password must be over 8 characters'
-              : ''}
-            </UserInputText>
-            <SubmitButton type='submit'>{ mode === "register" && "Register" || "Log in" }</SubmitButton>
-            <UserInputText>
-            {error !== null && (
-              <p>{error}</p>
-            )}
-            </UserInputText>
-          </InputWrapper>
-          </form>
-        </FormWrapper>
-        }
+        {!showForm && (
+          <>
+            <ButtonWrapper>
+              <ShowFormButton onClick={() => setShowForm(!showForm)}>
+                <span className='login'>Login</span> |{" "}
+                <span className='signup' onClick={() => setMode("register")}>
+                  Signup
+                </span>
+              </ShowFormButton>
+            </ButtonWrapper>
+            <WebImage className='mobile-show'>
+              <img src={introImg} />
+              <div className='web-img-text'>
+                <p>
+                  This meal planner tool helps you find inspiration, plan your
+                  meals and manage your shopping list
+                </p>
+              </div>
+            </WebImage>
+            <WelcomeTextWrapper>
+              <p>
+                This meal planner tool helps you find inspiration, plan your
+                meals and manage your shopping list
+              </p>
+            </WelcomeTextWrapper>
+          </>
+        )}
+        {showForm && (
+          <FormWrapper>
+            <form onSubmit={onFormSubmit}>
+              <h1> {(mode === "register" && "Register") || "Log in"} </h1>
+              <Radiobuttons>
+                <label htmlFor='register'>
+                  {mode === "register"
+                    ? ""
+                    : "Not having an account yet? Sign up"}
+                  <RadioInput
+                    type='radio'
+                    id='register'
+                    checked={mode === "register"}
+                    onChange={() => setMode("register")}
+                  />
+                </label>
+                <label htmlFor='login'>
+                  {mode === "login" ? "" : "Already got an account? Log in"}
+                  <RadioInput
+                    type='radio'
+                    id='login'
+                    checked={mode === "login"}
+                    onChange={() => setMode("login")}
+                  />
+                </label>
+              </Radiobuttons>
+              <InputWrapper>
+                <InputLabelWrapper>
+                  <label htmlFor='username'>Username</label>
+                  <Input
+                    type='text'
+                    id='username'
+                    value={username}
+                    placeholder='Username'
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
+                </InputLabelWrapper>
+                <InputLabelWrapper>
+                  <label htmlFor='password'>Password</label>
+                  <Input
+                    type='password'
+                    id='password'
+                    placeholder='Password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </InputLabelWrapper>
+                <UserInputText>
+                  {password && password.length < 8
+                    ? "Password must be over 8 characters"
+                    : ""}
+                </UserInputText>
+                <SubmitButton type='submit'>
+                  {(mode === "register" && "Register") || "Log in"}
+                </SubmitButton>
+                <UserInputText>
+                  {error !== null && <p>{error}</p>}
+                </UserInputText>
+              </InputWrapper>
+            </form>
+          </FormWrapper>
+        )}
       </InnerWrapper>
     </OuterWrapper>
   );
@@ -145,22 +160,21 @@ const Login = () => {
 
 export default Login;
 
+
 const WelcomeTextWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   max-width: 100%;
-  border: 1px solid #ACACAC;
-  border-radius: 13px;
   padding: 30px;
-  background-color: #fafafa;
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 600;
   @media screen and (min-width: 600px) {
     display: none !important;
   }
 `
+
 const ShowFormButton = styled.button`
   background-color: transparent;
   border: none;
@@ -176,6 +190,7 @@ const ShowFormButton = styled.button`
     color: red;
   }
 `
+
 const FormWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -184,14 +199,15 @@ const FormWrapper = styled.div`
   max-width: 100%;
   margin-bottom: 20px;
 `
+
 const InputWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 1px solid #ACACAC;
+  border: 1px solid #acacac;
   border-radius: 13px;
-  gap: 25px; 
+  gap: 25px;
   padding: 70px 50px 50px 50px;
   background-color: #fafafa;
 `
@@ -201,23 +217,25 @@ const InputLabelWrapper = styled.div`
 `
 
 const Input = styled.input`
-  padding: 7px; 
+  padding: 7px;
   display: flex;
   flex-direction: column;
-  border: 1px solid #ACACAC;
+  border: 1px solid #acacac;
   border-radius: 5px;
   background-color: #fafafa;
   margin-top: 7px;
   font-size: 14px;
 `
+
 const Radiobuttons = styled.div`
   display: flex;
   flex-direction: row;
   margin: 15px;
-  label{
-   margin-bottom: 30px;
+  label {
+    margin-bottom: 30px;
   }
 `
+
 const RadioInput = styled.input`
   -webkit-appearance: none;
   font-size: 60px;
@@ -225,9 +243,10 @@ const RadioInput = styled.input`
   height: 0;
   text-align: center;
   &:checked {
-    visibility:hidden;
+    visibility: hidden;
   }
 `
+
 const LoginHeader = styled.div`
   display: flex;
   height: 100px;
@@ -245,35 +264,26 @@ const SubmitButton = styled.button`
   background-color: #F5F0F0;
   border-radius: 6px;
   padding: 4px 20px;
+  cursor: pointer;
   &:hover {
-    color: lightgrey;
-    background-color: whitesmoke;
-    border: 1px solid lightgrey;
+    color: white;
+    background-color: black;
+    border: 1px solid white;
   }
   &:active {
     color: white;
     background-color: black;
+    transform: scale(1.02);
   }
+  @media (max-width: 800px) {
+    font-size: 10px;
   }
 `
+
 const UserInputText = styled.div`
   color: red;
   font-size: 12px;
 `
-
-// const MobileImage = styled.div`
-//   width: 100%;
-//   margin-bottom: 20px;
-//   display: flex;
-//   justify-content: center;
-//   img {
-//     border-radius: 13px;
-//     width: 100%;
-//   }
-//   @media screen and (max-width: 600px) {
-//     display: none !important;
-//   }
-// `
 
 const WebImage = styled.div`
   width: 100%;
@@ -281,7 +291,6 @@ const WebImage = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-
   img {
     border-radius: 13px;
     width: 100%;
@@ -295,10 +304,9 @@ const WebImage = styled.div`
     font-size: 22px;
     padding: 10px;
     font-weight: 600;
-
-    @media screen and (max-width: 600px) {
-      display: none !important;
-    } 
+  @media screen and (max-width: 600px) {
+    display: none !important;
+  } 
 `
 
 const ButtonWrapper = styled.div`

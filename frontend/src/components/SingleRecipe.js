@@ -55,7 +55,7 @@ export default SingleRecipe;
 const GoBackButton = styled.button`
   display: none;
   align-self: flex-start;
-  margin: 10px 0px 0px 0px;
+  margin: 10px 0 0 0;
   font-size: 25px;
   width: 65px;
   height: 20px;
@@ -86,12 +86,11 @@ const IngredientsWrapper = styled.div`
 
 const IngredientsCard = styled.div`
   padding: 10px 25px;
-  background-color: rgb(252, 252, 252);
+  background-color: #FCFCFC;
   border-radius: 13px;
   text-align: left;
-  border: rgb(232, 232, 232) solid 1px;
+  border: #E8E8E8 solid 1px;
   height: min-content;
-  
   @media (max-width: 667px) {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -104,20 +103,20 @@ const InstructionsWrapper = styled.div`
 
 const InstructionsCard = styled.div`
   padding: 10px 25px;
-  background-color: rgb(252, 252, 252);
+  background-color: #FCFCFC;
   border-radius: 13px;
   text-align: left;
-  border: rgb(232, 232, 232) solid 1px;
+  border: #E8E8E8 solid 1px;
   height: min-content;
   }
 `
 
 const LoaderWrapper = styled.div`
-margin: 0 auto;
-width: 300px;
-padding-top: 70px;
-@media (min-width: 667px) {
-width: 400px;
-padding-top: 50px;
-}
+  margin: 0 auto;
+  width: 300px;
+  padding-top: 70px;
+  @media (min-width: 667px) {
+  width: 400px;
+  padding-top: 50px;
+  }
 `

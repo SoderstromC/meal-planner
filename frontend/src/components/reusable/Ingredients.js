@@ -32,7 +32,7 @@ export const Ingredients = ({components}) => {
       .then((data) => {
         console.log("savedShoppingListData", data);
       })
-      .catch((error) => console.error("error2", error));
+      .catch((error) => console.error("Error saving items to shopping list:", error));
     };
 
   return (

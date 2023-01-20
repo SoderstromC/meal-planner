@@ -169,14 +169,12 @@ app.post("/saveRecipe", async (req, res) => {
 
 app.put("/removeRecipe", async (req, res) => {
   const { recipeId, userId } = req.body;
-  console.log(userId)
   try {
     const removeRecipe = await User.findByIdAndUpdate(
       userId,
       { $pull: { savedRecipes: { recipeId } } },
       { new: true }
     );
-    console.log(removeRecipe);
     res
       .status(201)
       .json({ success: true, response: removeRecipe.savedRecipes });
@@ -216,7 +214,7 @@ app.post("/saveListItem", async (req, res) => {
 });
 
 
-// SHOW SHOPPING LIST
+//SHOW SHOPPING LIST
 
 app.get("/listItems/:userId", async (req, res) => {
   const { userId } = req.params;
@@ -239,7 +237,6 @@ app.put("/removeIngredient", async (req, res) => {
       { $pull: { shoppingItems: { id } } },
       { new: true }
     );
-    console.log("removeIngredient", removeIngredient);
     res
       .status(201)
       .json({ success: true, response: removeIngredient.shoppingItems });
@@ -248,29 +245,24 @@ app.put("/removeIngredient", async (req, res) => {
   }
 });
 
+
+//EDIT SHOPPINGITEM IN SHOPPING LIST
+
  app.put("/editIngredient", async (req, res) => {
     const { userId, id, text } = req.body;
-    console.log('tadaaa',text )
 
     try {
-      console.log("update...");
       const editResult = await User.findOneAndUpdate(
         { _id: userId, "shoppingItems.id": id },
         { $set: { "shoppingItems.$.raw_text": text } },
         { new: true }
       );
-      //https://www.mongodb.com/docs/drivers/node/current/fundamentals/crud/write-operations/embedded-arrays/
-      //const updateIngredient = await User.findByIdAndUpdate(userId, {new: true}, { $ : {recipeComponents: { id }}},)
-
-      console.log("resultEditIngredient", editResult);
       res
         .status(201)
         .json({ success: true, response: editResult.shoppingItems });
     } catch (error) {
       res.status(400).json({ success: false, response: error });
     }
-
-    /* To get the updated document, we need to specify "new: true": https://stackoverflow.com/questions/30419575/mongoose-findbyidandupdate-not-returning-correct-model*/
   });
 
 
@@ -284,8 +276,6 @@ app.put("/removeallitems", async (req, res) => {
       { $pull: { shoppingItems: {} }},
       { new: true }
     );
-
-    console.log("removeAllItems", removeAllItems);
     res
       .status(201)
       .json({ success: true, response: removeAllItems.shoppingItems });
@@ -294,6 +284,8 @@ app.put("/removeallitems", async (req, res) => {
   }
 });
 
+
+//TECHNIGO RESOURCES FOR REFERENCE
 
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");

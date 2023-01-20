@@ -31,7 +31,6 @@ const MyShoppingList = () => {
   let counter = 0;
 
   const fetchMyShoppingList = () => {
-    //const MY_SHOPPINGLIST_URL = `http://localhost:8090/listItems/${userId}`;
     const MY_SHOPPINGLIST_URL = API_URL(`listItems/${userId}`);
 
     const options = {
@@ -62,12 +61,11 @@ const MyShoppingList = () => {
       .then((res) => res.json())
       .then((data) => {
         setShoppingList(data.response);
-        console.log("Updatedshoppinglist", data.response);
       })
       .catch((error) => console.error("Error removing ingredient:", error));
   };
 
-  /**** UPDATE INGREDIENT FROM USERS SAVED SHOPPINGLIST ****/
+  //UPDATE INGREDIENT FROM USERS SAVED SHOPPINGLIST
 
   const buttonClickEditIngredient = (id) => {
     setEditItem(id);
@@ -78,12 +76,14 @@ const MyShoppingList = () => {
   };
 
   const buttonClickSave = (id) => {
-    const EDIT_INGREDIENT_URL = `http://localhost:8090/editIngredient`;
+    const EDIT_INGREDIENT_URL = API_URL("editIngredient");
+
     const options = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId: userId, id: id, text: inputValue }),
     };
+
     fetch(EDIT_INGREDIENT_URL, options)
       .then((res) => res.json())
       .then((data) => {
@@ -93,8 +93,10 @@ const MyShoppingList = () => {
       .catch((error) => console.error("Error saving ingredient:", error));
   };
   
+  //REMOVE ALL INGREDIENTS FROM SHOPPINGLIST
+
   const buttonClickRemoveAll = () => {
-    const EDIT_INGREDIENT_URL = `http://localhost:8090/removeallitems`;
+    const EDIT_INGREDIENT_URL = API_URL("removeallitems");
     const options = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -104,8 +106,6 @@ const MyShoppingList = () => {
       .then((res) => res.json())
       .then((data) => {
         setShoppingList(data.response);
-        console.log("shoppinglistremoved", data.response);
-        console.log("shoppingList.length", shoppingList.length);
       })
       .catch((error) => console.error("Error removing all items:", error));
   };
@@ -208,7 +208,7 @@ export default MyShoppingList;
 
 const ShoppingListContainer = styled.div`
   width: 100%;
-  h3{
+  h3 {
     margin-bottom: 10px;
   }
   a {
@@ -218,16 +218,16 @@ const ShoppingListContainer = styled.div`
   }
   a:visited {
     color: black;
-    }
+  }
   a:hover {
     color: red;
   }
   @media (max-width: 800px) {
-    h3{
+    h3 {
       padding-left: 10px;
     }
+  }
   `
-
 
 const ShoppingListWrapper = styled.div`
   width: 100%;
@@ -250,7 +250,6 @@ const ShoppingItemContainer = styled.div`
   }
 `
 
-
 const ShoppingItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -267,15 +266,12 @@ const ShoppingItemWrapper = styled.div`
   }
 `
 
-
 const EditItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
-
   justify-content: flex-start;
   align-items: center;
   padding: 0 15px 0 15px;
-
   .buttonwrapper {
     margin-left: auto;
     display: flex;
@@ -296,7 +292,6 @@ const EditItemWrapper = styled.div`
   }
 `
 
-
 const Item = styled.div`
   max-width: 465px;
   font-size: 12px;
@@ -305,7 +300,6 @@ const Item = styled.div`
     font-size: 16px;
   }
 `
-
 
 const CheckBox = styled.input`
   cursor: pointer;
@@ -339,7 +333,6 @@ const CheckBox = styled.input`
   }
 `
 
-
 const RemoveItem = styled.button`
   margin-left: auto;
   border: none;
@@ -357,7 +350,6 @@ const RemoveItem = styled.button`
     padding: 0;
   }
 `
-
 
 const EditTextInput = styled.input`
   transform: scale(1.2);
@@ -379,100 +371,98 @@ const EditTextInput = styled.input`
   }
 `
 
-
 const EditItem = styled.button`
-justify-content: space-between;
-width: 60px;
-height: 34px;
-background-color: white;
-border: 1px solid #ACACAC;
-border-radius: 8px;
-font-size: 12px;
-font-weight: bold;
-margin: 5px 0;
-padding: 0;
-cursor: pointer;
-  &:hover {
-    color: white;
-    background-color: black;
-    border: 1px solid white;
-  }
-  &:active {
-    color: white;
-    background-color: black;
-    transform: scale(1.02);
-  }
-  @media (max-width: 800px) {
-    width: 30px;
-    height: 25px;
-    font-size: 10px;
-    margin: 0 7px;
-    border-radius: 5px;
-  }
-}
+  justify-content: space-between;
+  width: 60px;
+  height: 34px;
+  background-color: white;
+  border: 1px solid #ACACAC;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 5px 0;
+  padding: 0;
+  cursor: pointer;
+    &:hover {
+      color: white;
+      background-color: black;
+      border: 1px solid white;
+    }
+    &:active {
+      color: white;
+      background-color: black;
+      transform: scale(1.02);
+    }
+    @media (max-width: 800px) {
+      width: 30px;
+      height: 25px;
+      font-size: 10px;
+      margin: 0 7px;
+      border-radius: 5px;
+    }
 `
 
 const SaveItem = styled.button`
-justify-content: space-between;
-width: 60px;
-height: 34px;
-background-color: white;
-border: 1px solid #ACACAC;
-border-radius: 8px;
-font-size: 12px;
-font-weight: bold;
-margin: 5px;
-padding: 0;
-cursor: pointer;
-  &:hover {
-    color: white;
-    background-color: black;
-    border: 1px solid white;
-  }
-  &:active {
-    color: white;
-    background-color: black;
-    transform: scale(1.02);
-  }
-  @media (max-width: 800px) {
-    width: 45px;
-    height: 25px;
-    font-size: 10px;
-    margin: 4px;
-    border-radius: 5px;
-  }
+  justify-content: space-between;
+  width: 60px;
+  height: 34px;
+  background-color: white;
+  border: 1px solid #ACACAC;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 5px;
+  padding: 0;
+  cursor: pointer;
+    &:hover {
+      color: white;
+      background-color: black;
+      border: 1px solid white;
+    }
+    &:active {
+      color: white;
+      background-color: black;
+      transform: scale(1.02);
+    }
+    @media (max-width: 800px) {
+      width: 45px;
+      height: 25px;
+      font-size: 10px;
+      margin: 4px;
+      border-radius: 5px;
+    }
 `
 
 
 const CancelItem = styled.button`
-justify-content: space-between;
-width: 60px;
-height: 34px;
-background-color: white;
-border: 1px solid #ACACAC;
-border-radius: 8px;
-font-size: 12px;
-font-weight: bold;
-margin: 5px 0;
-padding: 0;
-cursor: pointer;
-  &:hover {
-    color: white;
-    background-color: black;
-    border: 1px solid white;
-  }
-  &:active {
-    color: white;
-    background-color: black;
-    transform: scale(1.02);
-  }
-  @media (max-width: 800px) {
-    width: 45px;
-    height: 25px;
-    font-size: 10px;
-    margin: 0 7px;
-    border-radius: 5px;
-  }
+  justify-content: space-between;
+  width: 60px;
+  height: 34px;
+  background-color: white;
+  border: 1px solid #ACACAC;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 5px 0;
+  padding: 0;
+  cursor: pointer;
+    &:hover {
+      color: white;
+      background-color: black;
+      border: 1px solid white;
+    }
+    &:active {
+      color: white;
+      background-color: black;
+      transform: scale(1.02);
+    }
+    @media (max-width: 800px) {
+      width: 45px;
+      height: 25px;
+      font-size: 10px;
+      margin: 0 7px;
+      border-radius: 5px;
+    }
 `
 
 const RemoveAllButton = styled.button`
@@ -504,7 +494,6 @@ const RemoveAllButton = styled.button`
   }
 `
 
-
 const RemoveAllWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -517,6 +506,7 @@ const EmptyListContainer = styled.div`
     font-size: 1em;
   }
 `
+
 const EmptyShoppingListWrapper = styled.div`
 width: 300px;
 margin: 0 auto;
@@ -528,20 +518,21 @@ height: 240px;
 `
 
 const EmptyTextWrapper = styled.div`
-margin: 0 auto;
-width: 500px;
-text-align: center;
-z-index: 100;
-position: relative;
+  margin: 0 auto;
+  width: 500px;
+  text-align: center;
+  z-index: 100;
+  position: relative;
   @media (max-width: 800px) {
     width: 300px;
   }
-  h2, p, a{
+  h2, p, a {
     color: #A7A7A7;
-    a:visited {
+  a:visited {
     color: #A7A7A7;
-    }
-    a:hover {
+  }
+  a:hover {
     color: red;
-    }
+  }
+  }
 `

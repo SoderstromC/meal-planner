@@ -24,5 +24,5 @@ const RecipeWrapper = styled.div`
 `
 
 const RecipeTitle = styled.h3`
-margin: 10px 0;
+  margin: 10px 0;
 `
