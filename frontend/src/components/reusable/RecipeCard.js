@@ -23,8 +23,7 @@ export const RecipeCard = ({ id, name, time, img }) => {
 
     fetch(SAVED_RECIPE_URL, options) 
       .then((res) => res.json())
-      .then((data) => {
-        console.log("savedRecipeData", data.response);
+      .then((data) => {data.response
         if(data.success === true) {
           setSavedRecipe(true);
         } else {

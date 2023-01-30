@@ -29,9 +29,7 @@ export const Ingredients = ({components}) => {
 
     fetch(SAVED_SHOPPINGLIST_URL, options)
       .then((res) => res.json())
-      .then((data) => {
-        console.log("savedShoppingListData", data);
-      })
+      .then((data) => {data.response})
       .catch((error) => console.error("Error saving items to shopping list:", error));
     };
 

@@ -49,7 +49,6 @@ export const generateRecipeList = () => {
     fetch(RECIPE_URL, generate)
       .then((response) => response.json())
       .then((data) => {
-        console.log("RecipeListData", data);
         dispatch(recipes.actions.setRecipes(data?.results))
       })
       .finally(() => {
@@ -73,7 +72,6 @@ export const generateSingleRecipe = (recipeId) => {
     fetch(SINGLE_URL(recipeId), details)
       .then((response) => response.json())
       .then((data) => {
-        console.log('SingleRecipeData', data)
         dispatch(
             recipes.actions.setSingleRecipe(data))
       })
