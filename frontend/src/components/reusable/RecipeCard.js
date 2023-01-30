@@ -23,13 +23,13 @@ export const RecipeCard = ({ id, name, time, img }) => {
 
     fetch(SAVED_RECIPE_URL, options) 
       .then((res) => res.json())
-      .then((data) => {data.response
+      .then((data) => {
         if(data.success === true) {
           setSavedRecipe(true);
         } else {
           alert("You have already saved this recipe");
         }
-      })
+  })
       .catch((error) => console.error("Error saving a recipe:", error));
   };
 
@@ -62,13 +62,12 @@ const RecipeListCard = styled.section`
   border-radius: 13px;
   word-wrap: break-word;
   background-image: -moz-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0, 0, 0, 0.6) 100%), url(${(props) => props.img}); /* FF3.6+ */
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.1)), color-stop(100%,rgba(0,0,0,0.6))), url(${(props) => props.img}); /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.1)), color-stop(100%,rgba(0,0,0,0.6))), url(${(props) => props.img}); /* Chrome,Safari4+ */
   background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${(props) => props.img}); /* Chrome10+,Safari5.1+ */
   background-image: -o-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${(props) => props.img}); /* Opera 11.10+ */
   background-image: -ms-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${(props) => props.img}); /* IE10+ */
   background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.6) 100%), url(${(props) => props.img}); /* W3C */
   background-size: cover;
-  }
   `
 
 const RecipeCardWrapper = styled.div`

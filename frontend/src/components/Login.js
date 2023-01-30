@@ -312,6 +312,7 @@ const WebImage = styled.div`
   @media screen and (max-width: 600px) {
     display: none !important;
   } 
+}
 `
 
 const ButtonWrapper = styled.div`

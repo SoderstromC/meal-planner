@@ -70,6 +70,7 @@ const ButtonWrapper = styled.div`
   justify-content: space-between;  
   h3{
     margin: 10px 0 15px 0;
+  }
 `
 
 const RecipeWrapper = styled.div`

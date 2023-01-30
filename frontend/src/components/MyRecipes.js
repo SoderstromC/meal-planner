@@ -24,7 +24,6 @@ const MyRecipes = () => {
   }, []);
 
   const fetchMyRecipes = () => {
-    // Don't fetch from server if userId is not defined
     if (!userId) {
       return;
     }
@@ -139,8 +138,8 @@ const SavedRecipesContainer = styled.div`
     h3{
       padding-left: 10px;
     }
+  }
 `
-
 const RecipeListWrapper = styled.div`
   width: 100%;
   border: 1px solid #ACACAC;

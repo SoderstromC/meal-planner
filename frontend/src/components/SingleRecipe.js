@@ -108,7 +108,6 @@ const InstructionsCard = styled.div`
   text-align: left;
   border: #E8E8E8 solid 1px;
   height: min-content;
-  }
 `
 
 const LoaderWrapper = styled.div`
