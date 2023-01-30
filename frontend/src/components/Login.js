@@ -97,7 +97,7 @@ const Login = () => {
                 <label htmlFor='register'>
                   {mode === "register"
                     ? ""
-                    : "Not having an account yet? Sign up"}
+                    : <>Not having an account yet? <span className="signUp">Sign up</span></> }
                   <RadioInput
                     type='radio'
                     id='register'
@@ -106,7 +106,7 @@ const Login = () => {
                   />
                 </label>
                 <label htmlFor='login'>
-                  {mode === "login" ? "" : "Already got an account? Log in"}
+                  {mode === "login" ? "" : <>Already got an account? <span className="logIn">Log in</span></>}
                   <RadioInput
                     type='radio'
                     id='login'
@@ -234,6 +234,11 @@ const Radiobuttons = styled.div`
   label {
     margin-bottom: 30px;
   }
+  .signUp, .logIn {
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: bold;
+  }
 `
 
 const RadioInput = styled.input`
@@ -313,4 +318,5 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: end;
   margin-bottom: 20px;
+
 `
